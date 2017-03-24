@@ -24,4 +24,98 @@ public class Utente implements Serializable{
    
    @Column(name = "nome")
    private String nome;
+   
+   @Column(name = "cognome")
+   private String cognome;
+   
+   @Column(name = "email")
+   private String email;
+   
+   
+
+   
+   /**
+    * Costruttore vuoto
+    */
+   public Utente() {}
+
+   /**
+    * 
+    * @return 
+    */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * 
+     * @param id 
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public String getNickname() {
+        return nickname;
+    }
+
+    /**
+     * 
+     * @param nickname 
+     */
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public String getNome() {
+        return nome;
+    }
+
+    /**
+     * 
+     * @param nome 
+     */
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public String getCognome() {
+        return cognome;
+    }
+
+    /**
+     * 
+     * @param cognome 
+     */
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * 
+     * @param email 
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
