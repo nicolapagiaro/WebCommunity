@@ -1,6 +1,5 @@
 package springmvc;
 
-import dao.MembriDao;
 import hibernate.HibernateUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,7 +23,7 @@ public class MainController
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap map)
     {
-        map.put("membriList", MembriDao.retrieveAll());
+        map.put("membriList", null);
         return "membriList";
     }
 }
