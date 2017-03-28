@@ -46,7 +46,7 @@ public class Utente implements Serializable{
            inverseJoinColumns = {@JoinColumn(name = "idCategoria")}
    )
    private List<Categoria> categorie;
-
+  
    
    /**
     * Costruttore vuoto
