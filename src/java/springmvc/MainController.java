@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Classe MainController
- *
  * @author Nicola Pagiaro
  */
 @Controller
