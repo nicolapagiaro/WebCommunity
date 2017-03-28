@@ -1,10 +1,15 @@
 package pojo;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -18,9 +23,7 @@ public class Utente implements Serializable{
     
    @Id @GeneratedValue
    private int id;
-   /**
-    * lol
-    */
+
    @Column(name = "nickname")
    private String nickname;
    
@@ -33,7 +36,16 @@ public class Utente implements Serializable{
    @Column(name = "email")
    private String email;
    
-   
+   /**
+    * Associazione molti a molti con categorie
+    */
+   @ManyToMany
+   @JoinTable(
+           name = "INTERESSE",
+           joinColumns = {@JoinColumn(name = "idUtente")},
+           inverseJoinColumns = {@JoinColumn(name = "idCategoria")}
+   )
+   private List<Categoria> categorie;
 
    
    /**
@@ -120,4 +132,21 @@ public class Utente implements Serializable{
     public void setEmail(String email) {
         this.email = email;
     }
+
+    /**
+     * 
+     * @return 
+     */
+    public List<Categoria> getCategorie() {
+        return categorie;
+    }
+
+    /**
+     * 
+     * @param categorie 
+     */
+    public void setCategorie(List<Categoria> categorie) {
+        this.categorie = categorie;
+    }
+    
 }
