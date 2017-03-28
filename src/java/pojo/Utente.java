@@ -19,7 +19,6 @@ public class Utente implements Serializable{
    @Id @GeneratedValue
    private int id;
    
-   /**LOLOLOL*/
    @Column(name = "nickname")
    private String nickname;
    

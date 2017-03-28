@@ -1,6 +1,4 @@
-package spring;
-
-
+package springmvc;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -11,15 +9,17 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 /**
  * Classe Init
- *
- * @author Matteo Parlato
+ * @author Nicola Pagiaro
  */
-public class Init implements WebApplicationInitializer
-{
+public class Init implements WebApplicationInitializer {
 
+    /**
+     * Metodo eseguito allo start up
+     * @param servletContext
+     * @throws ServletException 
+     */
     @Override
-    public void onStartup(ServletContext servletContext) throws ServletException
-    {
+    public void onStartup(ServletContext servletContext) throws ServletException {
         AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
         ctx.register(Config.class);
         ctx.setServletContext(servletContext);

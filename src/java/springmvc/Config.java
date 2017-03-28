@@ -1,6 +1,4 @@
-package spring;
-
-
+package springmvc;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,17 +12,19 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 @Configuration
 @ComponentScan("spring")
 @EnableWebMvc
+
 /**
  * Classe Config
- *
- * @author Matteo Parlato
+ * @author Nicola Pagiaro
  */
-public class Config extends WebMvcConfigurerAdapter
-{
+public class Config extends WebMvcConfigurerAdapter {
 
+    /**
+     * setupViewResolver method
+     * @return UrlBasedViewResolver object
+     */
     @Bean
-    public UrlBasedViewResolver setupViewResolver()
-    {
+    public UrlBasedViewResolver setupViewResolver() {
         UrlBasedViewResolver resolver = new UrlBasedViewResolver();
         resolver.setPrefix("/WEB-INF/jsp/");
         resolver.setSuffix(".jsp");
@@ -32,6 +32,10 @@ public class Config extends WebMvcConfigurerAdapter
         return resolver;
     }
     
+    /**
+     * 
+     * @param registry 
+     */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
