@@ -1,4 +1,4 @@
-package controller;
+package springmvc;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,7 +19,7 @@ public class MainController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap map) {
-        map.put("membriList", null);
-        return "membriList";
+        map.put("index", null);
+        return "index";
     }
 }
