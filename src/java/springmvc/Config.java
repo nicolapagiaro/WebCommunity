@@ -15,7 +15,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 /**
  * Classe Config
- * @author Nicola Pagiaro
+ * @author Nicola Pagiaroooooooh
  */
 public class Config extends WebMvcConfigurerAdapter {
 
