@@ -149,6 +149,16 @@ public class Evento implements Serializable{
     public void setProvincia(String provincia) {
         this.provincia = provincia;
     }
-    
+
+    /**
+     * toString()
+     * @return 
+     */
+    @Override
+    public String toString() {
+        return "Evento{" + "id=" + id + ", nome=" + nome + ", data=" 
+                + data + ", categoria=" + categoria + ", via_numero=" 
+                + via_numero + ", provincia=" + provincia + '}';
+    }
     
 }
