@@ -53,6 +53,16 @@ public class VotoCommento implements Serializable{
         public void setIdEvento(int idEvento) {
             this.idEvento = idEvento;
         } 
+
+        @Override
+        public boolean equals(Object obj) {
+            return super.equals(obj);
+        }
+
+        @Override
+        public int hashCode() {
+            return super.hashCode();
+        }  
     }
     
     @EmbeddedId
@@ -75,9 +85,7 @@ public class VotoCommento implements Serializable{
     /**
      * Costruttore vuoto
      */
-    public VotoCommento() {
-        id = new ChiavePrimaria();
-    }
+    public VotoCommento() {}
 
     /**
      * 
