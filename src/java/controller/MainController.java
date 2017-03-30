@@ -27,7 +27,7 @@ public class MainController {
     @RequestMapping(value = "/")
     public String index(ModelMap map) {
         EventiDao events = new EventiDao(HibernateUtil.getSessionFactory()); 
-        map.put("listEventi", events.getEventi());
+        map.addAttribute("listEventi", events.getEventi());
         return "index";
     }
 }

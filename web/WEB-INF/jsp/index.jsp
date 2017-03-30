@@ -10,6 +10,6 @@
     </head>
 
     <body>
-        <c:out value="${listaEventi}"/>
+        <p><c:out value="${listEventi}"/></p>
     </body>
 </html>
