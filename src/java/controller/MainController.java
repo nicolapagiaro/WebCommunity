@@ -1,9 +1,11 @@
 package controller;
 
+import dao.EventiDao;
+import dao.UtentiDao;
+import hibernate.HibernateUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Classe MainController
@@ -17,9 +19,10 @@ public class MainController {
      */
     public MainController() {}
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/")
     public String index(ModelMap map) {
-        map.put("index", null);
+        EventiDao events = new EventiDao(HibernateUtil.getSessionFactory()); 
+        map.put("listEventi", events.getEventi());
         return "index";
     }
 }
