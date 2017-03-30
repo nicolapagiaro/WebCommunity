@@ -7,11 +7,9 @@ import pojo.*;
 /**
  * Hibernate Utility class with a convenient method to get Session Factory
  * object.
- *
  * @author FSEVERI\pagiaro3283
  */
 public class HibernateUtil {
-
     private static final SessionFactory sessionFactory;
     
     static {
