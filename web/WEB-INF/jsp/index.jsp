@@ -10,5 +10,6 @@
     </head>
 
     <body>
+        <c:out value="${listaEventi}"/>
     </body>
 </html>

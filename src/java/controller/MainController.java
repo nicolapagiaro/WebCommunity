@@ -19,6 +19,11 @@ public class MainController {
      */
     public MainController() {}
 
+    /**
+     * 
+     * @param map
+     * @return 
+     */
     @RequestMapping(value = "/")
     public String index(ModelMap map) {
         EventiDao events = new EventiDao(HibernateUtil.getSessionFactory()); 

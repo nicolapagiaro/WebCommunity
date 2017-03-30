@@ -2,7 +2,7 @@ package hibernate;
 
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
-import pojo.Utente;
+import pojo.*;
 
 /**
  * Hibernate Utility class with a convenient method to get Session Factory
@@ -20,6 +20,10 @@ public class HibernateUtil {
             // config file.
             sessionFactory = new AnnotationConfiguration()
                     .addAnnotatedClass(Utente.class)
+                    .addAnnotatedClass(Evento.class)
+                    .addAnnotatedClass(VotoCommento.class)
+                    .addAnnotatedClass(Artista.class)
+                    .addAnnotatedClass(Categoria.class)
                     .configure().buildSessionFactory();
         } catch (Throwable ex) {
             // Log the exception. 
