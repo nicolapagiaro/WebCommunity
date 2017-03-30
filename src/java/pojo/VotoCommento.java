@@ -25,7 +25,7 @@ public class VotoCommento implements Serializable{
     /**
      * Classe per la chiave primaria composta
      */
-    class ChiavePrimaria {
+    class ChiavePrimaria implements Serializable{
         @Column(name = "idUtente")
         private int idUtente;
         
@@ -65,11 +65,11 @@ public class VotoCommento implements Serializable{
     private int voto;
     
     @ManyToOne
-    @JoinColumn(name = "idUtente")
+    @JoinColumn(name = "idUtente", insertable = false, updatable = false)
     private Utente utente;
     
     @ManyToOne
-    @JoinColumn(name = "idEvento")
+    @JoinColumn(name = "idEvento", insertable = false, updatable = false)
     private Evento evento;
     
     /**

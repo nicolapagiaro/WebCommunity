@@ -36,7 +36,7 @@ public class Utente implements Serializable{
    @Column(name = "email")
    private String email;
    
-   @OneToMany(mappedBy = "utenti")
+   @OneToMany(mappedBy = "utente")
     private List<VotoCommento> votiCommenti;
    
    /**
