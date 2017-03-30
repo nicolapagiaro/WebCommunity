@@ -28,7 +28,7 @@ class Categoria implements Serializable{
     @ManyToMany(mappedBy = "categorie")
     private List<Utente> utenti;
     
-    @OneToMany(mappedBy = "categorie")
+    @OneToMany(mappedBy = "categoria")
     private List<Evento> eventi;
 
     /**

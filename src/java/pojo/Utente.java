@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -34,6 +35,9 @@ public class Utente implements Serializable{
    
    @Column(name = "email")
    private String email;
+   
+   @OneToMany(mappedBy = "utenti")
+    private List<VotoCommento> votiCommenti;
    
    /**
     * Associazione molti a molti con categorie
