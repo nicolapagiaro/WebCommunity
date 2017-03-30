@@ -68,7 +68,6 @@ public class VotoCommento implements Serializable{
     public VotoCommento() {
         id = new ChiavePrimaria();
     }
-    
 
     /**
      * 
@@ -77,21 +76,13 @@ public class VotoCommento implements Serializable{
     public ChiavePrimaria getId() {
         return id;
     }
-   
-    /**
-     * 
-     * @param idUtente 
-     */
-    public void setIdUtente(int idUtente) {
-        getId().setIdUtente(idUtente);
-    }
 
     /**
      * 
-     * @param idEvento 
+     * @param id 
      */
-    public void setIdEvento(int idEvento) {
-        getId().setIdEvento(idEvento);
+    public void setId(ChiavePrimaria id) {
+        this.id = id;
     }
 
     /**
