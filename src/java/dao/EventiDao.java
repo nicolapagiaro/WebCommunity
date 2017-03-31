@@ -31,7 +31,7 @@ public class EventiDao {
         Transaction tran = null;
         try {
             tran = sessione.beginTransaction();
-            List<Evento> eventi = (List<Evento>) sessione.createQuery("FROM EVENTI");
+            List<Evento> eventi = (List<Evento>) sessione.createQuery("FROM Evento").list();
             tran.commit();
             return eventi;
         }

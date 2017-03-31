@@ -1,7 +1,10 @@
 package dao;
 
 import java.util.List;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import pojo.Utente;
 
 /**
@@ -9,13 +12,35 @@ import pojo.Utente;
  * @author nicola
  */
 public class UtentiDao {
-    private SessionFactory factory;
+    private static SessionFactory factory;
+
+    /**
+     * Costruttore parametrico
+     * @param factory 
+     */
+    public UtentiDao(SessionFactory factory) {
+        UtentiDao.factory = factory;
+    }
     
     /**
      * Metodo per prendere la lista degli utenti presenti
      * @return la lista di oggetti della classe Utente
      */
-    public static List<Utente> getUtenti() {
+    public List<Utente> getUtenti() {
+        Session sessione = factory.openSession();
+        Transaction tran = null;
+        try {
+            tran = sessione.beginTransaction();
+            List<Utente> users = (List<Utente>) sessione.createQuery("FROM Utente").list();
+            tran.commit();
+            return users;
+        }
+        catch(HibernateException e) {
+            if (tran != null) tran.rollback();
+        }
+        finally {
+            sessione.close();
+        }
         return null;
     }
 }

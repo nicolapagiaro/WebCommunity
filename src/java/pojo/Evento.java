@@ -29,7 +29,7 @@ public class Evento implements Serializable{
     @Column(name = "nome")
     private String nome;
     
-    @Column(name = "data")
+    @Column(name = "dataE")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date data; 
     

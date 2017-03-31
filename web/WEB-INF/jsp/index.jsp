@@ -10,5 +10,6 @@
 
     <body>
         <p>${listEventi}</p>
+        <p>${listUsers}</p>
     </body>
 </html>

@@ -54,9 +54,18 @@ public class VotoCommento implements Serializable{
             this.idEvento = idEvento;
         } 
 
+        /**
+         * equals(obj) method
+         * @param obj oggetto
+         * @return true/false
+         */
         @Override
         public boolean equals(Object obj) {
-            return super.equals(obj);
+            if (!(obj instanceof ChiavePrimaria))
+                return false;
+            ChiavePrimaria temp = (ChiavePrimaria) obj;
+            return (temp.idEvento == this.idEvento) && 
+                    (temp.idUtente == this.idUtente);
         }
 
         @Override
