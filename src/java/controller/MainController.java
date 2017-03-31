@@ -29,7 +29,8 @@ public class MainController {
         EventiDao events = new EventiDao(HibernateUtil.getSessionFactory());
         UtentiDao users = new UtentiDao(HibernateUtil.getSessionFactory());
         map.addAttribute("listEventi", events.getEventi());
-        map.addAttribute("listUtenti", users.getUtenti());
+        map.addAttribute("listUtenti", 
+                users.getUtenti().get(0).getVotiCommenti().get(0));
         return "index";
     }
 }

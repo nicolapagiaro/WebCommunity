@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -36,7 +37,7 @@ public class Utente implements Serializable{
    @Column(name = "email")
    private String email;
    
-   @OneToMany(mappedBy = "utente")
+   @OneToMany(mappedBy = "utente", fetch=FetchType.EAGER)
     private List<VotoCommento> votiCommenti;
    
    /**
@@ -151,5 +152,20 @@ public class Utente implements Serializable{
     public void setCategorie(List<Categoria> categorie) {
         this.categorie = categorie;
     }
-    
+
+    /**
+     * 
+     * @return 
+     */
+    public List<VotoCommento> getVotiCommenti() {
+        return votiCommenti;
+    }
+
+    /**
+     * 
+     * @param votiCommenti 
+     */
+    public void setVotiCommenti(List<VotoCommento> votiCommenti) {
+        this.votiCommenti = votiCommenti;
+    }
 }
