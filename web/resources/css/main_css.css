@@ -1,0 +1,42 @@
+.material-icons.inactive {
+    color: rgba(0, 0, 0, 0.26); 
+}
+
+.grey-text-costum {
+    color: #424242 !important;
+}
+
+/* checkboxes label color */
+[type="checkbox"] + label {
+  color: #424242 !important;
+}
+
+/* label color */
+.input-field label {
+    color: #424242;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label, 
+.input-field input[type=email]:focus + label{
+    color: #00796b;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus, 
+.input-field input[type=email]:focus {
+    border-bottom: 1px solid #00796b;
+    box-shadow: 0 1px 0 0 #00796b;
+}
+/* valid color */
+.input-field input[type=email].valid {
+    border-bottom: 1px solid #00796b;
+    box-shadow: 0 1px 0 0 #00796b;
+}
+/* invalid color */
+.input-field input[type=email].invalid {
+    border-bottom: 1px solid #c62828;
+    box-shadow: 0 1px 0 0 #c62828;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+    color: #00796b;
+}
