@@ -41,7 +41,7 @@
                     personalizzata possibile
                 </p>
                 <!-- form di registrazione -->
-                <form method="post" action="" class="col s12">
+                <form method="POST" action="" class="col s12">
                     <div class="row">
                         <div class="input-field col s12">
                             <input id="nick" type="text"/>
@@ -59,7 +59,8 @@
                     <div class="row">
                         <div class="input-field col s12">
                             <input id="email" type="email" class="validate"/>
-                            <label for="email" data-error="wrong" data-success="right">Email</label>
+                            <label for="email" data-error="Inserire una mail valida" 
+                                   data-success="">Email</label>
                         </div>
                     </div>
                     <p class="grey-text-costum">Seleziona le categorie di eventi preferiti</p>
@@ -109,6 +110,7 @@
                         </button> 
                     </div>
                 </form>
+                <!-- / form di registrazione -->
             </div>
         </div>
     </div>        

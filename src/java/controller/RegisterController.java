@@ -29,4 +29,9 @@ public class RegisterController {
     public String register(ModelMap map, HttpServletRequest request) {
         return "register";
     }
+    
+    @RequestMapping(value = "/do", method = RequestMethod.POST)
+    public String doRegister(ModelMap map, HttpServletRequest request) {
+        return "index";
+    }
 }
