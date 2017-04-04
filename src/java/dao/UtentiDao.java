@@ -12,21 +12,13 @@ import pojo.Utente;
  * @author nicola
  */
 public class UtentiDao {
-    private static SessionFactory factory;
-
-    /**
-     * Costruttore parametrico
-     * @param factory 
-     */
-    public UtentiDao(SessionFactory factory) {
-        UtentiDao.factory = factory;
-    }
     
     /**
      * Metodo per prendere la lista degli utenti presenti
+     * @param factory
      * @return la lista di oggetti della classe Utente
      */
-    public List<Utente> getUtenti() {
+    public List<Utente> getUtenti(SessionFactory factory) {
         Session sessione = factory.openSession();
         Transaction tran = null;
         try {

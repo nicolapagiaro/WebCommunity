@@ -41,62 +41,62 @@
                     personalizzata possibile
                 </p>
                 <!-- form di registrazione -->
-                <form method="post" action="" class="col s12">
+                <form method="post" action="<c:url value="/doRegister"/>" class="col s12">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="nick" type="text"/>
+                            <input name="nick" id="nick" type="text"/>
                             <label for="nick">Nickname</label>
                         </div>
                         <div class="input-field col s12">
-                            <input id="nome" type="text"/>
+                            <input name="nome" id="nome" type="text"/>
                             <label for="nome">Nome</label>
                         </div>
                         <div class="input-field col s12">
-                            <input id="cognome" type="text"/>
+                            <input name="congome" id="cognome" type="text"/>
                             <label for="cognome">Cognome</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="email" type="email" class="validate"/>
-                            <label for="email" data-error="wrong" data-success="right">Email</label>
+                            <input name="email" id="email" type="email" class="validate"/>
+                            <label for="email" data-error="Immettere una mail valida" data-success="">Email</label>
                         </div>
                     </div>
                     <p class="grey-text-costum">Seleziona le categorie di eventi preferiti</p>
                     <div class="row">
                         <div class="col l4 m6 s12">
                             <p>
-                                <input type="checkbox" class="filled-in" id="filled-in-box1"/>
+                                <input name="categorie" type="checkbox" class="filled-in" id="filled-in-box1"/>
                                 <label for="filled-in-box1">Filled in</label>
                             </p>
                         </div>
                         <div class="col l4 m6 s12">
                             <p>
-                                <input type="checkbox" class="filled-in" id="filled-in-box2"/>
+                                <input name="categorie" type="checkbox" class="filled-in" id="filled-in-box2"/>
                                 <label for="filled-in-box2">Filled in</label>
                             </p>
                         </div>
                         <div class="col l4 m6 s12">
                             <p>
-                                <input type="checkbox" class="filled-in" id="filled-in-box3"/>
+                                <input name="categorie" type="checkbox" class="filled-in" id="filled-in-box3"/>
                                 <label for="filled-in-box3">Filled in</label>
                             </p>
                         </div>
                         <div class="col l4 m6 s12">
                             <p>
-                                <input type="checkbox" class="filled-in" id="filled-in-box4"/>
+                                <input name="categorie" type="checkbox" class="filled-in" id="filled-in-box4"/>
                                 <label for="filled-in-box4">Filled in</label>
                             </p>
                         </div>
                         <div class="col l4 m6 s12">
                             <p>
-                                <input type="checkbox" class="filled-in" id="filled-in-box5"/>
+                                <input name="categorie" type="checkbox" class="filled-in" id="filled-in-box5"/>
                                 <label for="filled-in-box5">Filled in</label>
                             </p>
                         </div>
                         <div class="col l4 m6 s12">
                             <p>
-                                <input type="checkbox" class="filled-in" id="filled-in-box6"/>
+                                <input name="categorie" type="checkbox" class="filled-in" id="filled-in-box6"/>
                                 <label for="filled-in-box6">Filled in</label>
                             </p>
                         </div>

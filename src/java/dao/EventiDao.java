@@ -12,21 +12,13 @@ import pojo.Evento;
  * @author FSEVERI\pagiaro3283
  */
 public class EventiDao {
-    private static SessionFactory factory;
-
-    /**
-     * Costruttore per inizializzare la session factory
-     * @param factory session factory object
-     */
-    public EventiDao(SessionFactory factory) {
-        EventiDao.factory = factory;
-    }
 
     /**
      * Metodo che restituisce la lista degli eventi
+     * @param factory
      * @return 
      */
-    public List<Evento> getEventi() {
+    public static List<Evento> getEventi(SessionFactory factory) {
         Session sessione = factory.openSession();
         Transaction tran = null;
         try {

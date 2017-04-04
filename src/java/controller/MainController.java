@@ -31,8 +31,7 @@ public class MainController {
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap map, HttpServletRequest request) {
-        EventiDao events = new EventiDao(HibernateUtil.getSessionFactory());
-        map.addAttribute("listEventi", events.getEventi());
+        map.addAttribute("listEventi", EventiDao.getEventi(HibernateUtil.getSessionFactory()));
         return "index";
     }
 }
