@@ -31,7 +31,7 @@ public class Evento implements Serializable{
     
     @Column(name = "dataE")
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date data; 
+    private Date dataE; 
     
     @ManyToOne
     @JoinColumn(name = "categoria")
@@ -90,16 +90,16 @@ public class Evento implements Serializable{
      * 
      * @return 
      */
-    public Date getData() {
-        return data;
+    public Date getDataE() {
+        return dataE;
     }
 
     /**
      * 
-     * @param data 
+     * @param dataE
      */
-    public void setData(Date data) {
-        this.data = data;
+    public void setDataE(Date dataE) {
+        this.dataE = dataE;
     }
 
     /**
@@ -157,7 +157,7 @@ public class Evento implements Serializable{
     @Override
     public String toString() {
         return "Evento{" + "id=" + id + ", nome=" + nome + ", data=" 
-                + data + ", categoria=" + categoria + ", via_numero=" 
+                + dataE + ", categoria=" + categoria + ", via_numero=" 
                 + via_numero + ", provincia=" + provincia + '}';
     }
     
