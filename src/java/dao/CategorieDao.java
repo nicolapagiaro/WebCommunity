@@ -20,7 +20,7 @@ public class CategorieDao {
      * @param factory session factory
      * @return la lista delle categorie
      */
-    public static List<Categoria> getCategoria(SessionFactory factory) {
+    public static List<Categoria> getCategorie(SessionFactory factory) {
         Session sessione = factory.openSession();
         Transaction tran = null;
         try {

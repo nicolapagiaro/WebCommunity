@@ -20,8 +20,15 @@
     <nav class="teal darken-1">
         <!-- Dropdown Structure -->
         <ul id="dropdown1" class="dropdown-content">
-            <li><a href="#!">Accedi</a></li>
-            <li><a href="<c:url value="/registrazione"/>">Registrati</a></li>
+            <c:choose>
+                <c:when test="${!idUtente}">
+                    <li><a href="#!">Accedi</a></li>
+                    <li><a href="<c:url value="/registrazione"/>">Registrati</a></li>
+                </c:when>
+                <c:when test="${idUtente}">
+                    <li><a href="<c:url value="/exit"/>">Esci</a></li>
+                </c:when>
+            </c:choose>
         </ul>
         <!-- navbar structure -->
         <div class="nav-wrapper teal darken-1 container">
@@ -36,15 +43,15 @@
                     </a>
                 </li>
             </ul>
-            <ul class="side-nav" id="mobile-demo">
-                <li><a href="#!">Categorie</a></li>
-                <li><a href="#!">Accedi</a></li>
-                <li><a href="<c:url value="/registrazione"/>">Registrati</a></li>
-            </ul>
         </div>
     </nav>
-    
-    <p>Prove: ${listEventi}</p>
+
+    <!-- page content -->
+    <div class="container">
+        <div class="row">
+
+        </div>
+    </div>
 
     <!-- footer -->
     <footer class="page-footer teal darken-1">
@@ -73,7 +80,7 @@
             </div>
         </div>
     </footer>
-    
+
     <!-- fast loading of the page -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/materialize.min.js" />"></script>

@@ -34,7 +34,7 @@ public class RegisterController {
     @RequestMapping(value = "/registrazione", method = RequestMethod.GET)
     public String register(ModelMap map, HttpServletRequest request) {
         map.addAttribute("listaCategorie", 
-                CategorieDao.getCategoria(HibernateUtil.getSessionFactory()));
+                CategorieDao.getCategorie(HibernateUtil.getSessionFactory()));
         return "register";
     }
     
@@ -58,10 +58,20 @@ public class RegisterController {
         
         // array con gli id delle categorie selezionate
         String[] idCategorieSelezionate = request.getParameterValues("categorie");
+        Integer[] cat = new Integer[idCategorieSelezionate.length];
+        for(int i=0; i< cat.length; i++) {
+            cat[i] = Integer.parseInt(idCategorieSelezionate[i]);
+        }
+        
         Utente u = new Utente(nickname, nome, cognome, email);
         
-        if(UtentiDao.addUtente(u, HibernateUtil.getSessionFactory()))
+        int idUtente = UtentiDao
+                .addUtente(u, cat, HibernateUtil.getSessionFactory());
+        
+        if(idUtente != -1) {
+            request.getSession().setAttribute("idUtente", idUtente);
             return "redirect:/";
+        }
         
         return "register";
     }

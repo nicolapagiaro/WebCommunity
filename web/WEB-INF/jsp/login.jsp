@@ -6,7 +6,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!-- page title -->
-        <title>Registrazione al sito - WebCommunity</title>
+        <title>Login al sito - WebCommunity</title>
         <!--Import Google Icon Font-->
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
@@ -35,25 +35,13 @@
     <div class="container">
         <div class="row">
             <div class="col l6 m8 s12 offset-l3 offset-m2">
-                <h5 class="center-align">Registrazione alla Communty</h5>
-                <p class="center-align grey-text-costum">
-                    Utilizziamo i tuoi dati per fornirti un'esperienza pi&ugrave; 
-                    personalizzata possibile
-                </p>
-                <!-- form di registrazione -->
-                <form method="POST" action="<c:url value="/doRegister"/>" class="col s12">
+                <h5 class="center-align">Effettua il login alla Communty</h5>
+                <!-- form di login -->
+                <form method="POST" action="<c:url value="/doLogin"/>" class="col s12">
                     <div class="row">
                         <div class="input-field col s12">
                             <input name="nick" id="nick" type="text"/>
                             <label for="nick">Nickname</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <input name="nome" id="nome" type="text"/>
-                            <label for="nome">Nome</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <input name="cognome" id="cognome" type="text"/>
-                            <label for="cognome">Cognome</label>
                         </div>
                     </div>
                     <div class="row">
@@ -62,26 +50,15 @@
                             <label for="email" data-error="Immettere una mail valida" data-success="">Email</label>
                         </div>
                     </div>
-                    <p class="grey-text-costum">Seleziona le categorie di eventi preferiti</p>
-                    <div class="row">
-                        <c:forEach items="${listaCategorie}" var="cat">
-                            <div class="col l4 m6 s12">
-                                <p>
-                                    <input value="${cat.id}" name="categorie" type="checkbox" class="filled-in" id="${cat.id}"/>
-                                    <label for="${cat.id}">${cat.nome}</label>
-                                </p>
-                            </div>
-                        </c:forEach>
-                    </div>
                     <br>
                     <div class="right-align">
                         <button class="btn waves-effect waves-light" type="submit" name="action">
-                            Iscriviti
+                            Login
                             <i class="material-icons right">send</i>
                         </button> 
                     </div>
                 </form>
-                <!-- / form di registrazione -->
+                <!-- / form di login -->
             </div>
         </div>
     </div>        

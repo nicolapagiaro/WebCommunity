@@ -1,8 +1,5 @@
 package controller;
 
-import dao.EventiDao;
-import dao.UtentiDao;
-import hibernate.HibernateUtil;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Classe MainController
- *
  * @author Nicola Pagiaro
  */
 @Controller
@@ -31,7 +27,28 @@ public class MainController {
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap map, HttpServletRequest request) {
-        map.addAttribute("listEventi", EventiDao.getEventi(HibernateUtil.getSessionFactory()));
+        // controllo se c'è l'id
+        if (request.getSession().getAttribute("idUtente") != null)
+            setUpHomePageDefault(map);
+        else
+            setUpHomePageUsers(map);
         return "index";
+    }
+    
+    /**
+     * Metodo per caricare la pagina di default
+     * @param map 
+     */
+    private void setUpHomePageDefault(ModelMap map) {
+        map.addAttribute("idUtente", true); 
+    }
+    
+    /**
+     * Metodo per caricare la pagina a seconda delle preferenze 
+     * dell'utente loggato
+     * @param map 
+     */
+    private void setUpHomePageUsers(ModelMap map) {
+        map.addAttribute("idUtente", false); 
     }
 }
