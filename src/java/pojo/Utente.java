@@ -58,6 +58,34 @@ public class Utente implements Serializable{
    public Utente() {}
 
    /**
+    * Costruttore parametrico #1
+    * @param nickname nickname utente
+    * @param nome nome utente
+    * @param cognome cognome utente
+    * @param email email utente
+    */
+    public Utente(String nickname, String nome, String cognome, String email) {
+        this.nickname = nickname;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.email = email;
+    }
+
+    /**
+    * Costruttore parametrico #2
+    * @param nickname nickname utente
+    * @param nome nome utente
+    * @param cognome cognome utente
+    * @param email email utente
+     * @param categorie lista delle categorie preferite
+    */
+    public Utente(String nickname, String nome, String cognome, String email,
+            List<Categoria> categorie) {
+        this(nickname, nome, cognome, email);
+        this.categorie = categorie;
+    }
+
+   /**
     * 
     * @return 
     */

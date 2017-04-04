@@ -1,13 +1,16 @@
 package controller;
 
 import dao.CategorieDao;
+import dao.UtentiDao;
 import hibernate.HibernateUtil;
+import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import pojo.Utente;
 
 /**
  * Classe RegisterController
@@ -37,21 +40,29 @@ public class RegisterController {
     
     /**
      * Metodo per la registrazione di un utente alla web community
-     * @param nickname
-     * @param nome
-     * @param cognome
-     * @param email
-     * @return 
+     * @param request http request
+     * @param nickname nickname utente
+     * @param nome nome utente
+     * @param cognome cognome utente
+     * @param email email utente
+     * @return il nome della vista
      */
     @RequestMapping(value = "/doRegister", method = RequestMethod.POST)
-    public String doRegister(@RequestParam("nick") String nickname, 
+    public String doRegister(HttpServletRequest request,
+            @RequestParam("nick") String nickname, 
             @RequestParam("nome") String nome, 
             @RequestParam("cognome") String cognome,
             @RequestParam("email") String email) {
         
-        System.out.println(nickname);
         
         
-        return "redirect:/";
+        // array con gli id delle categorie selezionate
+        String[] idCategorieSelezionate = request.getParameterValues("categorie");
+        Utente u = new Utente(nickname, nome, cognome, email);
+        
+        if(UtentiDao.addUtente(u, HibernateUtil.getSessionFactory()))
+            return "redirect:/";
+        
+        return "register";
     }
 }

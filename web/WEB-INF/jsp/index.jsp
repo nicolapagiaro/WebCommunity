@@ -17,14 +17,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
     </head>
     <body>
-    <nav>
+    <nav class="teal darken-1">
         <!-- Dropdown Structure -->
         <ul id="dropdown1" class="dropdown-content">
             <li><a href="#!">Accedi</a></li>
             <li><a href="<c:url value="/registrazione"/>">Registrati</a></li>
         </ul>
         <!-- navbar structure -->
-        <div class="nav-wrapper teal darken-1">
+        <div class="nav-wrapper teal darken-1 container">
             <a href="#!" class="brand-logo">WebCommunity</a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
