@@ -1,5 +1,6 @@
 package dao;
 
+import static java.util.Collections.list;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -71,6 +72,33 @@ public class UtentiDao {
             sessione.close();
         }
         return -1;
+    }
+    
+
+    public static int loginUtente(String nick, String email, SessionFactory factory) {
+        Session sessione = factory.openSession();
+        Transaction tran = null;
+        int id;
+        try {
+            tran = sessione.beginTransaction();
+            // scarico la lista delle categorie selezionate
+            List query = sessione
+                    .createQuery("SELECT id FROM UTENTI WHERE nickname = :nick AND email = :email")
+                    .setParameter(nick, tran)
+                    .setParameter(email, tran)
+                    .list();
+            
+            if(query.isEmpty()){
+                return id = -1;
+            }
+            
+            id = (int) query.get(0);
+               
+        }
+        catch() {
+            
+        }
+        return 8;
     }
     
     /**
