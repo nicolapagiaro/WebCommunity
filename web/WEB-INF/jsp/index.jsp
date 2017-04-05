@@ -27,6 +27,36 @@
 
     <!-- page content -->
     <div class="parallax-container">
+        <div class="section no-pad-bot">
+            <div class="container">
+                <div class="row">
+                    <div class="col l9">
+                        <br><br>
+                        <h3 class="header left-align teal-text text-lighten-1">Parallax Template</h3>
+                        <div class="row left-align">
+                            <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+                        </div>
+                        <br><br>
+                    </div>
+                    <br><br>
+                    <form class="col l3">
+                        <p class="teal-text text-lighten-1">Effettua il login</p>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="first_name" type="text">
+                                <label for="first_name">First Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="email" type="email">
+                                <label for="email">Email</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <div class="parallax"><img src="images/parallax1.jpg"></div>
     </div>
     <div class="section white">
@@ -34,9 +64,6 @@
             <h2 class="header">Parallax</h2>
             <p class="grey-text text-darken-3 lighten-3">Parallax is an effect where the background content or image in this case, is moved at a different speed than the foreground content while scrolling.</p>
         </div>
-    </div>
-    <div class="parallax-container">
-        <div class="parallax"><img src="images/parallax2.jpg"></div>
     </div>
 
     <!-- footer -->
