@@ -95,6 +95,10 @@ public class UtentiDao {
             id = (int) query.get(0);
                
         }
+        catch() {
+            
+        }
+        return 8;
     }
     
     /**
