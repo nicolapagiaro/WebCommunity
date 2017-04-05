@@ -35,41 +35,38 @@
                 <div class="row">
                     <div class="col l9">
                         <br><br>
-                        <h4 class="header left-align teal-text text-lighten-1">Join the community</h4>
+                        <h4 class="header left-align white-text">Join the community</h4>
                         <div class="row left-align">
-                            <h5 class="header col s12">Condividi eventi, vota e commenta</h5>
+                            <h5 class="header col s12 white-text">Condividi eventi, vota e commenta</h5>
                         </div>
                         <br><br>
                     </div>
                     <br><br>
-                    <form method="POST" action="<c:url value="/doLogin"/>" class="col l3 form-fg">
-                        <h5 class="center light">Accedi</h5>
-                        <div class="row">
+                    <form method="POST" action="<c:url value="/doLogin"/>" class="col l3 form-fg teal text-lighten-1">
+                        <h5 class="center white-text">Accedi</h5>
+                        <div class="row white">
+                            <br>
                             <div class="input-field col s12">
                                 <input name="nick" id="nickname" type="text">
                                 <label for="nickname">Nickname</label>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="input-field col s12">
                                 <input name="email" id="email" type="email" class="validate">
                                 <label for="email" data-error="Immettere una mail valida" 
                                        data-success="">Email</label>
                             </div>
+                            <div class="center col l12">
+                                <button class="btn btn-flat waves-effect waves-light" 
+                                        id="login" type="submit" name="action">
+                                    Login
+                                </button> 
+                            </div>
                         </div>
-                        <br>
-                        <div class="right-align">
-                            <button class="btn btn-flat waves-effect waves-light" id="login" type="submit" name="action">
-                                Login
-                                <i class="material-icons right">send</i>
-                            </button> 
-                        </div>
-                        <br>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="parallax"><img src="<c:url value="/resources/images/bgindex.png"/>"></div>
+        <div class="parallax"><img src="<c:url value="/resources/images/bg_index.jpg"/>"></div>
     </div>
     <div class="section white">
         <div class="row container">

@@ -77,7 +77,6 @@
                     <div class="right-align">
                         <button class="btn waves-effect waves-light" type="submit" name="action">
                             Iscriviti
-                            <i class="material-icons right">send</i>
                         </button> 
                     </div>
                 </form>
