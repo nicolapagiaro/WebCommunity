@@ -17,65 +17,51 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
     </head>
     <body>
-    <nav class="teal darken-1">
-        <!-- Dropdown Structure -->
-        <ul id="dropdown1" class="dropdown-content">
-            <c:choose>
-                <c:when test="${!idUtente}">
-                    <li><a href="#!">Accedi</a></li>
-                    <li><a href="<c:url value="/registrazione"/>">Registrati</a></li>
-                </c:when>
-                <c:when test="${idUtente}">
-                    <li><a href="<c:url value="/exit"/>">Esci</a></li>
-                </c:when>
-            </c:choose>
-        </ul>
+    <nav class="white" role="navigation">
         <!-- navbar structure -->
-        <div class="nav-wrapper teal darken-1 container">
+        <div class="nav-wrapper white container">
             <a href="#!" class="brand-logo">WebCommunity</a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="#!">Categorie</a></li>
-                <!-- Dropdown Trigger -->
-                <li>
-                    <a class="dropdown-button" href="#!" data-activates="dropdown1">
-                        Community <i class="material-icons right">arrow_drop_down</i>
-                    </a>
-                </li>
-            </ul>
         </div>
     </nav>
 
     <!-- page content -->
-    <div class="container">
-        <div class="row">
-
+    <div class="parallax-container">
+        <div class="parallax"><img src="images/parallax1.jpg"></div>
+    </div>
+    <div class="section white">
+        <div class="row container">
+            <h2 class="header">Parallax</h2>
+            <p class="grey-text text-darken-3 lighten-3">Parallax is an effect where the background content or image in this case, is moved at a different speed than the foreground content while scrolling.</p>
         </div>
+    </div>
+    <div class="parallax-container">
+        <div class="parallax"><img src="images/parallax2.jpg"></div>
     </div>
 
     <!-- footer -->
-    <footer class="page-footer teal darken-1">
+    <footer class="page-footer white">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
-                    <h5 class="white-text">WebCommunity</h5>
-                    <p class="grey-text text-lighten-4">
+                    <h5 >WebCommunity</h5>
+                    <p class="grey-text text-darken-4">
                         Sviluppo di un progetto di gruppo
                     </p>
                 </div>
                 <div class="col l4 offset-l2 s12">
-                    <h5 class="white-text">Autori</h5>
+                    <h5>Autori</h5>
                     <ul>
-                        <li class="grey-text text-lighten-3">Link 1</li>
-                        <li class="grey-text text-lighten-3">Link 2</li>
-                        <li class="grey-text text-lighten-3">Link 3</li>
-                        <li class="grey-text text-lighten-3">Link 4</li>
+                        <li class="grey-text text-darken-4">Link 1</li>
+                        <li class="grey-text text-darken-4">Link 2</li>
+                        <li class="grey-text text-darken-4">Link 3</li>
+                        <li class="grey-text text-darken-4">Link 4</li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="footer-copyright">
-            <div class="container">
+        <div class="footer-copyright white">
+            <div class="container black-text">
                 © 2017 Classe 5IB
             </div>
         </div>

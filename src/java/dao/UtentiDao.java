@@ -40,10 +40,10 @@ public class UtentiDao {
     }
 
     /**
-     * Metodo che permette di aggiungere un utente al db
-     *
+     * Metodo che permette di aggiungere un utente al db con la lista delle 
+     * categorie preferite
      * @param u oggetto utente
-     * @param idCategorie
+     * @param idCategorie lista degli ID di categorie preferite
      * @param factory session factory
      * @return l'id maggiore di 0 se andato a buon fine, se no -1
      */
@@ -59,6 +59,32 @@ public class UtentiDao {
                     .list();
             // le aggiungo all'oggetto utente
             u.setCategorie(cats);
+            // salvo l'oggetto della base di dati
+            int id = (int) sessione.save(u);
+            tran.commit();
+            return id;
+        } catch (HibernateException e) {
+            if (tran != null) {
+                tran.rollback();
+            }
+        } finally {
+            sessione.close();
+        }
+        return -1;
+    }
+    
+    /**
+     * Metodo che permette di aggiungere un utente al db senza categorie
+     * preerite
+     * @param u oggetto utente
+     * @param factory session factory
+     * @return l'id maggiore di 0 se andato a buon fine, se no -1
+     */
+    public static int addUtente(Utente u, SessionFactory factory) {
+        Session sessione = factory.openSession();
+        Transaction tran = null;
+        try {
+            tran = sessione.beginTransaction();
             // salvo l'oggetto della base di dati
             int id = (int) sessione.save(u);
             tran.commit();
