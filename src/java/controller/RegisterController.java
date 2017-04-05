@@ -54,19 +54,23 @@ public class RegisterController {
             @RequestParam("cognome") String cognome,
             @RequestParam("email") String email) {
         
-        
+        Utente u = new Utente(nickname, nome, cognome, email);
         
         // array con gli id delle categorie selezionate
         String[] idCategorieSelezionate = request.getParameterValues("categorie");
-        Integer[] cat = new Integer[idCategorieSelezionate.length];
-        for(int i=0; i< cat.length; i++) {
-            cat[i] = Integer.parseInt(idCategorieSelezionate[i]);
+        int idUtente;
+        
+        // controllo se ha selezionate delle categorie preferite
+        if(idCategorieSelezionate != null) {
+            Integer[] cat = new Integer[idCategorieSelezionate.length];
+            for(int i=0; i< cat.length; i++) {
+                cat[i] = Integer.parseInt(idCategorieSelezionate[i]);
+            }
+            idUtente = UtentiDao.addUtente(u, cat, HibernateUtil.getSessionFactory());
         }
-        
-        Utente u = new Utente(nickname, nome, cognome, email);
-        
-        int idUtente = UtentiDao
-                .addUtente(u, cat, HibernateUtil.getSessionFactory());
+        else {
+            idUtente = UtentiDao.addUtente(u, HibernateUtil.getSessionFactory());
+        }
         
         if(idUtente != -1) {
             request.getSession().setAttribute("idUtente", idUtente);

@@ -28,7 +28,7 @@ public class MainController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap map, HttpServletRequest request) {
         // controllo se c'è l'id
-        if (request.getSession().getAttribute("idUtente") != null)
+        if (request.getSession().getAttribute("idUtente") == null)
             setUpHomePageDefault(map);
         else
             setUpHomePageUsers(map);
@@ -40,7 +40,6 @@ public class MainController {
      * @param map 
      */
     private void setUpHomePageDefault(ModelMap map) {
-        map.addAttribute("idUtente", true); 
     }
     
     /**
@@ -49,6 +48,5 @@ public class MainController {
      * @param map 
      */
     private void setUpHomePageUsers(ModelMap map) {
-        map.addAttribute("idUtente", false); 
     }
 }

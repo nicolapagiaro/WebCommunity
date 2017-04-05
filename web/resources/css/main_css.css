@@ -40,3 +40,14 @@
 .input-field .prefix.active {
     color: #00796b;
 }
+
+/* per la nav su telefono */
+.button-collapse {
+  color: #26a69a;
+}
+
+/* colore dei text della nav */
+nav ul a, 
+nav .brand-logo {
+  color: #444;
+}
