@@ -1,6 +1,5 @@
 package controller;
 
-import dao.CategorieDao;
 import dao.UtentiDao;
 import hibernate.HibernateUtil;
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +8,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import pojo.Utente;
 
 /**
  * Classe LoginController
@@ -25,7 +23,7 @@ public class LoginController {
      * @return il nome della vista
      */
     @RequestMapping(value = "/log", method = RequestMethod.GET)
-    public String register(ModelMap map, HttpServletRequest request) {      
+    public String login(ModelMap map, HttpServletRequest request) {      
         return "login";
     }
     
@@ -34,8 +32,6 @@ public class LoginController {
      * Metodo per la registrazione di un utente alla web community
      * @param request http request
      * @param nickname nickname utente
-     * @param nome nome utente
-     * @param cognome cognome utente
      * @param email email utente
      * @return il nome della vista
      */
@@ -44,7 +40,6 @@ public class LoginController {
             @RequestParam("nick") String nickname, 
             @RequestParam("email") String email) {
 
-        
         int idUtente = UtentiDao
                 .loginUtente(nickname, email, HibernateUtil.getSessionFactory());
         

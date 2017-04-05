@@ -40,7 +40,7 @@
                 <form method="POST" action="<c:url value="/doLogin"/>" class="col s12">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input name="nick" id="nick" type="text"/>
+                            <input name="nick" id="nickname" type="text"/>
                             <label for="nick">Nickname</label>
                         </div>
                     </div>

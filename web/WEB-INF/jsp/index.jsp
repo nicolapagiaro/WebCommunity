@@ -39,25 +39,34 @@
                         <br><br>
                     </div>
                     <br><br>
-                    <form class="col l3">
-                        <p class="teal-text text-lighten-1">Effettua il login</p>
+                    <form method="POST" action="<c:url value="/doLogin"/>" class="col l3 form-bg">
+                        <h5 class="center teal-text text-lighten-1">Accedi</h5>
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="first_name" type="text">
-                                <label for="first_name">First Name</label>
+                                <input name="nick" id="nickname" type="text">
+                                <label for="nickname">Nickname</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="email" type="email">
-                                <label for="email">Email</label>
+                                <input name="email" id="email" type="email" class="validate">
+                                <label for="email" data-error="Immettere una mail valida" 
+                                       data-success="">Email</label>
                             </div>
                         </div>
+                        <br>
+                        <div class="right-align">
+                            <button class="btn waves-effect waves-light" id="login" type="submit" name="action">
+                                Login
+                                <i class="material-icons right">send</i>
+                            </button> 
+                        </div>
+                        <br>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="parallax"><img src="images/parallax1.jpg"></div>
+        <div class="parallax"><img src="images/bg.jpg"></div>
     </div>
     <div class="section white">
         <div class="row container">

@@ -1,6 +1,5 @@
 package dao;
 
-import static java.util.Collections.list;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -75,35 +74,40 @@ public class UtentiDao {
     }
     
 
+    /**
+     * Metodo per il login dell'utente
+     * @param nick nickname utente
+     * @param email email dell'utente
+     * @param factory session factory
+     * @return l'id maggiore di 0 se andato a buon fine, se no -1
+     */
     public static int loginUtente(String nick, String email, SessionFactory factory) {
         Session sessione = factory.openSession();
-        Transaction tran = null;
         int id;
         try {
-            tran = sessione.beginTransaction();
-            // scarico la lista delle categorie selezionate
+            // prendo l'id dell'utente
             List query = sessione
-                    .createQuery("SELECT id FROM UTENTI WHERE nickname = :nick AND email = :email")
-                    .setParameter(nick, tran)
-                    .setParameter(email, tran)
+                    .createQuery("SELECT id FROM Utente WHERE nickname = :nick AND email = :email")
+                    .setParameter("nick", nick)
+                    .setParameter("email", email)
                     .list();
             
             if(query.isEmpty()){
-                return id = -1;
+                return -1;
             }
-            
             id = (int) query.get(0);
-               
+            return id;
+        } catch (HibernateException e) {
+
+        } finally {
+            sessione.close();
         }
-        catch() {
-            
-        }
-        return 8;
+        return -1;
     }
     
     /**
      * Metodo che permette di aggiungere un utente al db senza categorie
-     * preerite
+     * preferite
      * @param u oggetto utente
      * @param factory session factory
      * @return l'id maggiore di 0 se andato a buon fine, se no -1
