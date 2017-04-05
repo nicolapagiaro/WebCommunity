@@ -17,9 +17,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
     </head>
     <body>
-    <nav class="teal darken-1">
+    <nav class="white">
         <!-- navbar structure -->
-        <div class="nav-wrapper teal darken-1 container">
+        <div class="nav-wrapper white container">
             <a href="#!" class="brand-logo">WebCommunity</a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">

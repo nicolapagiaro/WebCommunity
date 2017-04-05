@@ -52,7 +52,7 @@ nav .brand-logo {
   color: #444;
 }
 
-.form-bg {
-    border: 2px solid #9e9e9e;
-    border-radius: 10px;
+.form-fg {
+    border-radius: 5px;
+    background-color: #FFFFFF;
 }

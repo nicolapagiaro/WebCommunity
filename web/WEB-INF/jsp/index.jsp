@@ -22,6 +22,9 @@
         <div class="nav-wrapper white container">
             <a href="#!" class="brand-logo">WebCommunity</a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="<c:url value="/registrazione"/>">Registrati</a></li>
+            </ul>
         </div>
     </nav>
 
@@ -32,15 +35,15 @@
                 <div class="row">
                     <div class="col l9">
                         <br><br>
-                        <h3 class="header left-align teal-text text-lighten-1">Parallax Template</h3>
+                        <h4 class="header left-align teal-text text-lighten-1">Join the community</h4>
                         <div class="row left-align">
-                            <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+                            <h5 class="header col s12">Condividi eventi, vota e commenta</h5>
                         </div>
                         <br><br>
                     </div>
                     <br><br>
-                    <form method="POST" action="<c:url value="/doLogin"/>" class="col l3 form-bg">
-                        <h5 class="center teal-text text-lighten-1">Accedi</h5>
+                    <form method="POST" action="<c:url value="/doLogin"/>" class="col l3 form-fg">
+                        <h5 class="center light">Accedi</h5>
                         <div class="row">
                             <div class="input-field col s12">
                                 <input name="nick" id="nickname" type="text">
@@ -56,7 +59,7 @@
                         </div>
                         <br>
                         <div class="right-align">
-                            <button class="btn waves-effect waves-light" id="login" type="submit" name="action">
+                            <button class="btn btn-flat waves-effect waves-light" id="login" type="submit" name="action">
                                 Login
                                 <i class="material-icons right">send</i>
                             </button> 
@@ -66,7 +69,7 @@
                 </div>
             </div>
         </div>
-        <div class="parallax"><img src="images/bg.jpg"></div>
+        <div class="parallax"><img src="<c:url value="/resources/images/bgindex.png"/>"></div>
     </div>
     <div class="section white">
         <div class="row container">
