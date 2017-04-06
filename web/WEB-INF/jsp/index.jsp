@@ -69,9 +69,27 @@
         <div class="parallax"><img src="<c:url value="/resources/images/bg_index.jpg"/>"></div>
     </div>
     <div class="section white">
+        <!-- page content eventi -->
         <div class="row container">
-            <h2 class="header">Parallax</h2>
-            <p class="grey-text text-darken-3 lighten-3">Parallax is an effect where the background content or image in this case, is moved at a different speed than the foreground content while scrolling.</p>
+            <h5 class="left-aligned teal-text text-darken-2">Eventi principali nella tua zona</h5>
+            <div class="col l12">
+                <blockquote>
+                    <h5 class="left-aligned light">Titolo evento</h5>
+                </blockquote>
+                <p class="left-aligned">Via jbcweb n4, PD</p>
+            </div>
+            <div class="col l12">
+                <ul>
+                    <li class="divider"></li>
+                </ul>
+            </div>
+            <div class="col l12">
+                <blockquote>
+                    <h5 class="left-aligned light">Titolo evento</h5>
+                </blockquote>
+                <p class="left-aligned">Via jbcweb n4, PD</p>
+            </div>
+
         </div>
     </div>
 
