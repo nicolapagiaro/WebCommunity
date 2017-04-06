@@ -49,7 +49,8 @@ public class LoginController {
         }
         
         //da mettere la pagina post-login
-        return "login";
+        request.getSession().setAttribute("controlloLogin", true);
+        return "redirect:/";
     }
     
     
