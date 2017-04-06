@@ -3,7 +3,6 @@ package controller;
 import dao.CategorieDao;
 import dao.UtentiDao;
 import hibernate.HibernateUtil;
-import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -77,6 +76,6 @@ public class RegisterController {
             return "redirect:/";
         }
         
-        return "register";
+        return "redirect:/registrazione";
     }
 }

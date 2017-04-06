@@ -75,22 +75,28 @@
     <div class="section white">
         <!-- page content eventi -->
         <div class="row container">
-            <h5 class="left-aligned teal-text text-darken-2">Eventi principali nella tua zona</h5>
-            <c:forEach items="${listaEventi}" var="e">
-                <div class="col l12">
-                    <blockquote>
-                        <h5 class="left-aligned light">${e.nome}</h5>
-                    </blockquote>
-                    <p class="left-aligned">Categoria: ${e.categoria.nome}</p>
-                    <p class="left-aligned">Il: ${e.dataE}</p>
-                    <p class="left-aligned">Indirizzo: ${e.via_numero} - ${e.provincia}</p>
-                </div>
-                <div class="col l12">
-                    <ul>
-                        <li class="divider"></li>
-                    </ul>
-                </div>
-            </c:forEach>
+            <div class="col l6">
+                <h5 class="center-align teal-text text-darken-2">Eventi principali nella tua zona</h5>
+                <c:forEach items="${listaEventi}" var="e">
+                    <div class="block col l8 offset-l2">
+                        <h5 class="">${e.nome}</h5>
+                        <p class="">Categoria: ${e.categoria.nome}</p>
+                        <p class="">Il: ${e.dataE}</p>
+                        <p class="">Indirizzo: ${e.via_numero} - ${e.provincia}</p>
+                    </div>
+                </c:forEach>
+            </div>
+            <div class="col l6">
+                <h5 class="center-align teal-text text-darken-2">Eventi pi&ugrave; votati</h5>
+                <c:forEach items="${listaEventi}" var="e">
+                    <div class="block col l8 offset-l2">
+                        <h5 class="">${e.nome}</h5>
+                        <p class="">Categoria: ${e.categoria.nome}</p>
+                        <p class="">Il: ${e.dataE}</p>
+                        <p class="">Indirizzo: ${e.via_numero} - ${e.provincia}</p>
+                    </div>
+                </c:forEach>
+            </div>
         </div>
     </div>
     <div class="parallax-container custom">
