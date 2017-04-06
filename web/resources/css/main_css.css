@@ -57,6 +57,10 @@ nav .brand-logo {
     background-color: #FFFFFF;
 }
 
+.custom {
+    height: 25px;
+}
+
 blockquote {
   margin: 20px 0;
   padding-left: 1.5rem;

@@ -35,4 +35,29 @@ public class EventiDao {
         }
         return null;
     }
+    
+    /**
+     * Metodo che restituisce la lista degli eventi ordinati per data più recenti
+     * @param factory
+     * @return 
+     */
+    public static List<Evento> getMainEventi(SessionFactory factory) {
+        Session sessione = factory.openSession();
+        Transaction tran = null;
+        try {
+            tran = sessione.beginTransaction();
+            List<Evento> eventi = (List<Evento>) sessione
+                    .createQuery("FROM Evento ORDER BY (dataE) ASC")
+                    .list();
+            tran.commit();
+            return eventi;
+        }
+        catch(HibernateException e) {
+            if (tran != null) tran.rollback();
+        }
+        finally {
+            sessione.close();
+        }
+        return null;
+    }
 }

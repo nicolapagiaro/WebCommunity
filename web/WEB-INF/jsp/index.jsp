@@ -56,7 +56,7 @@
                                        data-success="">Email</label>
                                 <c:if test="${control}">
                                     <p class="red-text text-darken-1">Credenziali errate<p>
-                                </c:if>
+                                    </c:if>
                             </div>
 
                             <div class="center col l12">
@@ -76,25 +76,25 @@
         <!-- page content eventi -->
         <div class="row container">
             <h5 class="left-aligned teal-text text-darken-2">Eventi principali nella tua zona</h5>
-            <div class="col l12">
-                <blockquote>
-                    <h5 class="left-aligned light">Titolo evento</h5>
-                </blockquote>
-                <p class="left-aligned">Via jbcweb n4, PD</p>
-            </div>
-            <div class="col l12">
-                <ul>
-                    <li class="divider"></li>
-                </ul>
-            </div>
-            <div class="col l12">
-                <blockquote>
-                    <h5 class="left-aligned light">Titolo evento</h5>
-                </blockquote>
-                <p class="left-aligned">Via jbcweb n4, PD</p>
-            </div>
-
+            <c:forEach items="${listaEventi}" var="e">
+                <div class="col l12">
+                    <blockquote>
+                        <h5 class="left-aligned light">${e.nome}</h5>
+                    </blockquote>
+                    <p class="left-aligned">Categoria: ${e.categoria.nome}</p>
+                    <p class="left-aligned">Il: ${e.dataE}</p>
+                    <p class="left-aligned">Indirizzo: ${e.via_numero} - ${e.provincia}</p>
+                </div>
+                <div class="col l12">
+                    <ul>
+                        <li class="divider"></li>
+                    </ul>
+                </div>
+            </c:forEach>
         </div>
+    </div>
+    <div class="parallax-container custom">
+        <div class="parallax"><img src="<c:url value="/resources/images/bg_bottom.jpg"/>"></div>
     </div>
 
     <!-- footer -->
