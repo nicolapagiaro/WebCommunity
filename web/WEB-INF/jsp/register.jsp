@@ -20,7 +20,7 @@
     <nav class="white">
         <!-- navbar structure -->
         <div class="nav-wrapper white container">
-            <a href="#!" class="brand-logo">WebCommunity</a>
+            <a href="<c:url value="/"/>" class="brand-logo">WebCommunity</a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="<c:url value="/"/>">Torna al sito</a></li>
@@ -75,7 +75,7 @@
                     </div>
                     <br>
                     <div class="right-align">
-                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                        <button class="btn waves-effect waves-light" type="submit" name="action" id="register">
                             Iscriviti
                         </button> 
                     </div>
