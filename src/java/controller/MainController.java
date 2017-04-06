@@ -28,8 +28,8 @@ public class MainController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap map, HttpServletRequest request) {
         // controllo se c'è l'id
-        if (request.getSession().getAttribute("idUtente") == null)
-            setUpHomePageDefault(map);
+        if ((request.getSession().getAttribute("controlloLogin")) != null)
+            map.addAttribute("control",true);
         else
             setUpHomePageUsers(map);
         return "index";

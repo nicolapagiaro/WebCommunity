@@ -54,7 +54,11 @@
                                 <input name="email" id="email" type="email" class="validate">
                                 <label for="email" data-error="Immettere una mail valida" 
                                        data-success="">Email</label>
+                                <c:if test="${control}">
+                                    <p class="red-text text-darken-1">Credenziali errate<p>
+                                </c:if>
                             </div>
+
                             <div class="center col l12">
                                 <button class="btn btn-flat waves-effect waves-light" 
                                         id="login" type="submit" name="action">
@@ -96,7 +100,7 @@
                 </div>
             </div>
         </div>
-        <div class="footer-copyright white">
+        <div class="footer-copyrig3ht white">
             <div class="container black-text">
                 © 2017 Classe 5IB
             </div>
