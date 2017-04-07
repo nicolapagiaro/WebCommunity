@@ -60,7 +60,7 @@
                             </div>
 
                             <div class="center col l12">
-                                <button class="btn btn-flat waves-effect waves-light" 
+                                <button class="btn btn-flat" 
                                         id="login" type="submit" name="action">
                                     Login
                                 </button> 
@@ -75,25 +75,41 @@
     <div class="section white">
         <!-- page content eventi -->
         <div class="row container">
-            <div class="col l6">
+            <div class="col l3">
+                <div class="section">
+                    <h5>Eventi principali</h5>
+                    <p>
+                        Lista degli eventi principali nei dintorni della tua posizione
+                    </p>
+                </div>
+                <div class="divider-active"></div>
+                <a href="">
+                    <div class="section">
+                        <h5>Piu votati</h5>
+                        <p>Lista degli eventi pi&ugrave; popolari nella tua zona</p>
+                    </div>
+                </a>
+                <div class="divider"></div>
+                <div class="section">
+                    <h5>Per categoria</h5>
+                    <p>Stuff</p>
+                </div>
+                <div class="divider"></div>
+            </div>
+            <div class="col l8 offset-l1">
                 <h5 class="center-align teal-text text-darken-2">Eventi principali nella tua zona</h5>
                 <c:forEach items="${listaEventi}" var="e">
-                    <div class="block col l8 offset-l2">
-                        <h5 class="">${e.nome}</h5>
-                        <p class="">Categoria: ${e.categoria.nome}</p>
-                        <p class="">Il: ${e.dataE}</p>
-                        <p class="">Indirizzo: ${e.via_numero} - ${e.provincia}</p>
-                    </div>
-                </c:forEach>
-            </div>
-            <div class="col l6">
-                <h5 class="center-align teal-text text-darken-2">Eventi pi&ugrave; votati</h5>
-                <c:forEach items="${listaEventi}" var="e">
-                    <div class="block col l8 offset-l2">
-                        <h5 class="">${e.nome}</h5>
-                        <p class="">Categoria: ${e.categoria.nome}</p>
-                        <p class="">Il: ${e.dataE}</p>
-                        <p class="">Indirizzo: ${e.via_numero} - ${e.provincia}</p>
+                    <div class="col l6">
+                        <div class="card hoverable">
+                            <div class="card-content">
+                                <span class="card-title">${e.nome}</span>
+                                <p class="">Il: ${e.dataE}</p>
+                                <p class="">Indirizzo: ${e.via_numero} - ${e.provincia}</p>
+                            </div>
+                            <div class="card-action center-align blue-grey lighten-1 white-text">
+                                ${e.categoria.nome}
+                            </div>
+                        </div>
                     </div>
                 </c:forEach>
             </div>
