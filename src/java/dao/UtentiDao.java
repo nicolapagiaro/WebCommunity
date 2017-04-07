@@ -17,7 +17,6 @@ public class UtentiDao {
 
     /**
      * Metodo per prendere la lista degli utenti presenti
-     *
      * @param factory
      * @return la lista di oggetti della classe Utente
      */
@@ -40,14 +39,14 @@ public class UtentiDao {
     }
 
     /**
-     * Metodo che permette di aggiungere un utente al db con la lista delle 
+     * Metodo che permette di aggiungere un utente al db con la lista delle
      * categorie preferite
      * @param u oggetto utente
      * @param idCategorie lista degli ID di categorie preferite
      * @param factory session factory
      * @return l'id maggiore di 0 se andato a buon fine, se no -1
      */
-    public static int addUtente(Utente u, Integer[] idCategorie, SessionFactory factory) {
+    public static Utente addUtente(Utente u, Integer[] idCategorie, SessionFactory factory) {
         Session sessione = factory.openSession();
         Transaction tran = null;
         try {
@@ -60,9 +59,9 @@ public class UtentiDao {
             // le aggiungo all'oggetto utente
             u.setCategorie(cats);
             // salvo l'oggetto della base di dati
-            int id = (int) sessione.save(u);
+            sessione.save(u);
             tran.commit();
-            return id;
+            return u;
         } catch (HibernateException e) {
             if (tran != null) {
                 tran.rollback();
@@ -70,57 +69,43 @@ public class UtentiDao {
         } finally {
             sessione.close();
         }
-        return -1;
+        return null;
     }
-    
 
     /**
      * Metodo per il login dell'utente
      * @param nick nickname utente
      * @param email email dell'utente
      * @param factory session factory
-     * @return l'id maggiore di 0 se andato a buon fine, se no -1
+     * @return l'oggetto utente
      */
-    public static int loginUtente(String nick, String email, SessionFactory factory) {
+    public static Utente loginUtente(String nick, String email, SessionFactory factory) {
         Session sessione = factory.openSession();
-        int id;
-        try {
-            // prendo l'id dell'utente
-            List query = sessione
-                    .createQuery("SELECT id FROM Utente WHERE nickname = :nick AND email = :email")
-                    .setParameter("nick", nick)
-                    .setParameter("email", email)
-                    .list();
-            
-            if(query.isEmpty()){
-                return -1;
-            }
-            id = (int) query.get(0);
-            return id;
-        } catch (HibernateException e) {
-
-        } finally {
-            sessione.close();
-        }
-        return -1;
+        Utente utente = (Utente) sessione
+                .createQuery("FROM Utente WHERE nickname = :nick AND email = :email")
+                .setParameter("nick", nick)
+                .setParameter("email", email)
+                .uniqueResult();
+        sessione.close();
+        return utente;
     }
-    
+
     /**
      * Metodo che permette di aggiungere un utente al db senza categorie
      * preferite
      * @param u oggetto utente
      * @param factory session factory
-     * @return l'id maggiore di 0 se andato a buon fine, se no -1
+     * @return 
      */
-    public static int addUtente(Utente u, SessionFactory factory) {
+    public static Utente addUtente(Utente u, SessionFactory factory) {
         Session sessione = factory.openSession();
         Transaction tran = null;
         try {
             tran = sessione.beginTransaction();
             // salvo l'oggetto della base di dati
-            int id = (int) sessione.save(u);
+            sessione.save(u);
             tran.commit();
-            return id;
+            return u;
         } catch (HibernateException e) {
             if (tran != null) {
                 tran.rollback();
@@ -128,6 +113,6 @@ public class UtentiDao {
         } finally {
             sessione.close();
         }
-        return -1;
+        return null;
     }
 }

@@ -76,42 +76,76 @@
         <!-- page content eventi -->
         <div class="row container">
             <div class="col l3">
-                <div class="section">
-                    <h5>Eventi principali</h5>
-                    <p>
-                        Lista degli eventi principali nei dintorni della tua posizione
-                    </p>
-                </div>
-                <div class="divider-active"></div>
-                <a href="">
+                <a href="#!" class="trigger" id="_1">
+                    <div class="section">
+                        <h5>Eventi principali</h5>
+                        <p>
+                            Lista degli eventi principali nei dintorni della tua posizione
+                        </p>
+                    </div>
+                </a>
+                <div id="_1_1" class="divider-active"></div>
+                <a href="#!" class="trigger" id="_2">
                     <div class="section">
                         <h5>Piu votati</h5>
                         <p>Lista degli eventi pi&ugrave; popolari nella tua zona</p>
                     </div>
                 </a>
-                <div class="divider"></div>
-                <div class="section">
-                    <h5>Per categoria</h5>
-                    <p>Stuff</p>
-                </div>
-                <div class="divider"></div>
+                <div id="_2_2" class="divider"></div>
+                <a href="#!" class="trigger" id="_3">
+                    <div class="section">
+                        <h5>Categorie</h5>
+                        <p>Lista delle categorie presenti</p>
+                    </div>
+                </a>
+                <div id="_3_3" class="divider"></div>
             </div>
             <div class="col l8 offset-l1">
-                <h5 class="center-align teal-text text-darken-2">Eventi principali nella tua zona</h5>
-                <c:forEach items="${listaEventi}" var="e">
-                    <div class="col l6">
-                        <div class="card hoverable">
-                            <div class="card-content">
-                                <span class="card-title">${e.nome}</span>
-                                <p class="">Il: ${e.dataE}</p>
-                                <p class="">Indirizzo: ${e.via_numero} - ${e.provincia}</p>
-                            </div>
-                            <div class="card-action center-align blue-grey lighten-1 white-text">
-                                ${e.categoria.nome}
+                <div class="" id="section_1">
+                    <c:forEach items="${listaEventi}" var="e">
+                        <div class="col l6">
+                            <div class="card hoverable">
+                                <div class="card-content">
+                                    <span class="card-title">${e.nome}</span>
+                                    <p class="">Il: ${e.dataE}</p>
+                                    <p class="">Indirizzo: ${e.via_numero} - ${e.provincia}</p>
+                                </div>
+                                <div class="card-action center-align teal lighten-1 white-text">
+                                    ${e.categoria.nome}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </c:forEach>
+                    </c:forEach>
+                </div>
+                <div class="hide" id="section_2">
+                    <c:forEach items="${listaEventiTop}" var="eT">
+                        <div class="col l6">
+                            <div class="card hoverable">
+                                <div class="card-content">
+                                    <span class="card-title">${eT.e.nome}</span>
+                                    <p class="">Il: ${eT.e.dataE}</p>
+                                    <p class="">Indirizzo: ${eT.e.via_numero} - ${eT.e.provincia}</p>
+                                </div>
+                                <div class="card-action center-align orange lighten-1 white-text">
+                                    Voto medio: ${eT.votoMedio}
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+                <div class="hide" id="section_3">
+                    <c:forEach items="${listaCategorie}" var="c">
+                        <div class="col l6">
+                            <div class="card hoverable">
+                                <div class="card-content">
+                                    <span class="card-title">${c.nome}</span>
+                                    <p>Totale eventi: ${c.eventi.size()}</p>
+                                </div>
+                                <div class="card-action center-align light-blue lighten-1"></div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
             </div>
         </div>
     </div>

@@ -150,6 +150,22 @@ public class Evento implements Serializable{
         this.provincia = provincia;
     }
 
+    public List<Artista> getArtisti() {
+        return artisti;
+    }
+
+    public void setArtisti(List<Artista> artisti) {
+        this.artisti = artisti;
+    }
+
+    public List<VotoCommento> getVotiCommenti() {
+        return votiCommenti;
+    }
+
+    public void setVotiCommenti(List<VotoCommento> votiCommenti) {
+        this.votiCommenti = votiCommenti;
+    }
+    
     /**
      * toString()
      * @return 

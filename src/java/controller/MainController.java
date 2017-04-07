@@ -31,11 +31,18 @@ public class MainController {
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap map, HttpServletRequest request) {
+        // se l'utente è loggato va nella sua homepage
+        if(request.getSession().getAttribute("utente") != null) 
+            return "redirect:/homepage";
+        
         SessionFactory s = HibernateUtil.getSessionFactory();
         
         // passo alla pagina la lista degli eventi
         map.addAttribute("listaEventi", EventiDao.getMainEventi(s));
-        EventiDao.getMostRatedEventi(s);
+        
+        // passo alla pagina la lista degli eventi più votati
+        map.addAttribute("listaEventiTop", EventiDao.getMostRatedEventi(s));
+        
         // passo alla pagina la lista delle categorie
         map.addAttribute("listaCategorie", CategorieDao.getCategorie(s));
         

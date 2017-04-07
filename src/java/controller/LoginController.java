@@ -8,6 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import pojo.Utente;
 
 /**
  * Classe LoginController
@@ -40,12 +41,12 @@ public class LoginController {
             @RequestParam("nick") String nickname, 
             @RequestParam("email") String email) {
 
-        int idUtente = UtentiDao
+        Utente u = UtentiDao
                 .loginUtente(nickname, email, HibernateUtil.getSessionFactory());
         
-        if(idUtente != -1) {
-            request.getSession().setAttribute("idUtente", idUtente);
-            return "redirect:/";
+        if(u != null) {
+            request.getSession().setAttribute("utente", u);
+            return "redirect:/homepage";
         }
         
         //da mettere la pagina post-login
@@ -62,7 +63,7 @@ public class LoginController {
      */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(ModelMap map, HttpServletRequest request) {
-        request.getSession().removeAttribute("idUtente");
+        request.getSession().removeAttribute("utente");
         map.addAttribute("idUtente", false);
         return "redirect:/";
     }

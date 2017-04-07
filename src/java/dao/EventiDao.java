@@ -1,11 +1,14 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import pojo.Evento;
+import pojo.VotoCommento;
+import util.EventoUtil;
 
 /**
  * Classe per i metodi crud legati agli utenti
@@ -52,6 +55,7 @@ public class EventiDao {
             tran = sessione.beginTransaction();
             List<Evento> eventi = (List<Evento>) sessione
                     .createQuery("FROM Evento WHERE dataE > current_date() ORDER BY (dataE) ASC")
+                    .setMaxResults(15)
                     .list();
             tran.commit();
             return eventi;
@@ -78,13 +82,26 @@ public class EventiDao {
         try {
             tran = sessione.beginTransaction();
             List eventi = (List) sessione
-                    .createQuery("FROM VotoCommento")
+                    .createQuery("FROM Evento")
+                    .setMaxResults(15)
                     .list();
             tran.commit();
-            System.out.println(eventi);
-            return eventi;
+            
+            List<EventoUtil> events = new ArrayList<>();
+            
+            // trovo il voto medio
+            for(Object o : eventi) {
+                Evento e = (Evento) o;
+                List<VotoCommento> voti = e.getVotiCommenti();
+                int temp = 0, count = 0;
+                for(VotoCommento v : voti) {
+                    temp += v.getVoto();
+                    count++;
+                }
+                events.add(new EventoUtil(e, temp/count));
+            }
+            return events;
         } catch (HibernateException e) {
-            e.printStackTrace();
             if (tran != null) {
                 tran.rollback();
             }
