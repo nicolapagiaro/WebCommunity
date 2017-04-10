@@ -26,7 +26,7 @@ public class Categoria implements Serializable{
     @Column(name = "nome")
     private String nome;
     
-    @ManyToMany(mappedBy = "categorie")
+    @ManyToMany(mappedBy = "categorie", fetch=FetchType.EAGER)
     private List<Utente> utenti;
     
     @OneToMany(mappedBy = "categoria", fetch=FetchType.EAGER)

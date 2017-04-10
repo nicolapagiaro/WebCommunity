@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import pojo.Categoria;
+import pojo.Utente;
 
 /**
  * Classe per i metodi crud legati alle categorie
@@ -36,5 +37,18 @@ public class CategorieDao {
             sessione.close();
         }
         return null;
+    }
+    
+    /**
+     * 
+     * @param u
+     * @param factory
+     * @return 
+     */
+    public static List<Categoria> getCategorieUtente(Utente u, SessionFactory factory) {
+        Session sessione = factory.openSession();
+        List<Categoria> categorie = (List<Categoria>) 
+                ((Utente) sessione.get(Utente.class, u.getId())).getCategorie();
+        return categorie;
     }
 }
