@@ -40,9 +40,6 @@ public class MainController {
         // passo alla pagina la lista degli eventi
         map.addAttribute("listaEventi", EventiDao.getMainEventi(s));
         
-        // gli eventi già svolti in ordine alfabetico di provincia 
-        map.addAttribute("listaEventi", EventiDao.EventiFatti(s));
-        
         // passo alla pagina la lista degli eventi più votati
         map.addAttribute("listaEventiTop", EventiDao.getMostRatedEventi(s));
         

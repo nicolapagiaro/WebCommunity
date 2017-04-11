@@ -59,4 +59,23 @@ public class HomepageController {
         map.addAttribute("categoria", c);
         return "categoria";
     }
+    
+    /**
+     * metodo per il caricamento della pagina per creare un nuovo evento
+     * @param map
+     * @param request
+     * @param nomeE nome dell'evento
+     * @return
+     */
+    @RequestMapping(value = "/homepage/newEvento", method = RequestMethod.POST)
+    public String newEvento(ModelMap map, HttpServletRequest request,
+            @RequestParam("nomeE") String nomeE) {
+        // se non è loggato nessuno
+        Utente u = (Utente) request.getSession().getAttribute("utente");
+        if(u == null) return "redirect:/";
+        
+        SessionFactory s = HibernateUtil.getSessionFactory();
+        map.addAttribute("nomeE", nomeE);
+        return "newEvento";
+    }
 }
