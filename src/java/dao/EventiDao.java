@@ -3,6 +3,7 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -69,6 +70,33 @@ public class EventiDao {
         }
         return null;
     }
+        
+    
+        /*prima query*/
+        public static List<Evento> EventiFatti(SessionFactory factory) {
+        Session sessione = factory.openSession();
+        Transaction tran = null;
+        try {
+            tran = sessione.beginTransaction();
+            List<Evento> eventifatti = (List<Evento>) sessione
+                .createQuery("FROM Evento WHERE dataE < current_date() ORDER BY (provincia) ASC")
+                .setMaxResults(15)
+                .list();
+            tran.commit();
+            System.out.println(eventifatti);
+            return eventifatti;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            if (tran != null) {
+                tran.rollback();
+            }
+        } finally {
+            sessione.close();
+        }
+        return null;
+    }
+        
+
 
     /**
      * Metodo che restituisce la lista degli eventi con la media più alta di
@@ -98,6 +126,7 @@ public class EventiDao {
                     temp += v.getVoto();
                     count++;
                 }
+                if(count == 0) count = 1;
                 events.add(new EventoUtil(e, temp/count));
             }
             return events;

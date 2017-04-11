@@ -40,6 +40,9 @@ public class MainController {
         // passo alla pagina la lista degli eventi
         map.addAttribute("listaEventi", EventiDao.getMainEventi(s));
         
+        // gli eventi già svolti in ordine alfabetico di provincia 
+        map.addAttribute("listaEventi", EventiDao.EventiFatti(s));
+        
         // passo alla pagina la lista degli eventi più votati
         map.addAttribute("listaEventiTop", EventiDao.getMostRatedEventi(s));
         
@@ -49,7 +52,7 @@ public class MainController {
         // controllo se ci sono errori nel login
         if ((request.getSession().getAttribute("controlloLogin")) != null)
             map.addAttribute("control",true);
-        
+       
         // tolgo il flag di errori nel login per i caricamenti successivi
         request.getSession().removeAttribute("controlloLogin");
         return "index";
