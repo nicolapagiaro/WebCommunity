@@ -46,7 +46,7 @@ public class LoginController {
         
         if(u != null) {
             request.getSession().setAttribute("utente", u);
-            return "redirect:/homepage";
+            return "redirect:/homepage?ordine=default";
         }
         
         //da mettere la pagina post-login

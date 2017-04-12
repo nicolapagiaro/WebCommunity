@@ -69,6 +69,36 @@ public class EventiDao {
         }
         return null;
     }
+    
+    /**
+     * Metodo che restituisce la lista degli eventi ordinati per data meno
+     * recente
+     *
+     * @param factory
+     * @return
+     */
+    public static List<Evento> getEventiDecr(SessionFactory factory) {
+        Session sessione = factory.openSession();
+        Transaction tran = null;
+        try {
+            tran = sessione.beginTransaction();
+            List<Evento> eventi = (List<Evento>) sessione
+                    .createQuery("FROM Evento WHERE dataE > current_date() ORDER BY (dataE) DESC")
+                    .setMaxResults(15)
+                    .list();
+            tran.commit();
+            return eventi;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            if (tran != null) {
+                tran.rollback();
+            }
+        } finally {
+            sessione.close();
+        }
+        return null;
+    }
+    
 
     /**
      * Metodo che restituisce la lista degli eventi con la media più alta di
@@ -98,9 +128,33 @@ public class EventiDao {
                     temp += v.getVoto();
                     count++;
                 }
+                if(count == 0) count = 1;
                 events.add(new EventoUtil(e, temp/count));
             }
             return events;
+        } catch (HibernateException e) {
+            if (tran != null) {
+                tran.rollback();
+            }
+        } finally {
+            sessione.close();
+        }
+        return null;
+    }
+    
+    /**
+     * restiurisce eventi ordinati per lettera crescente
+     * @param factory
+     * @return 
+     */
+    public static List<Evento> getEventiLC(SessionFactory factory) {
+        Session sessione = factory.openSession();
+        Transaction tran = null;
+        try {
+            tran = sessione.beginTransaction();
+            List<Evento> eventi = (List<Evento>) sessione.createQuery("FROM Evento ORDER BY nome ASC").list();
+            tran.commit();
+            return eventi;
         } catch (HibernateException e) {
             if (tran != null) {
                 tran.rollback();
