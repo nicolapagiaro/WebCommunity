@@ -91,7 +91,23 @@
                                 <h5>Eventi</h5>
                             </div>
                             <div class="col l6 left-align">
-                                <p>Ordina per nome</p>
+
+                                <!-- Dropdown Trigger -->
+                                <a class='dropdown-button btn' href='#' data-activates='dropdown1'>Ordina per</a>
+
+                                <!-- Dropdown Structure -->
+                                <ul id='dropdown1' class='dropdown-content'>
+                                    <li><a href="<c:url value="/homepage?ordine=dc"/>">data crescente</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="<c:url value="/homepage?ordine=dd"/>">data decrescente</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="<c:url value="/homepage?ordine=lc"/>">lettera crescente</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="<c:url value="/homepage?ordine=ld"/>">lettera decrescente</a></li>
+                                    <!--<li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
+                                    <li><a href="#!"><i class="material-icons">cloud</i>five</a></li> -->
+                                </ul>
+
                             </div>
                         </div>
                         <div class="row">

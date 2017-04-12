@@ -139,4 +139,27 @@ public class EventiDao {
         }
         return null;
     }
+    
+    /**
+     * restiurisce eventi ordinati per lettera crescente
+     * @param factory
+     * @return 
+     */
+    public static List<Evento> getEventiLC(SessionFactory factory) {
+        Session sessione = factory.openSession();
+        Transaction tran = null;
+        try {
+            tran = sessione.beginTransaction();
+            List<Evento> eventi = (List<Evento>) sessione.createQuery("FROM Evento ORDER BY nome ASC").list();
+            tran.commit();
+            return eventi;
+        } catch (HibernateException e) {
+            if (tran != null) {
+                tran.rollback();
+            }
+        } finally {
+            sessione.close();
+        }
+        return null;
+    }
 }
