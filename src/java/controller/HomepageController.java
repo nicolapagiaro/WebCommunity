@@ -100,12 +100,13 @@ public class HomepageController {
      */
     @RequestMapping(value = "/homepage/newEvento", method = RequestMethod.POST)
     public String newEvento(ModelMap map, HttpServletRequest request,
-            @RequestParam("nomeE") String nomeE) {
+            @RequestParam("nomeE") String nomeE, @RequestParam("numeroA") int numeroA) {
         // se non è loggato nessuno
         Utente u = (Utente) request.getSession().getAttribute("utente");
         if(u == null) return "redirect:/";
         
         SessionFactory s = HibernateUtil.getSessionFactory();
+        map.addAttribute("numeroA",numeroA);
         map.addAttribute("nomeE", nomeE);
         return "newEvento";
 

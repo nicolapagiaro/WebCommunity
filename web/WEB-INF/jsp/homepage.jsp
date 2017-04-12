@@ -68,15 +68,26 @@
                         <div class="row">
                             <form method="POST" action="<c:url value="/homepage/newEvento"/>">
                                 <div class="input-field col s12">
-                                <input name="nomeE" id="nomeE" type="text" class="validate">
-                                <label for="nomeE">Nome nuovo evento</label>
-                            </div>
-                            <div class="right-align col l12">
-                                <button class="btn btn-flat" 
-                                        id="new_evento" type="submit" name="action">
-                                    Crea
-                                </button> 
-                            </div>
+                                    <input name="nomeE" id="nomeE" type="text" class="validate">
+                                    <label for="nomeE">Nome nuovo evento</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    
+                                    <form action="#">
+                                        <label for="numeroA">Numero di artisti presenti</label>
+                                        <br>
+                                        <br>
+                                        <p class="range-field">
+                                            <input type="range" id="numeroA" min="0" max="30" value="0" />
+                                        </p>
+                                    </form>
+                                </div>
+                                <div class="right-align col l12">
+                                    <button class="btn btn-flat" 
+                                            id="new_evento" type="submit" name="action">
+                                        Crea
+                                    </button> 
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -90,10 +101,10 @@
                             <div class="col l6">
                                 <h5>Eventi</h5>
                             </div>
-                            <div class="col l6 left-align">
+                            <div class="col l6 right-align">
 
                                 <!-- Dropdown Trigger -->
-                                <a class='dropdown-button btn' href='#' data-activates='dropdown1'>Ordina per</a>
+                                <a class='dropdown-button btn btn-flat' href='#' data-activates='dropdown1'>Ordina per</a>
 
                                 <!-- Dropdown Structure -->
                                 <ul id='dropdown1' class='dropdown-content'>

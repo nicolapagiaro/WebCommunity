@@ -33,13 +33,68 @@
     <br>
     <div class="container">
         <div class="row">
-            
+            <div class="card">
+                <div class="card-content">
+                    <form>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="name" type="text" class="validate" >
+                                <label for="name">Nome evento</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <label for="data">Seleziona la data</label>
+                                <input id="data" type="date" class="datepicker">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input  id="via" type="text" class="validate" >
+                                <label for="via">Via e numero civico</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">textsms</i>
+                                <input type="text" id="autocomplete-input" class="autocomplete">
+                                <label for="autocomplete-input">Provincia</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            //da fare for in jstl
+                            <div class="input-field col s6">
+                                <input id="nomeA" type="text" class="validate">
+                                <label for="nomeA">Nome</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="cognome" type="text" class="validate">
+                                <label for="cognome">Cognome</label>
+                            </div>
+                            
+                            <div class="input-field col s6">
+                                <input id="nomeA" type="text" class="validate">
+                                <label for="nomeA">Nome</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="cognome" type="text" class="validate">
+                                <label for="cognome">Cognome</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                This is an inline input field:
+                                <div class="input-field inline">
+                                    <input id="email" type="email" class="validate">
+                                    <label for="email" data-error="wrong" data-success="right">Email</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>        
 
-        <!-- fast loading of the page -->
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/materialize.min.js" />"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/main_script.js" />"></script>
-    </body>
+    <!-- fast loading of the page -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/materialize.min.js" />"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/main_script.js" />"></script>
+</body>
 </html>

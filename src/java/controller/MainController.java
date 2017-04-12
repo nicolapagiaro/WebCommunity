@@ -33,7 +33,7 @@ public class MainController {
     public String index(ModelMap map, HttpServletRequest request) {
         // se l'utente è loggato va nella sua homepage
         if(request.getSession().getAttribute("utente") != null) 
-            return "redirect:/homepage";
+            return "redirect:/homepage?ordine=default";
         
         SessionFactory s = HibernateUtil.getSessionFactory();
         

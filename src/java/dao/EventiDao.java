@@ -70,6 +70,33 @@ public class EventiDao {
         }
         return null;
     }
+    
+    /**
+     * Metodo che restituisce eventi in ordine data decrescente
+     * @param factory
+     * @return 
+     */
+    public static List<Evento> getEventiDD(SessionFactory factory) {
+        Session sessione = factory.openSession();
+        Transaction tran = null;
+        try {
+            tran = sessione.beginTransaction();
+            List<Evento> eventi = (List<Evento>) sessione
+                    .createQuery("FROM Evento WHERE dataE > current_date() ORDER BY (dataE) DESC")
+                    .setMaxResults(15)
+                    .list();
+            tran.commit();
+            return eventi;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            if (tran != null) {
+                tran.rollback();
+            }
+        } finally {
+            sessione.close();
+        }
+        return null;
+    }
         
     
         /*prima query*/
@@ -151,6 +178,29 @@ public class EventiDao {
         try {
             tran = sessione.beginTransaction();
             List<Evento> eventi = (List<Evento>) sessione.createQuery("FROM Evento ORDER BY nome ASC").list();
+            tran.commit();
+            return eventi;
+        } catch (HibernateException e) {
+            if (tran != null) {
+                tran.rollback();
+            }
+        } finally {
+            sessione.close();
+        }
+        return null;
+    }
+    
+    /**
+     * metodo che restituisce eventi lettera decrescente
+     * @param factory
+     * @return 
+     */
+    public static List<Evento> getEventiLD(SessionFactory factory) {
+        Session sessione = factory.openSession();
+        Transaction tran = null;
+        try {
+            tran = sessione.beginTransaction();
+            List<Evento> eventi = (List<Evento>) sessione.createQuery("FROM Evento ORDER BY nome DESC").list();
             tran.commit();
             return eventi;
         } catch (HibernateException e) {
