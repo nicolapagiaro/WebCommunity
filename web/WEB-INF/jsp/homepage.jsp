@@ -98,8 +98,8 @@
                             <c:forEach items="${listaEventi}" var="e">
                                 <div class="col l12">
                                     <span class="card-title">${e.nome}</span>
-                                    <p class="">Il: ${e.dataE}</p>
-                                    <p class="">Indirizzo: ${e.via_numero} - ${e.provincia}</p>
+                                    <p class="">Data: ${e.dataE}</p>
+                                    <p class="">${e.via_numero} - ${e.provincia}</p>
                                     ${e.categoria.nome}
                                 </div>
                             </c:forEach>
