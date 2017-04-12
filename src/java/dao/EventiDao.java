@@ -3,6 +3,7 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -69,25 +70,21 @@ public class EventiDao {
         }
         return null;
     }
+        
     
-    /**
-     * Metodo che restituisce la lista degli eventi ordinati per data meno
-     * recente
-     *
-     * @param factory
-     * @return
-     */
-    public static List<Evento> getEventiDecr(SessionFactory factory) {
+        /*prima query*/
+        public static List<Evento> EventiFatti(SessionFactory factory) {
         Session sessione = factory.openSession();
         Transaction tran = null;
         try {
             tran = sessione.beginTransaction();
-            List<Evento> eventi = (List<Evento>) sessione
-                    .createQuery("FROM Evento WHERE dataE > current_date() ORDER BY (dataE) DESC")
-                    .setMaxResults(15)
-                    .list();
+            List<Evento> eventifatti = (List<Evento>) sessione
+                .createQuery("FROM Evento WHERE dataE < current_date() ORDER BY (provincia) ASC")
+                .setMaxResults(15)
+                .list();
             tran.commit();
-            return eventi;
+            System.out.println(eventifatti);
+            return eventifatti;
         } catch (HibernateException e) {
             e.printStackTrace();
             if (tran != null) {
@@ -98,7 +95,8 @@ public class EventiDao {
         }
         return null;
     }
-    
+        
+
 
     /**
      * Metodo che restituisce la lista degli eventi con la media più alta di

@@ -34,6 +34,7 @@
     <div class="container">
         <div class="row">
             <div class="col l3">
+                <!-- utente -->
                 <div class="card">
                     <div class="card-content">
                         <div class="center-align">
@@ -47,6 +48,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- categorie seguite -->
                 <div class="card">
                     <div class="card-content">
                         <span class="card-title">Le tue categorie preferite</span>
@@ -60,7 +62,27 @@
                         </c:forEach>
                     </div>
                 </div>
+                <!-- nuovo evento -->
+                <div class="card">
+                    <div class="card-content">
+                        <div class="row">
+                            <form method="POST" action="<c:url value="/homepage/newEvento"/>">
+                                <div class="input-field col s12">
+                                <input name="nomeE" id="nomeE" type="text" class="validate">
+                                <label for="nomeE">Nome nuovo evento</label>
+                            </div>
+                            <div class="right-align col l12">
+                                <button class="btn btn-flat" 
+                                        id="new_evento" type="submit" name="action">
+                                    Crea
+                                </button> 
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <!-- eventi -->
             <div class="col l9">
                 <div class="card">
                     <div class="card-content">

@@ -48,17 +48,23 @@ public class HomepageController {
             //random gesu balla 
             //map.addAttribute("listaCategorie", CategorieDao.getCategorieUtente(u, s));
         } else if ("dc".equals(c)) {
-            // passo alla pagina la lista degli eventi e le categorie
-            map.addAttribute("listaCategorie", CategorieDao.getCategorieUtente(u, s));
+            // passo alla pagina la lista degli eventi in ordine data crescente
+            map.addAttribute("listaEventi", EventiDao.getMainEventi(s));
         } else if ("dd".equals(c)) {
-            //passo la pagina con eventi decrescenti
-            map.addAttribute("listaEventi", EventiDao.getEventiDecr(s));
+            //passo la pagina con eventi data decrescenti 
+            map.addAttribute("listaEventi", EventiDao.getEventiDD(s));
         } else if ("lc".equals(c)) {
-            //passo la pagina con eventi decrescenti
-            map.addAttribute("listaEventi", EventiDao.getEventiDecr(s));
+            //passo la pagina con eventi lettera crescente
+            map.addAttribute("listaEventi", EventiDao.getEventiLC(s));
+        } else if ("ld".equals(c)){
+            //passo la pagina con eventi lettera decrescente
+            map.addAttribute("listaEventi", EventiDao.getEventiLD(s));
+        }
+        else{
+            //random gesu balla
         }
 
-        map.addAttribute("listaEventi", EventiDao.getMainEventi(s));
+        map.addAttribute("listaCategorie", CategorieDao.getCategorieUtente(u, s));
         return "homepage";
     }
 
@@ -84,19 +90,24 @@ public class HomepageController {
         return "categoria";
     }
 
+    
     /**
-     * Metodo per restituire lista eventi ordinati per data meno recente
-     *
+     * metodo per il caricamento della pagina per creare un nuovo evento
      * @param map
      * @param request
-     * @param c
+     * @param nomeE nome dell'evento
      * @return
      */
-    @RequestMapping(value = "/homeujbpage", method = RequestMethod.GET)
-    public String dataCrescente(ModelMap map, HttpServletRequest request) {
-
+    @RequestMapping(value = "/homepage/newEvento", method = RequestMethod.POST)
+    public String newEvento(ModelMap map, HttpServletRequest request,
+            @RequestParam("nomeE") String nomeE) {
+        // se non è loggato nessuno
+        Utente u = (Utente) request.getSession().getAttribute("utente");
+        if(u == null) return "redirect:/";
+        
         SessionFactory s = HibernateUtil.getSessionFactory();
+        map.addAttribute("nomeE", nomeE);
+        return "newEvento";
 
-        return "homepage";
     }
 }

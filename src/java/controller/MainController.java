@@ -49,7 +49,7 @@ public class MainController {
         // controllo se ci sono errori nel login
         if ((request.getSession().getAttribute("controlloLogin")) != null)
             map.addAttribute("control",true);
-        
+       
         // tolgo il flag di errori nel login per i caricamenti successivi
         request.getSession().removeAttribute("controlloLogin");
         return "index";
