@@ -45,7 +45,6 @@ public class EventiDao {
     /**
      * Metodo che restituisce la lista degli eventi ordinati per data più
      * recenti
-     *
      * @param factory
      * @return
      */
@@ -61,7 +60,6 @@ public class EventiDao {
             tran.commit();
             return eventi;
         } catch (HibernateException e) {
-            e.printStackTrace();
             if (tran != null) {
                 tran.rollback();
             }
@@ -88,7 +86,6 @@ public class EventiDao {
             tran.commit();
             return eventi;
         } catch (HibernateException e) {
-            e.printStackTrace();
             if (tran != null) {
                 tran.rollback();
             }
@@ -201,6 +198,29 @@ public class EventiDao {
         try {
             tran = sessione.beginTransaction();
             List<Evento> eventi = (List<Evento>) sessione.createQuery("FROM Evento ORDER BY nome DESC").list();
+            tran.commit();
+            return eventi;
+        } catch (HibernateException e) {
+            if (tran != null) {
+                tran.rollback();
+            }
+        } finally {
+            sessione.close();
+        }
+        return null;
+    }
+    
+    /**
+     * metodo che restituisce eventi random
+     * @param factory
+     * @return 
+     */
+    public static List<Evento> getEventiRandom(SessionFactory factory) {
+        Session sessione = factory.openSession();
+        Transaction tran = null;
+        try {
+            tran = sessione.beginTransaction();
+            List<Evento> eventi = (List<Evento>) sessione.createQuery("FROM Evento ORDER BY RAND()").list();
             tran.commit();
             return eventi;
         } catch (HibernateException e) {

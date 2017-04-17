@@ -68,7 +68,7 @@ $(document).ready(function () {
             "Udine": null,
             "Varese": null, "Venezia": null, "Verbano-Cusio-Ossola": null, "Vercelli": null, "Verona": null, "Vibo Valentia": null, "Vicenza": null, "Viterbo": null
         },
-        limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+        limit: 8, // The max amount of results that can be shown at once. Default: Infinity.
         onAutocomplete: function (val) {
             // Callback function when value is autcompleted.
         },

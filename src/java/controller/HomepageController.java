@@ -46,7 +46,7 @@ public class HomepageController {
 
         if ("default".equals(c)) {
             //random gesu balla 
-            //map.addAttribute("listaCategorie", CategorieDao.getCategorieUtente(u, s));
+            map.addAttribute("listaEventi", EventiDao.getEventiRandom(s));
         } else if ("dc".equals(c)) {
             // passo alla pagina la lista degli eventi in ordine data crescente
             map.addAttribute("listaEventi", EventiDao.getMainEventi(s));
@@ -62,6 +62,7 @@ public class HomepageController {
         }
         else{
             //random gesu balla
+            map.addAttribute("listaEventi", EventiDao.getEventiRandom(s));
         }
 
         map.addAttribute("listaCategorie", CategorieDao.getCategorieUtente(u, s));
@@ -96,6 +97,7 @@ public class HomepageController {
      * @param map
      * @param request
      * @param nomeE nome dell'evento
+     * @param numeroA numero degli artisti
      * @return
      */
     @RequestMapping(value = "/homepage/newEvento", method = RequestMethod.POST)
@@ -109,6 +111,5 @@ public class HomepageController {
         map.addAttribute("numeroA",numeroA);
         map.addAttribute("nomeE", nomeE);
         return "newEvento";
-
     }
 }

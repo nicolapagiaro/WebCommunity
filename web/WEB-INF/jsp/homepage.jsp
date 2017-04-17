@@ -72,15 +72,12 @@
                                     <label for="nomeE">Nome nuovo evento</label>
                                 </div>
                                 <div class="input-field col s12">
-                                    
-                                    <form action="#">
-                                        <label for="numeroA">Numero di artisti presenti</label>
-                                        <br>
-                                        <br>
-                                        <p class="range-field">
-                                            <input type="range" id="numeroA" min="0" max="30" value="0" />
-                                        </p>
-                                    </form>
+                                    <label for="numeroA">Numero di artisti presenti</label>
+                                    <br>
+                                    <br>
+                                    <p class="range-field">
+                                        <input type="range" name="numeroA" min="0" max="5" value="0" />
+                                    </p>
                                 </div>
                                 <div class="right-align col l12">
                                     <button class="btn btn-flat" 
