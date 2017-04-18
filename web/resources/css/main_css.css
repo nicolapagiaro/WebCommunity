@@ -22,7 +22,7 @@
 }
 /* label underline focus color */
 .input-field input[type=text]:focus, 
-.input-field input[type=email]:focus {
+.input-field input[type=email]:focus{
     border-bottom: 1px solid #00796b;
     box-shadow: 0 1px 0 0 #00796b;
 }
@@ -39,6 +39,17 @@
 /* icon prefix focus color */
 .input-field .prefix.active {
     color: #00796b;
+}
+
+/* text area */
+textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #00796b;
+  box-shadow: 0 1px 0 0 #00796b;
+}
+
+/* text area */
+textarea.materialize-textarea:focus:not([readonly]) + label {
+  color: #00796b;
 }
 
 /* per la nav su telefono */

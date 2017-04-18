@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import pojo.Evento;
 import pojo.Utente;
+import pojo.VotoCommento;
 
 /**
  * Controller per la pagina home dell'utente
@@ -111,5 +112,41 @@ public class HomepageController {
         map.addAttribute("numeroA",numeroA);
         map.addAttribute("nomeE", nomeE);
         return "newEvento";
+    }
+    
+    /**
+     * metodo per il caricamento della pagina per visualizzare i commenti ed
+     * i voti per quel commento
+     * @param map
+     * @param request
+     * @param id id evento
+     * @return
+     */
+    @RequestMapping(value = "/homepage/evento", method = RequestMethod.GET)
+    public String evento(ModelMap map, HttpServletRequest request,
+            @RequestParam("id") int id) {
+        // se non è loggato nessuno
+        Utente u = (Utente) request.getSession().getAttribute("utente");
+        if(u == null) return "redirect:/";
+        
+        SessionFactory s = HibernateUtil.getSessionFactory();
+        
+        Evento e = EventiDao.getEvento(s, id);
+        List<VotoCommento> v = e.getVotiCommenti();
+        
+        // vedo se l'utente loggato ha commentato
+        boolean commentato = false;
+        for(VotoCommento vc : v) {
+            if(vc.getIdUtente() == u.getId()) {
+                commentato = true;
+                break;
+            }
+        }
+        
+        map.addAttribute("evento", e);
+        map.addAttribute("voti_commenti", v);
+        map.addAttribute("commentato", commentato);
+        
+        return "evento";
     }
 }

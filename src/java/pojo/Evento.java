@@ -20,82 +20,85 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table(name = "EVENTI")
-public class Evento implements Serializable{
+public class Evento implements Serializable {
+
     static final long serialVersionUID = 30L;
-    
-    @Id @GeneratedValue
+
+    @Id
+    @GeneratedValue
     private int id;
-    
+
     @Column(name = "nome")
     private String nome;
-    
+
     @Column(name = "dataE")
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dataE; 
-    
+    private Date dataE;
+
     @ManyToOne
     @JoinColumn(name = "categoria")
     private Categoria categoria;
-    
+
     @Column(name = "via_numero")
     private String via_numero;
-    
+
     @Column(name = "provincia")
     private String provincia;
-    
+
     @ManyToMany(mappedBy = "eventi")
     private List<Artista> artisti;
-    
+
     @OneToMany(mappedBy = "evento")
     private List<VotoCommento> votiCommenti;
 
     /**
      * Costruttore vuoto
      */
-    public Evento() {}
+    public Evento() {
+    }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public int getId() {
         return id;
     }
 
     /**
-     * 
-     * @param id 
+     *
+     * @param id
      */
     public void setId(int id) {
         this.id = id;
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getNome() {
         return nome;
     }
 
     /**
-     * 
-     * @param nome 
+     *
+     * @param nome
      */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public Date getDataE() {
         return dataE;
     }
 
     /**
-     * 
+     *
      * @param dataE
      */
     public void setDataE(Date dataE) {
@@ -103,48 +106,48 @@ public class Evento implements Serializable{
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public Categoria getCategoria() {
         return categoria;
     }
 
     /**
-     * 
-     * @param categoria 
+     *
+     * @param categoria
      */
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getVia_numero() {
         return via_numero;
     }
 
     /**
-     * 
-     * @param via_numero 
+     *
+     * @param via_numero
      */
     public void setVia_numero(String via_numero) {
         this.via_numero = via_numero;
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getProvincia() {
         return provincia;
     }
 
     /**
-     * 
-     * @param provincia 
+     *
+     * @param provincia
      */
     public void setProvincia(String provincia) {
         this.provincia = provincia;
@@ -165,16 +168,31 @@ public class Evento implements Serializable{
     public void setVotiCommenti(List<VotoCommento> votiCommenti) {
         this.votiCommenti = votiCommenti;
     }
-    
+
+    /**
+     * Metodo che restituisce il voto medio dell'evento
+     * @return voto medio dell'evento
+     */
+    public float getVotoMedio() {
+        int temp = 0, count = 0;
+        for (VotoCommento v : this.getVotiCommenti()) {
+            temp += v.getVoto();
+            count++;
+        }
+        if(count == 0) count = 1;
+        return temp/count;
+    }
+
     /**
      * toString()
-     * @return 
+     *
+     * @return
      */
     @Override
     public String toString() {
-        return "Evento{" + "id=" + id + ", nome=" + nome + ", data=" 
-                + dataE + ", categoria=" + categoria + ", via_numero=" 
+        return "Evento{" + "id=" + id + ", nome=" + nome + ", data="
+                + dataE + ", categoria=" + categoria + ", via_numero="
                 + via_numero + ", provincia=" + provincia + '}';
     }
-    
+
 }

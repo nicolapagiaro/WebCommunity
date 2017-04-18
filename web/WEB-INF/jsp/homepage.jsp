@@ -13,6 +13,7 @@
         <link href="<c:url value="/resources/css/materialize.min.css" />" rel="stylesheet" media="screen,projection">
         <!--Import main_css.css-->
         <link href="<c:url value="/resources/css/main_css.css" />" rel="stylesheet" media="screen,projection">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
     </head>
@@ -71,14 +72,6 @@
                                     <input name="nomeE" id="nomeE" type="text" class="validate">
                                     <label for="nomeE">Nome nuovo evento</label>
                                 </div>
-                                <div class="input-field col s12">
-                                    <label for="numeroA">Numero di artisti presenti</label>
-                                    <br>
-                                    <br>
-                                    <p class="range-field">
-                                        <input type="range" name="numeroA" min="0" max="5" value="0" />
-                                    </p>
-                                </div>
                                 <div class="right-align col l12">
                                     <button class="btn btn-flat" 
                                             id="new_evento" type="submit" name="action">
@@ -99,11 +92,7 @@
                                 <h5>Eventi</h5>
                             </div>
                             <div class="col l6 right-align">
-
-                                <!-- Dropdown Trigger -->
                                 <a class='dropdown-button btn btn-flat' href='#' data-activates='dropdown1'>Ordina per</a>
-
-                                <!-- Dropdown Structure -->
                                 <ul id='dropdown1' class='dropdown-content'>
                                     <li><a href="<c:url value="/homepage?ordine=dc"/>">data crescente</a></li>
                                     <li class="divider"></li>
@@ -112,22 +101,31 @@
                                     <li><a href="<c:url value="/homepage?ordine=lc"/>">lettera crescente</a></li>
                                     <li class="divider"></li>
                                     <li><a href="<c:url value="/homepage?ordine=ld"/>">lettera decrescente</a></li>
-                                    <!--<li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
-                                    <li><a href="#!"><i class="material-icons">cloud</i>five</a></li> -->
                                 </ul>
 
                             </div>
                         </div>
-                        <div class="row">
-                            <c:forEach items="${listaEventi}" var="e">
-                                <div class="col l12">
+                        <c:forEach items="${listaEventi}" var="e">
+                            <div class="row">
+                                <div class="col l9">
                                     <span class="card-title">${e.nome}</span>
-                                    <p class="">Data: ${e.dataE}</p>
-                                    <p class="">${e.via_numero} - ${e.provincia}</p>
-                                    ${e.categoria.nome}
+                                    <p>Data: ${e.dataE}</p>
+                                    <p>${e.via_numero} - ${e.provincia}</p>
+                                    <p>${e.categoria.nome}</p>
                                 </div>
-                            </c:forEach>
-                        </div>
+                                <div class="col l3">
+                                    <a href="<c:url value="/homepage/evento?id=${e.id}"/>" class="btn btn-flat light">
+                                        <i class="material-icons left">chat_bubble</i>
+                                        Commenta
+                                    </a>
+                                </div>
+                                <div class="col l12">
+                                    <div class="section"></div>
+                                    <div class="divider"></div>
+                                    <div class="section no-padding"></div>
+                                </div>
+                            </div>
+                        </c:forEach>
                     </div>
                 </div>
             </div>

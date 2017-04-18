@@ -1,6 +1,7 @@
 $(document).ready(function () {
+    $('input#input_text, textarea#textarea1').characterCounter();
     $('.parallax').parallax();
-
+    
     var section_active = "_1";
 
     // per il login
@@ -64,7 +65,7 @@ $(document).ready(function () {
             "Padova": null, "Palermo": null, "Parma": null, "Pavia": null, "Perugia": null, "Pesa ro e Urbino": null, "Pescara": null, "Piacenza": null, "Pisa": null, "Pistoia": null, "Por denone": null, "Potenza": null, "Prato": null,
             "Ragusa": null, "Ravenna": null, "Reggio Calabria": null, "Reggio Emilia": null, "Rieti": null, "Rimini": null, "Roma": null, "Rovigo": null,
             "Salerno": null, "Sassari": null, "Savona": null, "Siena": null, "Siracusa": null, "S ondrio": null,
-            "Taranto": null, "Teramo": null, "Terni": null, "Torino": null, "Trapani": null, "Tre nto": null, "Treviso": null, "Trieste": null,
+            "Taranto": null, "Teramo": null, "Terni": null, "Torino": null, "Trapani": null, "Trento": null, "Treviso": null, "Trieste": null,
             "Udine": null,
             "Varese": null, "Venezia": null, "Verbano-Cusio-Ossola": null, "Vercelli": null, "Verona": null, "Vibo Valentia": null, "Vicenza": null, "Viterbo": null
         },
@@ -73,5 +74,11 @@ $(document).ready(function () {
             // Callback function when value is autcompleted.
         },
         minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+    });
+    
+    // per mostrare il voto dato ad un evento
+    $("#range").on('change', function(e) {
+        var v = $(this).val();
+        $("#voto").text("Voto: " + v);
     });
 });

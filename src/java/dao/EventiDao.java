@@ -1,15 +1,11 @@
 package dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import pojo.Evento;
-import pojo.VotoCommento;
-import util.EventoUtil;
 
 /**
  * Classe per i metodi crud legati agli utenti
@@ -138,22 +134,7 @@ public class EventiDao {
                     .setMaxResults(15)
                     .list();
             tran.commit();
-            
-            List<EventoUtil> events = new ArrayList<>();
-            
-            // trovo il voto medio
-            for(Object o : eventi) {
-                Evento e = (Evento) o;
-                List<VotoCommento> voti = e.getVotiCommenti();
-                int temp = 0, count = 0;
-                for(VotoCommento v : voti) {
-                    temp += v.getVoto();
-                    count++;
-                }
-                if(count == 0) count = 1;
-                events.add(new EventoUtil(e, temp/count));
-            }
-            return events;
+            return eventi;
         } catch (HibernateException e) {
             if (tran != null) {
                 tran.rollback();
@@ -231,5 +212,17 @@ public class EventiDao {
             sessione.close();
         }
         return null;
+    }
+    
+    /**
+     * Metodo per prendere l'evento con id passato
+     * @param factory session factory
+     * @param idEvento id dell'evento
+     * @return l'oggetto evento
+     */
+    public static Evento getEvento(SessionFactory factory, int idEvento) {
+        Session sessione = factory.openSession();
+        Evento e = (Evento) sessione.get(Evento.class, idEvento);
+        return e;
     }
 }

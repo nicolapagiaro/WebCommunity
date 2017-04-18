@@ -2,6 +2,7 @@ package pojo;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -38,7 +39,7 @@ public class Utente implements Serializable{
    private String email;
    
    @OneToMany(mappedBy = "utente", fetch=FetchType.EAGER)
-    private List<VotoCommento> votiCommenti;
+   private List<VotoCommento> votiCommenti;
    
    /**
     * Associazione molti a molti con categorie
@@ -196,4 +197,36 @@ public class Utente implements Serializable{
     public void setVotiCommenti(List<VotoCommento> votiCommenti) {
         this.votiCommenti = votiCommenti;
     }
+
+    /**
+     * Equals method
+     * @param obj
+     * @return 
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        final Utente other = (Utente) obj;
+        return this.id == other.id;
+    }
+
+    /**
+     * Hash code
+     * @return 
+     */
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 23 * hash + this.id;
+        hash = 23 * hash + Objects.hashCode(this.nickname);
+        hash = 23 * hash + Objects.hashCode(this.nome);
+        hash = 23 * hash + Objects.hashCode(this.cognome);
+        hash = 23 * hash + Objects.hashCode(this.email);
+        return hash;
+    }   
 }

@@ -122,12 +122,12 @@
                         <div class="col l6">
                             <div class="card hoverable">
                                 <div class="card-content">
-                                    <span class="card-title">${eT.e.nome}</span>
-                                    <p class="">Il: ${eT.e.dataE}</p>
-                                    <p class="">Indirizzo: ${eT.e.via_numero} - ${eT.e.provincia}</p>
+                                    <span class="card-title">${eT.nome}</span>
+                                    <p class="">Il: ${eT.dataE}</p>
+                                    <p class="">Indirizzo: ${eT.via_numero} - ${eT.provincia}</p>
                                 </div>
                                 <div class="card-action center-align orange lighten-1 white-text">
-                                    Voto medio: ${eT.votoMedio}
+                                    Voto medio: ${eT.getVotoMedio()}
                                 </div>
                             </div>
                         </div>
