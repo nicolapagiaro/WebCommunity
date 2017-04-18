@@ -124,12 +124,12 @@ public class EventiDao {
      * @param factory
      * @return
      */
-    public static List getMostRatedEventi(SessionFactory factory) {
+    public static List<Evento> getMostRatedEventi(SessionFactory factory) {
         Session sessione = factory.openSession();
         Transaction tran = null;
         try {
             tran = sessione.beginTransaction();
-            List eventi = (List) sessione
+            List<Evento> eventi = (List<Evento>) sessione
                     .createQuery("FROM Evento")
                     .setMaxResults(15)
                     .list();

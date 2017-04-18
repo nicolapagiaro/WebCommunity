@@ -41,7 +41,7 @@
                         <p>Data: ${evento.dataE}</p>
                         <p>${evento.via_numero} - ${evento.provincia}</p>
                         <p>${evento.categoria.nome}</p>
-                        <p>Voto medio: </p>
+                        <p>Voto medio: ${evento.getVotoMedio()}</p>
                     </div>
                 </div>
             </div>
@@ -68,10 +68,10 @@
                                     <br>
                                     <img width="42px" class="responsive-img circle" alt="userimage" src="<c:url value="/resources/images/userimage.png"/>"/>
                                 </div>
-                                <form class="col l10 pull-l1">
+                                    <form class="col l10 pull-l1" action="<c:url value="/homepage/evento/commenta"/>" method="POST">
                                     <div class="row">
                                         <div class="input-field col l12">
-                                            <textarea id="textarea1" class="materialize-textarea" maxlength="255" data-length="255"></textarea>
+                                            <textarea id="textarea1" class="materialize-textarea" maxlength="255"></textarea>
                                             <label for="textarea1">Commento..</label>
                                         </div>
                                         <div class="input-field col l4">
