@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import pojo.Evento;
+import pojo.VotoCommento;
 
 /**
  * Classe per i metodi crud legati agli utenti
@@ -224,5 +225,39 @@ public class EventiDao {
         Session sessione = factory.openSession();
         Evento e = (Evento) sessione.get(Evento.class, idEvento);
         return e;
+    }
+    
+    /**
+     * Metodo per aggiungere un commento all'evento
+     * @param factory session factory
+     * @param idEvento id dell'evento
+     * @param commento commento
+     * @param voto voto
+     * @return true se è andato bene, false se no
+     */
+    public static boolean addCommentoVoto(SessionFactory factory, int idEvento, String commento, int voto) {
+        Session sessione = factory.openSession();
+        Transaction tran = null;
+        try {
+            tran = sessione.beginTransaction();
+            Evento e = (Evento) sessione.get(Evento.class, idEvento);
+            List<VotoCommento> v = e.getVotiCommenti();
+            VotoCommento vc = new VotoCommento();
+            vc.setCommento(commento);
+            vc.setVoto(voto);
+            v.add(vc);
+            e.setVotiCommenti(v);
+            sessione.update(e);
+            tran.commit();
+            return true;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            if (tran != null) {
+                tran.rollback();
+            }
+        } finally {
+            sessione.close();
+        }
+        return false;
     }
 }

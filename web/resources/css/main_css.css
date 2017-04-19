@@ -94,3 +94,7 @@ nav .brand-logo {
 .circle {
     border: 2px solid #00796b;
 }
+
+.circle-min {
+    border: 1px solid #00796b;
+}

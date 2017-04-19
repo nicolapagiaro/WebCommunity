@@ -2,9 +2,7 @@ package controller;
 
 import dao.CategorieDao;
 import dao.EventiDao;
-import dao.UtentiDao;
 import hibernate.HibernateUtil;
-import static java.sql.JDBCType.NULL;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.hibernate.SessionFactory;
@@ -65,7 +63,7 @@ public class HomepageController {
             //random gesu balla
             map.addAttribute("listaEventi", EventiDao.getEventiRandom(s));
         }
-
+        
         map.addAttribute("listaCategorie", CategorieDao.getCategorieUtente(u, s));
         return "homepage";
     }
@@ -125,6 +123,7 @@ public class HomepageController {
     @RequestMapping(value = "/homepage/evento", method = RequestMethod.GET)
     public String evento(ModelMap map, HttpServletRequest request,
             @RequestParam("id") int id) {
+        
         // se non è loggato nessuno
         Utente u = (Utente) request.getSession().getAttribute("utente");
         if(u == null) return "redirect:/";
@@ -132,6 +131,8 @@ public class HomepageController {
         SessionFactory s = HibernateUtil.getSessionFactory();
         
         Evento e = EventiDao.getEvento(s, id);
+        if(e == null) return "redirect:/homepage?ordine=default";
+        request.getSession().setAttribute("idEvento", id);
         List<VotoCommento> v = e.getVotiCommenti();
         
         // vedo se l'utente loggato ha commentato
@@ -148,5 +149,30 @@ public class HomepageController {
         map.addAttribute("commentato", commentato);
         
         return "evento";
+    }
+    
+    /**
+     * Metodo per commentare un evento
+     * @param map
+     * @param request
+     * @param commento commento dell'utente
+     * @param voto voto dell'utente
+     * @return
+     */
+    @RequestMapping(value = "/homepage/evento/commenta", method = RequestMethod.POST)
+    public String commenta(ModelMap map, HttpServletRequest request,
+            @RequestParam("commento") String commento, @RequestParam("voto") int voto) {
+        
+        // se non è loggato nessuno
+        Utente u = (Utente) request.getSession().getAttribute("utente");
+        if(u == null) return "redirect:/";
+        
+        int idEvento = (int) request.getSession().getAttribute("idEvento");
+        
+        SessionFactory s = HibernateUtil.getSessionFactory();
+        
+        EventiDao.addCommentoVoto(s, idEvento, commento, voto);
+        
+        return "redirect:/homepage/evento?id=" + idEvento;
     }
 }

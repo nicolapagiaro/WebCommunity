@@ -127,7 +127,7 @@
                                     <p class="">Indirizzo: ${eT.via_numero} - ${eT.provincia}</p>
                                 </div>
                                 <div class="card-action center-align orange lighten-1 white-text">
-                                    Voto medio: ${eT.getVotoMedio()}
+                                    Voto medio: ${eT.nome}
                                 </div>
                             </div>
                         </div>

@@ -66,18 +66,18 @@
                                 </div>
                                 <div class="col l2">
                                     <br>
-                                    <img width="42px" class="responsive-img circle" alt="userimage" src="<c:url value="/resources/images/userimage.png"/>"/>
+                                    <img width="42px" class="responsive-img circle circle-min" alt="userimage" src="<c:url value="/resources/images/userimage.png"/>"/>
                                 </div>
-                                    <form class="col l10 pull-l1" action="<c:url value="/homepage/evento/commenta"/>" method="POST">
+                                <form class="col l10 pull-l1" action="<c:url value="/homepage/evento/commenta"/>" method="POST">
                                     <div class="row">
                                         <div class="input-field col l12">
-                                            <textarea id="textarea1" class="materialize-textarea" maxlength="255"></textarea>
+                                            <textarea name="commento" id="textarea1" class="materialize-textarea" maxlength="255"></textarea>
                                             <label for="textarea1">Commento..</label>
                                         </div>
                                         <div class="input-field col l4">
                                             <p id="voto">Voto</p>
                                             <p class="range-field">
-                                                <input type="range" id="range" min="0" max="5" value="0"/>
+                                                <input type="range" name="voto" id="range" min="0" max="5" value="0"/>
                                             </p>
                                         </div>
                                         <div class="input-field right-align col l8">

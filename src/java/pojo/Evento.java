@@ -48,7 +48,7 @@ public class Evento implements Serializable {
     @ManyToMany(mappedBy = "eventi")
     private List<Artista> artisti;
 
-    @OneToMany(mappedBy = "evento", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "evento")
     private List<VotoCommento> votiCommenti;
 
     /**
