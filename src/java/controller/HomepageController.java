@@ -1,5 +1,6 @@
 package controller;
 
+import dao.ArtistiDao;
 import dao.CategorieDao;
 import dao.EventiDao;
 import hibernate.HibernateUtil;
@@ -96,19 +97,20 @@ public class HomepageController {
      * @param map
      * @param request
      * @param nomeE nome dell'evento
-     * @param numeroA numero degli artisti
      * @return
      */
     @RequestMapping(value = "/homepage/newEvento", method = RequestMethod.POST)
     public String newEvento(ModelMap map, HttpServletRequest request,
-            @RequestParam("nomeE") String nomeE, @RequestParam("numeroA") int numeroA) {
+            @RequestParam("nomeE") String nomeE) {
         // se non è loggato nessuno
         Utente u = (Utente) request.getSession().getAttribute("utente");
         if(u == null) return "redirect:/";
         
         SessionFactory s = HibernateUtil.getSessionFactory();
-        map.addAttribute("numeroA",numeroA);
+        
         map.addAttribute("nomeE", nomeE);
+        // passo alla pagina la lista degli artisti
+        map.addAttribute("listaArtisti", ArtistiDao.getArtisti(s));
         return "newEvento";
     }
     

@@ -80,4 +80,8 @@ $(document).ready(function () {
         var v = $(this).val();
         $("#voto").text("Voto: " + v);
     });
+    
+    //per i multiple select
+    $('select').material_select();
+
 });
