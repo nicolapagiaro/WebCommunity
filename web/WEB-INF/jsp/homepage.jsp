@@ -93,6 +93,8 @@
                             <div class="col l6 right-align">
                                 <a class='dropdown-button btn btn-flat' href='#' data-activates='dropdown1'>Ordina per</a>
                                 <ul id='dropdown1' class='dropdown-content'>
+                                    <li><a href="<c:url value="/homepage?ordine=default"/>">predefinito</a></li>
+                                    <li class="divider"></li>
                                     <li><a href="<c:url value="/homepage?ordine=dc"/>">data crescente</a></li>
                                     <li class="divider"></li>
                                     <li><a href="<c:url value="/homepage?ordine=dd"/>">data decrescente</a></li>
@@ -107,7 +109,7 @@
                         <c:forEach items="${listaEventi}" var="e">
                             <div class="row">
                                 <div class="col l9">
-                                    <p>Categoria: ${e.categoria.nome}</p>
+                                    <p class="grey-text text-darken-2">Categoria: ${e.categoria.nome}</p>
                                     <span class="card-title">${e.nome}</span>
                                     <p>Il ${e.dataE}</p>
                                     <p>In ${e.via_numero} - ${e.provincia}</p>

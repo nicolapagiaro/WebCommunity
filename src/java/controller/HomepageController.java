@@ -4,7 +4,10 @@ import dao.ArtistiDao;
 import dao.CategorieDao;
 import dao.EventiDao;
 import hibernate.HibernateUtil;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
@@ -52,7 +55,7 @@ public class HomepageController {
             events = EventiDao.getEventiRandom(s);
         } else if ("dc".equals(c)) {
             // passo alla pagina la lista degli eventi in ordine data crescente
-            events = EventiDao.getMainEventi(s);
+            events = EventiDao.getEventiDC(s);
         } else if ("dd".equals(c)) {
             //passo la pagina con eventi data decrescenti 
             events =  EventiDao.getEventiDD(s);
@@ -155,6 +158,7 @@ public class HomepageController {
         map.addAttribute("evento", e);
         map.addAttribute("voti_commenti", v);
         map.addAttribute("commentato", commentato);
+        map.addAttribute("idUtente", u.getId());
         
         return "evento";
     }
@@ -176,10 +180,9 @@ public class HomepageController {
         if(u == null) return "redirect:/";
         
         int idEvento = (int) request.getSession().getAttribute("idEvento");
-        
         SessionFactory s = HibernateUtil.getSessionFactory();
         
-        EventiDao.addCommentoVoto(s, idEvento, commento, voto);
+        EventiDao.addCommentoVoto(s, idEvento, u, commento, voto);
         
         return "redirect:/homepage/evento?id=" + idEvento;
     }

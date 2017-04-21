@@ -20,9 +20,9 @@
     <nav class="white">
         <!-- navbar structure -->
         <div class="nav-wrapper white container">
-            <a href="<c:url value="/homepage"/>" class="brand-logo">Creazione evento</a>
-            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <a href="#!" class="brand-logo">Creazione evento</a>
             <ul class="right hide-on-med-and-down">
+                <li class="active"><a href="<c:url value="/homepage?ordine=default"/>">Torna alla homepage</a></li>
                 <li><a href="<c:url value="/logout"/>">Esci</a></li>
             </ul>
         </div>
@@ -38,7 +38,7 @@
                     <form>
                         <div class="row">
                             <div class="input-field col s6">
-                                <input id="name" type="text" class="validate" >
+                                <input id="name" type="text"  autocoplete="off">
                                 <label for="name">Nome evento</label>
                             </div>
                             <div class="input-field col s6">
@@ -48,7 +48,7 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s6">
-                                <input  id="via" type="text" class="validate" >
+                                <input  id="via" type="text" autocoplete="off">
                                 <label for="via">Via e numero civico</label>
                             </div>
                             <div class="input-field col s6">

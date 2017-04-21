@@ -39,6 +39,25 @@ public class VotoCommento implements Serializable {
     @JoinColumn(name = "idEvento", insertable = false, updatable = false)
     private Evento evento;
 
+    /**
+     * Costruttore vuoto
+     */
+    public VotoCommento() {
+    }
+
+    /**
+     * 
+     * @param commento
+     * @param voto
+     * @param idUtente
+     * @param idEvento
+     */
+    public VotoCommento(String commento, int voto, int idUtente, int idEvento) {
+        id = new ChiavePrimaria(idUtente, idEvento);
+        this.commento = commento;
+        this.voto = voto;
+    }
+
     public Utente getUtente() {
         return utente;
     }
@@ -55,12 +74,7 @@ public class VotoCommento implements Serializable {
         this.evento = evento;
     }
 
-    /**
-     * Costruttore vuoto
-     */
-    public VotoCommento() {
-    }
-
+    
     /**
      *
      * @return
@@ -131,8 +145,7 @@ public class VotoCommento implements Serializable {
     @Override
     public String toString() {
         return "VotoCommento{" + "id=" + id + ", commento=" + commento + 
-                ", voto=" + voto + ", utente=" + utente.getClass()
-                + ", evento=" + evento.getClass() + '}';
+                ", voto=" + voto;
     }
 }
 
@@ -151,6 +164,16 @@ class ChiavePrimaria implements Serializable {
      * Costruttore vouto
      */
     public ChiavePrimaria() {
+    }
+
+    /**
+     * 
+     * @param idUtente
+     * @param idEvento 
+     */
+    public ChiavePrimaria(int idUtente, int idEvento) {
+        this.idUtente = idUtente;
+        this.idEvento = idEvento;
     }
 
     // getter e setter

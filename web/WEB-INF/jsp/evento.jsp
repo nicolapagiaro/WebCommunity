@@ -21,9 +21,10 @@
     <nav class="white">
         <!-- navbar structure -->
         <div class="nav-wrapper white container">
-            <a href="<c:url value="/homepage?ordine=default"/>" class="brand-logo">Homepage</a>
+            <a href="#!" class="brand-logo">Evento</a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
+                <li class="active"><a href="<c:url value="/homepage?ordine=default"/>">Torna alla homepage</a></li>
                 <li><a href="<c:url value="/logout"/>">Esci</a></li>
             </ul>
         </div>
@@ -37,10 +38,10 @@
             <div class="col l6 s12">
                 <div class="card">
                     <div class="card-content">
+                        <p class="grey-text text-darken-2">${evento.categoria.nome}</p>
                         <span class="card-title">${evento.nome}</span>
                         <p>Data: ${evento.dataE}</p>
                         <p>${evento.via_numero} - ${evento.provincia}</p>
-                        <p>${evento.categoria.nome}</p>
                         <p>Voto medio: ${evento.getVotoMedio()}</p>
                     </div>
                 </div>
@@ -51,12 +52,27 @@
                         <span class="card-title">Voti e commenti</span>
                         <c:forEach items="${voti_commenti}" var="v">
                             <div class="row">
-                                <div class="col l12">
-                                    <p><b>${v.utente.nome} ${v.utente.cognome}</b> - ${v.voto}</p>
+                                <div class="col l11">
+                                    <p><b>${v.utente.nome} ${v.utente.cognome}</b></p>
                                     <p>${v.commento}</p>
+                                    <p>Voto: ${v.voto}</p>
                                 </div>
+                                <c:if test="${idUtente == v.utente.id}">
+                                    <div class="col l1 left-align">
+                                        <a href="#!1"><i class="material-icons">mode_edit</i></a>
+                                        <br>
+                                        <a href="#!2"><i class="material-icons">delete</i></a>
+                                    </div>
+                                </c:if>
                             </div>
                         </c:forEach>
+                        <c:if test="${voti_commenti.size() == 0}">
+                            <div class="row">
+                                <div class="col l12">
+                                    <p class="grey-text text-darken-2">Ancora nessun commento</p>
+                                </div>
+                            </div>
+                        </c:if>
                         <c:if test="${!commentato}">
                             <div class="row">
                                 <div class="col l12">
@@ -71,8 +87,8 @@
                                 <form class="col l10 pull-l1" action="<c:url value="/homepage/evento/commenta"/>" method="POST">
                                     <div class="row">
                                         <div class="input-field col l12">
-                                            <textarea name="commento" id="textarea1" class="materialize-textarea" maxlength="255"></textarea>
-                                            <label for="textarea1">Commento..</label>
+                                            <textarea name="commento" id="commento" class="materialize-textarea" maxlength="255"></textarea>
+                                            <label for="commento">Commento..</label>
                                         </div>
                                         <div class="input-field col l4">
                                             <p id="voto">Voto</p>

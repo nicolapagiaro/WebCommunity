@@ -81,14 +81,14 @@ $(document).ready(function () {
         $("#voto").text("Voto: " + v);
     });
     
-    //per i multiple select
+    //per i multiple select degli artisti
     $('select').material_select();
     
+    // per mostrare/nascondere i campi di nuovi artisti
     $("#nuoviArtisti").on('click', function(n) {
         if (this.checked) 
             $('#numArtisti').removeClass('hide');
         else 
             $('#numArtisti').addClass('hide');
     });
-    
 });
