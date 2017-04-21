@@ -68,43 +68,26 @@
                                 <label>Scegli dagli artisti già presenti nel database</label>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <form action="#">
+                                    <p>                                   
+                                        <input type="checkbox" class="filled-in" id="nuoviArtisti" align="right"/>
+                                        <label for="nuoviArtisti" align="left">Vuoi inserire nuovi artisti?</label>
+                                    </p>
+                                </form>
+                            </div>
+                            <div class="input-field col s6 hide" id="numArtisti">
+                                <form action="#">
+                                    <p class="range-field">
+                                        <input type="range" id="test5" min="0" max="50" />
+                                    </p>
+                                </form>
+
+                            </div>
+                        </div>
                     </form>
 
-                    <form action="#">
-                        <p>
-                            <input type="checkbox" id="test5" />
-                            <label for="test5">Red</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="test6" checked="checked" />
-                            <label for="test6">Yellow</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
-                            <label for="filled-in-box">Filled in</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="indeterminate-checkbox" />
-                            <label for="indeterminate-checkbox">Indeterminate Style</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="test7" checked="checked" disabled="disabled" />
-                            <label for="test7">Green</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="test8" disabled="disabled" />
-                            <label for="test8">Brown</label>
-                        </p>
-                    </form><div class="row">
-                        <div class="input-field col s12">
-                            <form action="#">
-                                <p>
-                                    <label for="filled-in-box">Vuoi aggiungere degli artisti?</label>
-                                    <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
-                                </p>
-                            </form>
-                        </div>
-                    </div>
                     <%--<button class="btn waves-effect waves-light" type="submit" name="action">Submit
                         <i class="material-icons right">send</i>
                     </button>

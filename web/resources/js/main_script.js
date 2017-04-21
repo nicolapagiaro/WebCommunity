@@ -83,5 +83,12 @@ $(document).ready(function () {
     
     //per i multiple select
     $('select').material_select();
-
+    
+    $("#nuoviArtisti").on('click', function(n) {
+        if (this.checked) 
+            $('#numArtisti').removeClass('hide');
+        else 
+            $('#numArtisti').addClass('hide');
+    });
+    
 });
