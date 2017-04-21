@@ -6,6 +6,7 @@ import dao.EventiDao;
 import hibernate.HibernateUtil;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -43,27 +44,32 @@ public class HomepageController {
             return "redirect:/";
         }
         map.addAttribute("utente", u);
+        
+        List<Evento> events;
 
         if ("default".equals(c)) {
             //random gesu balla 
-            map.addAttribute("listaEventi", EventiDao.getEventiRandom(s));
+            events = EventiDao.getEventiRandom(s);
         } else if ("dc".equals(c)) {
             // passo alla pagina la lista degli eventi in ordine data crescente
-            map.addAttribute("listaEventi", EventiDao.getMainEventi(s));
+            events = EventiDao.getMainEventi(s);
         } else if ("dd".equals(c)) {
             //passo la pagina con eventi data decrescenti 
-            map.addAttribute("listaEventi", EventiDao.getEventiDD(s));
+            events =  EventiDao.getEventiDD(s);
         } else if ("lc".equals(c)) {
             //passo la pagina con eventi lettera crescente
-            map.addAttribute("listaEventi", EventiDao.getEventiLC(s));
+            events =  EventiDao.getEventiLC(s);
         } else if ("ld".equals(c)){
             //passo la pagina con eventi lettera decrescente
-            map.addAttribute("listaEventi", EventiDao.getEventiLD(s));
+            events =  EventiDao.getEventiLD(s);
         }
         else{
             //random gesu balla
-            map.addAttribute("listaEventi", EventiDao.getEventiRandom(s));
+            events =  EventiDao.getEventiRandom(s);
         }
+        
+        // aggiungo alla pagina la lista degli eventi
+        map.addAttribute("listaEventi", events);
         
         map.addAttribute("listaCategorie", CategorieDao.getCategorieUtente(u, s));
         return "homepage";

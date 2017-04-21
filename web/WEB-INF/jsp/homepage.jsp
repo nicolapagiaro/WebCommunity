@@ -13,7 +13,6 @@
         <link href="<c:url value="/resources/css/materialize.min.css" />" rel="stylesheet" media="screen,projection">
         <!--Import main_css.css-->
         <link href="<c:url value="/resources/css/main_css.css" />" rel="stylesheet" media="screen,projection">
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
     </head>
@@ -108,10 +107,14 @@
                         <c:forEach items="${listaEventi}" var="e">
                             <div class="row">
                                 <div class="col l9">
+                                    <p>Categoria: ${e.categoria.nome}</p>
                                     <span class="card-title">${e.nome}</span>
-                                    <p>Data: ${e.dataE}</p>
-                                    <p>${e.via_numero} - ${e.provincia}</p>
-                                    <p>${e.categoria.nome}</p>
+                                    <p>Il ${e.dataE}</p>
+                                    <p>In ${e.via_numero} - ${e.provincia}</p>
+                                    <p>Artisti partecipanti: </p>
+                                    <c:forEach items="${e.artisti}" var="a">
+                                        <div class="chip">${a.nome} ${a.cognome}</div>
+                                    </c:forEach>
                                 </div>
                                 <div class="col l3">
                                     <a href="<c:url value="/homepage/evento?id=${e.id}"/>" class="btn btn-flat light">
