@@ -59,8 +59,6 @@
                                 </div>
                                 <c:if test="${idUtente == v.utente.id}">
                                     <div class="col l1 left-align">
-                                        <a href="#!1"><i class="material-icons">mode_edit</i></a>
-                                        <br>
                                         <a href="#!2"><i class="material-icons">delete</i></a>
                                     </div>
                                 </c:if>

@@ -4,12 +4,8 @@ import dao.ArtistiDao;
 import dao.CategorieDao;
 import dao.EventiDao;
 import hibernate.HibernateUtil;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
-import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -52,7 +48,7 @@ public class HomepageController {
 
         if ("default".equals(c)) {
             //random gesu balla 
-            events = EventiDao.getEventiRandom(s);
+            events = EventiDao.getEventiRandom(s, u);
         } else if ("dc".equals(c)) {
             // passo alla pagina la lista degli eventi in ordine data crescente
             events = EventiDao.getEventiDC(s);
@@ -68,7 +64,7 @@ public class HomepageController {
         }
         else{
             //random gesu balla
-            events =  EventiDao.getEventiRandom(s);
+            events =  EventiDao.getEventiRandom(s, u);
         }
         
         // aggiungo alla pagina la lista degli eventi
@@ -133,17 +129,23 @@ public class HomepageController {
      */
     @RequestMapping(value = "/homepage/evento", method = RequestMethod.GET)
     public String evento(ModelMap map, HttpServletRequest request,
-            @RequestParam("id") int id) {
+            @RequestParam("id") String id) {
         
         // se non è loggato nessuno
         Utente u = (Utente) request.getSession().getAttribute("utente");
         if(u == null) return "redirect:/";
         
         SessionFactory s = HibernateUtil.getSessionFactory();
+        Evento e = null;
+        try {
+            e = EventiDao.getEvento(s, Integer.parseInt(id));
+        }
+        catch(NumberFormatException ex ) {
+            return "redirect:/homepage?ordine=default";
+        }
         
-        Evento e = EventiDao.getEvento(s, id);
         if(e == null) return "redirect:/homepage?ordine=default";
-        request.getSession().setAttribute("idEvento", id);
+        request.getSession().setAttribute("idEvento", Integer.parseInt(id));
         List<VotoCommento> v = e.getVotiCommenti();
         
         // vedo se l'utente loggato ha commentato

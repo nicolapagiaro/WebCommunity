@@ -111,16 +111,16 @@
                                 <div class="col l9">
                                     <p class="grey-text text-darken-2">Categoria: ${e.categoria.nome}</p>
                                     <span class="card-title">${e.nome}</span>
-                                    <p>Il ${e.dataE}</p>
-                                    <p>In ${e.via_numero} - ${e.provincia}</p>
-                                    <p>Artisti partecipanti: </p>
+                                    <p><i class="material-icons">today</i> ${e.dataE}</p>
+                                    <p><i class="material-icons">location_on</i> ${e.via_numero} - ${e.provincia}</p>
+                                    <span><i class="material-icons">people</i></span>
                                     <c:forEach items="${e.artisti}" var="a">
                                         <div class="chip">${a.nome} ${a.cognome}</div>
                                     </c:forEach>
                                 </div>
                                 <div class="col l3">
                                     <a href="<c:url value="/homepage/evento?id=${e.id}"/>" class="btn btn-flat light">
-                                        <i class="material-icons left">chat_bubble</i>
+                                        <i class="material-icons left">chat_bubble_outline</i>
                                         Commenta
                                     </a>
                                 </div>

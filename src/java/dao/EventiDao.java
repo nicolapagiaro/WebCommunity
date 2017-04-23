@@ -7,6 +7,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import pojo.Categoria;
 import pojo.Evento;
 import pojo.Utente;
 import pojo.VotoCommento;
@@ -20,7 +21,6 @@ public class EventiDao {
 
     /**
      * Metodo che restituisce la lista degli eventi
-     *
      * @param factory
      * @return
      */
@@ -194,22 +194,44 @@ public class EventiDao {
     }
 
     /**
-     * metodo che restituisce eventi random per visualizzarli nella homepage dell'utente
+     * Metodo che restituisce eventi random per visualizzarli nella homepage dell'utente
+     * DA FARE!!!! (mettere prima gli eventi delle categorie che segue)
      * @param factory
+     * @param u oggetto utente loggato
      * @return
      */
-    public static List<Evento> getEventiRandom(SessionFactory factory) {
+    public static List<Evento> getEventiRandom(SessionFactory factory, Utente u) {
         Session sessione = factory.openSession();
         Transaction tran = null;
         try {
             tran = sessione.beginTransaction();
-            List<Evento> eventi = (List<Evento>) sessione.createQuery("FROM Evento ORDER BY RAND()").list();
-            for (Evento e : eventi) {
-                Hibernate.initialize(e.getArtisti());
+            
+            // lista delle categorie dell'utente
+            List<Categoria> categorie = sessione
+                    .createQuery("SELECT categorie FROM Utente WHERE idUtente = :id")
+                    .setInteger("id", u.getId())
+                    .list();
+            
+            List<Evento> eventi = new ArrayList<>();
+            for(Categoria c : categorie) {
+                eventi.addAll(c.getEventi());
             }
+            
+            if(eventi.size() < 15) {
+                List<Evento> l = (List<Evento>) sessione
+                        .createQuery("FROM Evento")
+                        .setMaxResults(15 - eventi.size())
+                        .list();                
+                l.removeAll(eventi);
+                eventi.addAll(l);
+            }
+            
+            // inizializzo gli artisti di ogni evento per mostrarli nel jsp
+            for (Evento e : eventi) { Hibernate.initialize(e.getArtisti()); }
             tran.commit();
             return eventi;
         } catch (HibernateException e) {
+            e.printStackTrace();
             if (tran != null) {
                 tran.rollback();
             }
@@ -221,7 +243,6 @@ public class EventiDao {
 
     /**
      * Metodo per prendere l'evento con id passato
-     *
      * @param factory session factory
      * @param idEvento id dell'evento
      * @return l'oggetto evento

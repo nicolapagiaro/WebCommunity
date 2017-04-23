@@ -184,6 +184,34 @@ public class Evento implements Serializable {
     }
 
     /**
+     * Hashcode
+     * @return 
+     */
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
+
+    /**
+     * Equals
+     * @param obj
+     * @return 
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        final Evento other = (Evento) obj;
+        return this.id == other.id;
+    }
+
+
+    /**
      * toString()
      *
      * @return
