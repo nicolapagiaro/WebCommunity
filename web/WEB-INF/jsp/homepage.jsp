@@ -30,7 +30,6 @@
 
     <div class="homepage-bg"></div> <!-- cool background -->
     <br>
-    <br>
     <div class="container">
         <div class="row">
             <div class="col l3">
@@ -109,7 +108,7 @@
                         <c:forEach items="${listaEventi}" var="e">
                             <div class="row">
                                 <div class="col l9">
-                                    <p class="grey-text text-darken-2">Categoria: ${e.categoria.nome}</p>
+                                    <p class="grey-text text-darken-2">${e.categoria.nome}</p>
                                     <span class="card-title">${e.nome}</span>
                                     <p><i class="material-icons">today</i> ${e.dataE}</p>
                                     <p><i class="material-icons">location_on</i> ${e.via_numero} - ${e.provincia}</p>
@@ -117,6 +116,9 @@
                                     <c:forEach items="${e.artisti}" var="a">
                                         <div class="chip">${a.nome} ${a.cognome}</div>
                                     </c:forEach>
+                                    <c:if test="${e.artisti.size() == 0}">
+                                        Nessun artista presente
+                                    </c:if>
                                 </div>
                                 <div class="col l3">
                                     <a href="<c:url value="/homepage/evento?id=${e.id}"/>" class="btn btn-flat light">
