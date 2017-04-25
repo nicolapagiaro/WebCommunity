@@ -40,9 +40,15 @@
                     <div class="card-content">
                         <p class="grey-text text-darken-2">${evento.categoria.nome}</p>
                         <span class="card-title">${evento.nome}</span>
-                        <p>Data: ${evento.dataE}</p>
-                        <p>${evento.via_numero} - ${evento.provincia}</p>
-                        <p>Voto medio: ${evento.getVotoMedio()}</p>
+                        <p><i class="material-icons">today</i> ${evento.dataE}</p>
+                        <p><i class="material-icons">location_on</i> ${evento.via_numero} - ${evento.provincia}</p>
+                        <span><i class="material-icons">people</i></span>
+                        <c:forEach items="${evento.artisti}" var="a">
+                            <div class="chip">${a.nome} ${a.cognome}</div>
+                        </c:forEach>
+                        <c:if test="${evento.artisti.size() == 0}">
+                            Nessun artista presente
+                        </c:if>
                     </div>
                 </div>
             </div>
@@ -59,8 +65,20 @@
                                 </div>
                                 <c:if test="${idUtente == v.utente.id}">
                                     <div class="col l1 left-align">
-                                        <a href="#!2"><i class="material-icons">delete</i></a>
+                                        <a href="#confirm_delete"><i class="material-icons">delete</i></a>
                                     </div>
+                                    <!-- Modal Structure -->
+                                    <div id="confirm_delete" class="modal">
+                                        <div class="modal-content">
+                                            <h4>Conferma</h4>
+                                            <p>Confermi l'eliminazione della tua recensione su questo evento?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="#!" id="confirm_delete_no" class="modal-action modal-close btn teal lighten-2">No</a>
+                                            <a href="#!" id="confirm_delete_si" class="modal-action modal-close btn-flat">Si</a>
+                                        </div>
+                                    </div>
+                                    <!-- Modal Structure -->
                                 </c:if>
                             </div>
                         </c:forEach>

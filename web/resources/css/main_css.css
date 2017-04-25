@@ -1,9 +1,13 @@
 .material-icons.inactive {
-    color: rgba(0, 0, 0, 0.26); 
+    color: rgba(0, 0, 0, 0.26);
+    display: inline-flex;
+    vertical-align: middle;
 }
 
 .material-icons {
-    color: rgba(0, 0, 0, 0.54); 
+    color: rgba(0, 0, 0, 0.54);
+    display: inline-flex;
+    vertical-align: middle;
 }
 
 .grey-text-costum {

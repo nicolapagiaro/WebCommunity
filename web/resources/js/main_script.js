@@ -1,6 +1,27 @@
 $(document).ready(function () {
+    //per i multiple select degli artisti
+    $('select').material_select();
+
+    //per l'effetto parallax della homepage
     $('.parallax').parallax();
-    
+
+    //per la richiesta di eliminazione del commento
+    $('.modal').modal({
+        dismissible: false, // Modal can be dismissed by clicking outside of the modal
+        opacity: .5, // Opacity of modal background
+        inDuration: 200, // Transition in duration
+        outDuration: 200, // Transition out duration
+        startingTop: '4%', // Starting top style attribute
+        endingTop: '10%' // Ending top style attribute
+    });
+
+    // quando l'utente preme il SI di conferma dell'eliminazione del commento
+    $('#confirm_delete_si').on('click', function () {
+        // Send the data using post
+        var getting = $.get("/WebCommunity/homepage/evento/eliminaRecensione");
+        window.location.reload();
+    });
+
     var section_active = "_1";
 
     // per il login
@@ -74,21 +95,20 @@ $(document).ready(function () {
         },
         minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
     });
-    
+
     // per mostrare il voto dato ad un evento
-    $("#range").on('change', function(e) {
+    $("#range").on('change', function (e) {
         var v = $(this).val();
         $("#voto").text("Voto: " + v);
     });
-    
-    //per i multiple select degli artisti
-    $('select').material_select();
-    
+
+
+
     // per mostrare/nascondere i campi di nuovi artisti
-    $("#nuoviArtisti").on('click', function(n) {
-        if (this.checked) 
+    $("#nuoviArtisti").on('click', function (n) {
+        if (this.checked)
             $('#numArtisti').removeClass('hide');
-        else 
+        else
             $('#numArtisti').addClass('hide');
     });
 });
