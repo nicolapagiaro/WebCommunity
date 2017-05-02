@@ -19,10 +19,20 @@ $(document).ready(function () {
     $('#confirm_delete_si').on('click', function () {
         // Send the data using post
         var getting = $.get("/WebCommunity/homepage/evento/eliminaRecensione");
-        window.location.reload();
+        getting.done(function() {
+            window.location.reload();
+        });
     });
-
-    var section_active = "_1";
+    
+    
+    // controllo la correttezza  del voto immesso del commento
+    $("#btn_commenta").on('click', function(e) {
+        var v = $("#voto").text();
+        if(v === "Voto") {
+            e.preventDefault();
+            Materialize.toast("Votare l'evento", 4000);
+        }
+    });
 
     // per il login
     $('#login').on('click', function (e) {
@@ -45,7 +55,8 @@ $(document).ready(function () {
             e.preventDefault();
         }
     });
-
+    
+    var section_active = "_1";
     // per l'index e le tre sezioni
     $('.trigger').on('click', function (e) {
         var id = $(this).attr('id');
@@ -97,12 +108,34 @@ $(document).ready(function () {
     });
 
     // per mostrare il voto dato ad un evento
-    $("#range").on('change', function (e) {
+    $("#range").on('change', function () {
         var v = $(this).val();
-        $("#voto").text("Voto: " + v);
+        var commento;
+        switch(v) {
+            case '0': 
+                commento = "Schifoso";
+                break;
+            case '1': 
+                commento = "Penoso";
+                break;
+            case '2': 
+                commento = "Uhm";
+                break;
+            case '3':
+                commento = "Carino dai";
+                break;
+            case '4': 
+                commento = "Molto bello";
+                break;
+            case '5':
+                commento = "Fantastico!";
+                break;
+            default:
+                commento = "";
+                break;
+        }
+        $("#voto").text("Voto: " + v + " - " + commento);
     });
-
-
 
     // per mostrare/nascondere i campi di nuovi artisti
     $("#nuoviArtisti").on('click', function (n) {

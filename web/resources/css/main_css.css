@@ -74,7 +74,7 @@ nav .brand-logo {
 /* form */
 .form-fg {
     border-radius: 5px;
-    background-color: #FFFFFF;
+    background-color: transparent;
 }
 
 /* custom size for the photo at bottom of the page */

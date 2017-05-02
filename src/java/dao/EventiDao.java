@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import pojo.Categoria;
+import pojo.ChiavePrimaria;
 import pojo.Evento;
 import pojo.Utente;
 import pojo.VotoCommento;
@@ -21,6 +22,7 @@ public class EventiDao {
 
     /**
      * Metodo che restituisce la lista degli eventi
+     *
      * @param factory
      * @return
      */
@@ -71,10 +73,10 @@ public class EventiDao {
     }
 
     /**
-     * (Prima query UDA)
-     * Metodo per visualizzare gli eventi passati già fatti
+     * (Prima query UDA) Metodo per visualizzare gli eventi passati già fatti
+     *
      * @param factory
-     * @return 
+     * @return
      */
     public static List<Evento> eventiFatti(SessionFactory factory) {
         Session sessione = factory.openSession();
@@ -99,8 +101,8 @@ public class EventiDao {
 
     /**
      * Metodo che restituisce la lista degli eventi con la media più alta di
-     * voto
-     * DA FARE !!!!
+     * voto DA FARE !!!!
+     *
      * @param factory
      * @return
      */
@@ -109,8 +111,16 @@ public class EventiDao {
         Transaction tran = null;
         try {
             tran = sessione.beginTransaction();
+            List<Integer> eventiID = (ArrayList<Integer>) sessione
+                    .createSQLQuery("SELECT E.id\n"
+                            + "FROM EVENTI E, VOTO_COMMENTO V \n"
+                            + "WHERE E.id = V.idEvento\n"
+                            + "GROUP BY(E.id)\n"
+                            + "ORDER BY(AVG(V.voto)) DESC")
+                    .list();
             List<Evento> eventi = (List<Evento>) sessione
-                    .createQuery("FROM Evento")
+                    .createQuery("FROM Evento WHERE id in :list")
+                    .setParameter("list", eventiID)
                     .setMaxResults(15)
                     .list();
             tran.commit();
@@ -158,7 +168,7 @@ public class EventiDao {
         return eventi;
 
     }
-    
+
     /**
      * Metodo che restituisce eventi in ordine data decrescente
      *
@@ -175,7 +185,7 @@ public class EventiDao {
         }
         return eventi;
     }
-    
+
     /**
      * Metodo che restituisce eventi in ordine data crescente
      *
@@ -194,8 +204,10 @@ public class EventiDao {
     }
 
     /**
-     * Metodo che restituisce eventi random per visualizzarli nella homepage dell'utente
-     * DA FARE!!!! (mettere prima gli eventi delle categorie che segue)
+     * Metodo che restituisce eventi random per visualizzarli nella homepage
+     * dell'utente DA FARE!!!! (mettere prima gli eventi delle categorie che
+     * segue)
+     *
      * @param factory
      * @param u oggetto utente loggato
      * @return
@@ -205,29 +217,31 @@ public class EventiDao {
         Transaction tran = null;
         try {
             tran = sessione.beginTransaction();
-            
+
             // lista delle categorie dell'utente
             List<Categoria> categorie = sessione
                     .createQuery("SELECT categorie FROM Utente WHERE idUtente = :id")
                     .setInteger("id", u.getId())
                     .list();
-            
+
             List<Evento> eventi = new ArrayList<>();
-            for(Categoria c : categorie) {
+            for (Categoria c : categorie) {
                 eventi.addAll(c.getEventi());
             }
-            
-            if(eventi.size() < 15) {
+
+            if (eventi.size() < 15) {
                 List<Evento> l = (List<Evento>) sessione
                         .createQuery("FROM Evento")
                         .setMaxResults(15 - eventi.size())
-                        .list();                
+                        .list();
                 l.removeAll(eventi);
                 eventi.addAll(l);
             }
-            
+
             // inizializzo gli artisti di ogni evento per mostrarli nel jsp
-            for (Evento e : eventi) { Hibernate.initialize(e.getArtisti()); }
+            for (Evento e : eventi) {
+                Hibernate.initialize(e.getArtisti());
+            }
             tran.commit();
             return eventi;
         } catch (HibernateException e) {
@@ -243,6 +257,7 @@ public class EventiDao {
 
     /**
      * Metodo per prendere l'evento con id passato
+     *
      * @param factory session factory
      * @param idEvento id dell'evento
      * @return l'oggetto evento
@@ -283,5 +298,31 @@ public class EventiDao {
             sessione.close();
         }
         return false;
+    }
+
+    /**
+     * Metodo che elimina il commento dell'utente su un determinato evento
+     *
+     * @param factory
+     * @param idEvento
+     * @param u
+     */
+    public static void eliminaCommento(SessionFactory factory, int idEvento, Utente u) {
+        Session sessione = factory.openSession();
+        Transaction tran = null;
+        try {
+            tran = sessione.beginTransaction();
+            VotoCommento vc = (VotoCommento) sessione
+                    .get(VotoCommento.class, new ChiavePrimaria(u.getId(), idEvento));
+            sessione.delete(vc);
+            tran.commit();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            if (tran != null) {
+                tran.rollback();
+            }
+        } finally {
+            sessione.close();
+        }
     }
 }

@@ -113,7 +113,7 @@
                                             </p>
                                         </div>
                                         <div class="input-field right-align col l8">
-                                            <button type="submit" class="btn-flat">
+                                            <button type="submit" id="btn_commenta" class="btn-flat">
                                                 <i class="material-icons right">send</i>
                                             </button>
                                         </div>

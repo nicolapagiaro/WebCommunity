@@ -42,31 +42,33 @@
                         <br><br>
                     </div>
                     <br><br>
-                    <form method="POST" action="<c:url value="/doLogin"/>" class="col l3 form-fg teal text-lighten-1">
-                        <h5 class="center white-text">Accedi</h5>
-                        <div class="row white">
-                            <br>
-                            <div class="input-field col s12">
-                                <input name="nick" id="nickname" type="text">
-                                <label for="nickname">Nickname</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <input name="email" id="email" type="email" class="validate">
-                                <label for="email" data-error="Immettere una mail valida" 
-                                       data-success="">Email</label>
-                                <c:if test="${control}">
-                                    <p class="red-text text-darken-1">Credenziali errate<p>
-                                    </c:if>
+                    <div class="col l3 section no-padding teal lighten-1">
+                        <form method="POST" action="<c:url value="/doLogin"/>" class="form-fg">                      
+                            <h5 class="center white-text">Accedi</h5>
+                            <div class="row white">
+                                <br>
+                                <div class="input-field col s12">
+                                    <input name="nick" id="nickname" type="text">
+                                    <label for="nickname">Nickname</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <input name="email" id="email" type="email" class="validate">
+                                    <label for="email" data-error="Immettere una mail valida" 
+                                           data-success="">Email</label>
+                                    <c:if test="${control}">
+                                        <p class="red-text text-darken-1">Credenziali errate<p>
+                                        </c:if>
+                                </div>
+                                <div class="center col l12">
+                                    <button class="btn btn-flat" 
+                                            id="login" type="submit" name="action">
+                                        Login
+                                    </button> 
+                                </div>
                             </div>
 
-                            <div class="center col l12">
-                                <button class="btn btn-flat" 
-                                        id="login" type="submit" name="action">
-                                    Login
-                                </button> 
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -116,6 +118,10 @@
                             </div>
                         </div>
                     </c:forEach>
+                    <c:if test="${listaEventi.size() == 0}">
+                        <br>
+                        <h5 class="center-align grey-text">Nessun evento disponibile</h5>
+                    </c:if>
                 </div>
                 <div class="hide" id="section_2">
                     <c:forEach items="${listaEventiTop}" var="eT">

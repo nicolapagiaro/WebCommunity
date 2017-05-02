@@ -12,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import pojo.Evento;
 import pojo.Utente;
 import pojo.VotoCommento;
@@ -151,7 +152,7 @@ public class HomepageController {
         // vedo se l'utente loggato ha commentato
         boolean commentato = false;
         for(VotoCommento vc : v) {
-            if(vc.getIdUtente() == u.getId()) {
+            if(vc.getUtente().getId() == u.getId()) {
                 commentato = true;
                 break;
             }
@@ -186,6 +187,25 @@ public class HomepageController {
         
         EventiDao.addCommentoVoto(s, idEvento, u, commento, voto);
         
+        return "redirect:/homepage/evento?id=" + idEvento;
+    }
+    
+    /**
+     * Metodo per eliminare la recensione dell'utente dall'evento
+     * @param map
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/homepage/evento/eliminaRecensione", method = RequestMethod.GET)
+    public String eliminaRecensione(ModelMap map, HttpServletRequest request) {
+        // se non è loggato nessuno
+        Utente u = (Utente) request.getSession().getAttribute("utente");
+        if(u == null) return "redirect:/";
+        
+        int idEvento = (int) request.getSession().getAttribute("idEvento");
+        SessionFactory s = HibernateUtil.getSessionFactory();
+        
+        EventiDao.eliminaCommento(s, idEvento, u);
         return "redirect:/homepage/evento?id=" + idEvento;
     }
 }
