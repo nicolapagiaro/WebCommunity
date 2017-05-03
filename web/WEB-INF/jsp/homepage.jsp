@@ -65,7 +65,7 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="row">
-                            <form method="POST" action="<c:url value="/homepage/newEvento"/>">
+                            <form method="POST" action="<c:url value="/newEvento"/>">
                                 <div class="input-field col s12">
                                     <input name="nomeE" id="nomeE" type="text" class="validate">
                                     <label for="nomeE">Nome nuovo evento</label>

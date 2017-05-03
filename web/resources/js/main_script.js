@@ -80,7 +80,7 @@ $(document).ready(function () {
     });
 
     //per autocomplete provincia
-    $('input.autocomplete').autocomplete({
+    $('provincia').autocomplete({
         data: {
             "Agrigento": null, "Alessandria": null, "Ancona": null, "Aosta": null, "Aquila ": null, "Arezzo": null, "Ascoli Piceno": null, "Asti": null, "Avellino": null,
             "Bari": null, "Belluno": null, "Benevento": null, "Bergamo": null, "Biella": null, "B ologna": null, "Bolzano": null, "Brescia": null, "Brindisi": null,
@@ -139,9 +139,13 @@ $(document).ready(function () {
 
     // per mostrare/nascondere i campi di nuovi artisti
     $("#nuoviArtisti").on('click', function (n) {
-        if (this.checked)
+        if (this.checked){
             $('#numArtisti').removeClass('hide');
-        else
+            $('#caricaE').addClass('hide');
+        }
+        else{
             $('#numArtisti').addClass('hide');
+            $('#caricaE').removeClass('hide');
+        }
     });
 });
