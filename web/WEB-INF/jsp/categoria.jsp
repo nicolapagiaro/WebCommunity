@@ -6,7 +6,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!-- page title -->
-        <title>[${categoria}] - WebCommunity</title>
+        <title>Categoria - WebCommunity</title>
         <!--Import Google Icon Font-->
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
@@ -17,25 +17,27 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
     </head>
     <body>
-    <nav class="white">
-        <!-- navbar structure -->
-        <div class="nav-wrapper white container">
-            <a href="#!" class="brand-logo">Homepage</a>
-            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="<c:url value="/logout"/>">Esci</a></li>
-            </ul>
-        </div>
-    </nav>
+        <nav class="white">
+            <!-- navbar structure -->
+            <div class="nav-wrapper white container">
+                <a href="<c:url value="/homepage?ordine=default"/>" class="brand-logo">Homepage</a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="<c:url value="/logout"/>">Esci</a></li>
+                </ul>
+            </div>
+        </nav>
 
-    <div class="homepage-bg"></div> <!-- cool background -->
-    <br>
-    <br>
-    <div class="container">
-        <div class="row">
-         
+        <div class="homepage-bg"></div> <!-- cool background -->
+        <br>
+        <div class="container row">
+            <div class="col l12">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">${categoria.nome}</span>
+                    </div>
+                </div>
+            </div> 
         </div>
-    </div>        
 
         <!-- fast loading of the page -->
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

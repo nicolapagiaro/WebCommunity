@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -50,5 +51,18 @@ public class CategorieDao {
         List<Categoria> categorie = (List<Categoria>) 
                 ((Utente) sessione.get(Utente.class, u.getId())).getCategorie();
         return categorie;
+    }
+    
+    /**
+     * Metodo che restituisce l'oggetto categoria dato l'id
+     * @param factory
+     * @param idCategoria
+     * @return 
+     */
+    public static Categoria getCategoria(SessionFactory factory, int idCategoria) {
+        Session sessione = factory.openSession();
+        Categoria c = (Categoria) sessione.get(Categoria.class, idCategoria);
+        Hibernate.initialize(c.getEventi());
+        return c;
     }
 }

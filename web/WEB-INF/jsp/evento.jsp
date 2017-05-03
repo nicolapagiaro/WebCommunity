@@ -32,7 +32,6 @@
 
     <div class="homepage-bg"></div> <!-- cool background -->
     <br>
-    <br>
     <div class="container">
         <div class="row">
             <div class="col l6 s12">

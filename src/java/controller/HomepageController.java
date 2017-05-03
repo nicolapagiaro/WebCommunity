@@ -12,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import pojo.Categoria;
 import pojo.Evento;
 import pojo.Utente;
 import pojo.VotoCommento;
@@ -92,7 +93,16 @@ public class HomepageController {
         }
 
         SessionFactory s = HibernateUtil.getSessionFactory();
-        map.addAttribute("categoria", c);
+        
+        Categoria e = null;
+        try {
+            e = CategorieDao.getCategoria(s, Integer.parseInt(c));
+        }
+        catch(NumberFormatException ex ) {
+            return "redirect:/homepage?ordine=default";
+        }
+        
+        map.addAttribute("categoria", e);
         return "categoria";
     }
 
