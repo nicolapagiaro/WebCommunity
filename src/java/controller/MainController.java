@@ -41,7 +41,7 @@ public class MainController {
         map.addAttribute("listaEventi", EventiDao.getMainEventi(s));
         
         // passo alla pagina la lista degli eventi più votati
-        map.addAttribute("listaEventiTop", null);
+        map.addAttribute("listaEventiTop", EventiDao.getMostRatedEventi(s));
         
         // passo alla pagina la lista delle categorie
         map.addAttribute("listaCategorie", CategorieDao.getCategorie(s));

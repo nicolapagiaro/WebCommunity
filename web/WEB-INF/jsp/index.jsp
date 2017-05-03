@@ -106,7 +106,7 @@
                 <div class="" id="section_1">
                     <c:forEach items="${listaEventi}" var="e">
                         <div class="col l6">
-                            <div class="card hoverable">
+                            <div class="card">
                                 <div class="card-content">
                                     <span class="card-title">${e.nome}</span>
                                     <p class="">Il: ${e.dataE}</p>
@@ -126,14 +126,14 @@
                 <div class="hide" id="section_2">
                     <c:forEach items="${listaEventiTop}" var="eT">
                         <div class="col l6">
-                            <div class="card hoverable">
+                            <div class="card">
                                 <div class="card-content">
                                     <span class="card-title">${eT.nome}</span>
                                     <p class="">Il: ${eT.dataE}</p>
                                     <p class="">Indirizzo: ${eT.via_numero} - ${eT.provincia}</p>
                                 </div>
-                                <div class="card-action center-align orange lighten-1 white-text">
-                                    Voto medio: ${eT.nome}
+                                <div class="card-action center-align brown lighten-1 white-text">
+                                    Voto medio: ${eT.getVotoMedio()}
                                 </div>
                             </div>
                         </div>
@@ -142,12 +142,12 @@
                 <div class="hide" id="section_3">
                     <c:forEach items="${listaCategorie}" var="c">
                         <div class="col l6">
-                            <div class="card hoverable">
+                            <div class="card">
                                 <div class="card-content">
                                     <span class="card-title">${c.nome}</span>
                                     <p>Totale eventi: ${c.eventi.size()}</p>
                                 </div>
-                                <div class="card-action center-align light-blue lighten-1"></div>
+                                <div class="card-action center-align light-blue darken-1"></div>
                             </div>
                         </div>
                     </c:forEach>

@@ -1,5 +1,6 @@
 package dao;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Hibernate;
@@ -100,9 +101,7 @@ public class EventiDao {
     }
 
     /**
-     * Metodo che restituisce la lista degli eventi con la media più alta di
-     * voto DA FARE !!!!
-     *
+     * Metodo che restituisce la lista degli eventi con la media più alta di voti
      * @param factory
      * @return
      */
@@ -111,18 +110,27 @@ public class EventiDao {
         Transaction tran = null;
         try {
             tran = sessione.beginTransaction();
-            List<Integer> eventiID = (ArrayList<Integer>) sessione
+            List<BigDecimal> eventiID = (List<BigDecimal>) sessione
                     .createSQLQuery("SELECT E.id\n"
                             + "FROM EVENTI E, VOTO_COMMENTO V \n"
                             + "WHERE E.id = V.idEvento\n"
                             + "GROUP BY(E.id)\n"
-                            + "ORDER BY(AVG(V.voto)) DESC")
+                            + "ORDER BY (categoria) ASC, (nome) ASC")
                     .list();
+            ArrayList<Integer> l = new ArrayList();
+            for(int i=0; i<eventiID.size(); i++) {
+                l.add(eventiID.get(i).intValue());
+            }
             List<Evento> eventi = (List<Evento>) sessione
                     .createQuery("FROM Evento WHERE id in :list")
-                    .setParameter("list", eventiID)
+                    .setParameterList("list", l)
                     .setMaxResults(15)
                     .list();
+            
+            // inizializzo i voti e commenti di ogni evento per mostrarli nel jsp
+            for(Evento e : eventi) {
+                Hibernate.initialize(e.getVotiCommenti());
+            }
             tran.commit();
             return eventi;
         } catch (HibernateException e) {
