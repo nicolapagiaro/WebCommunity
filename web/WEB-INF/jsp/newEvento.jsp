@@ -34,10 +34,10 @@
         <div class="row">
             <div class="card">
                 <div class="card-content">
-                    <form method="POST" action="<c:url value="/upload"/>">
+                    <form method="POST" action="<c:url value="/homepage/newEvento/upload"/>">
                         <div class="row">
                             <div class="input-field col s6">
-                                <input id="name" type="text" name="name" autocoplete="off">
+                                <input id="name" type="text" name="name" value="${nomeE}" autocoplete="off">
                                 <label for="name">Nome evento</label>
                             </div>
                             <div class="input-field col s6">
@@ -51,17 +51,17 @@
                                 <label for="via">Via e numero civico</label>
                             </div>
                             <div class="input-field col s6">
-                                <input type="text" id="provincia" name="provincia" class="autocomplete">
+                                <input type="text" id="provincia" name="provincia" autocoplete="off" class="autocomplete">
                                 <label for="autocomplete-input">Provincia</label>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="input-field col s12">
-                                <select multiple>
+                                <select name="artistiDB" multiple>
                                     <option value=""  disabled selected>Scegli il tuo artista</option>
                                     <c:forEach items="${listaArtisti}" var="e">
-                                        <option name="artistiDB" value="${e.id}">${e.nome} ${e.cognome}</option>
+                                        <option value="${e.id}">${e.nome} ${e.cognome}</option>
                                     </c:forEach>
                                 </select>
                                 <label>Scegli dagli artisti già presenti nel database</label>
@@ -69,22 +69,16 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s6">
-                                
-                                    <p>                                   
-                                        <input type="checkbox" class="filled-in" id="nuoviArtisti" name="nuoviArtisti" align="right"/>
-                                        <label for="nuoviArtisti" align="left">Vuoi inserire nuovi artisti?</label>
-                                    </p>
-                                
+                                <p>                                   
+                                    <input type="checkbox" class="filled-in" id="nuoviArtisti" name="nuoviArtisti" align="right"/>
+                                    <label for="nuoviArtisti" align="left">Vuoi inserire nuovi artisti?</label>
+                                </p>
                             </div>
                             <div class="input-field col s6 hide" id="numArtisti">
-                                
-                                    <p class="range-field">
-                                        <input type="range" id="nA" min="0" max="50" />
-                                    </p>
-                               
-
+                                <p class="range-field">
+                                    <input type="range" id="nA" min="0" max="50" />
+                                </p>
                                 <br>
-
                                 <button class="btn waves-effect waves-light right" type="submit" name="action" id="inserisciA">Inserisci gli artisti
                                     <i class="material-icons right">send</i>
                                 </button>
@@ -93,11 +87,7 @@
                             <button class="btn waves-effect waves-light right" type="submit" name="action" id="caricaE">Carica l'evento
                                 <i class="material-icons right">send</i>
                             </button>
-
                         </div>
-
-
-
                     </form>
 
                     <%--<button class="btn waves-effect waves-light" type="submit" name="action">Submit

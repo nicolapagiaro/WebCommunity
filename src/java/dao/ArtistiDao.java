@@ -33,10 +33,8 @@ public class ArtistiDao {
             tran = sessione.beginTransaction();
             List<Artista> artisti = (List<Artista>) sessione.createQuery("FROM Artista").list();
             tran.commit();
-            System.out.println("CIAONENENENNE");
             return artisti;
         } catch (HibernateException e) {
-            e.printStackTrace();
             if (tran != null) {
                 tran.rollback();
             }

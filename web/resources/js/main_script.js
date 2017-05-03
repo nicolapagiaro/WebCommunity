@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    // per aggiornare le text fields
+    Materialize.updateTextFields();
+    
     //per i multiple select degli artisti
     $('select').material_select();
 
@@ -80,7 +83,7 @@ $(document).ready(function () {
     });
 
     //per autocomplete provincia
-    $('provincia').autocomplete({
+    $('#provincia').autocomplete({
         data: {
             "Agrigento": null, "Alessandria": null, "Ancona": null, "Aosta": null, "Aquila ": null, "Arezzo": null, "Ascoli Piceno": null, "Asti": null, "Avellino": null,
             "Bari": null, "Belluno": null, "Benevento": null, "Bergamo": null, "Biella": null, "B ologna": null, "Bolzano": null, "Brescia": null, "Brindisi": null,

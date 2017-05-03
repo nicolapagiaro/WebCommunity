@@ -1,6 +1,5 @@
 package controller;
 
-import dao.ArtistiDao;
 import dao.CategorieDao;
 import dao.EventiDao;
 import hibernate.HibernateUtil;

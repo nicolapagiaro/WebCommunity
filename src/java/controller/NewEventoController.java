@@ -35,7 +35,7 @@ public class NewEventoController {
      * @param nomeE nome dell'evento
      * @return
      */
-    @RequestMapping(value = "/newEvento", method = RequestMethod.POST)
+    @RequestMapping(value = "/homepage/newEvento", method = RequestMethod.POST)
     public String newEvento(ModelMap map, HttpServletRequest request,
             @RequestParam("nomeE") String nomeE) {
         // se non è loggato nessuno
@@ -51,34 +51,30 @@ public class NewEventoController {
     }
     
     
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    @RequestMapping(value = "/homepage/newEvento/upload", method = RequestMethod.POST)
     public String upload(ModelMap map, HttpServletRequest request,
-            @RequestParam("nuoviArtisti") String nA ,
+            @RequestParam("nuoviArtisti") String nA,
             @RequestParam("name") String nome, 
             @RequestParam("data") String data,
             @RequestParam("via") String via,
-            @RequestParam("provincia") String provincia) {
+            @RequestParam("provincia") String provincia,
+            @RequestParam("artistiDB") String artistiDB) {
         // se non è loggato nessuno
         Utente u = (Utente) request.getSession().getAttribute("utente");
         if(u == null) return "redirect:/";
         
         SessionFactory s = HibernateUtil.getSessionFactory();
-        
-        // array con gli id delle categorie selezionate
-        String[] artisti = request.getParameterValues("artistiDB");
-        System.out.println(Arrays.toString(artisti));
-        if(artisti == null)
-            System.out.print("ciaooaoaoa");
+        System.out.println(artistiDB);
         //checckato uguale a on
         if(nA.equals("on")){
-            
+            System.out.println("checckato");
         }
         
         //map.addAttribute("nomeE", nomeE);
         // passo alla pagina la lista degli artisti
         //map.addAttribute("listaArtisti", ArtistiDao.getArtisti(s));
         //return "newEvento";
-        return "gesu";
+        return "null";
     }
     
     
