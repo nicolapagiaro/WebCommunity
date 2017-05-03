@@ -253,7 +253,6 @@ public class EventiDao {
             tran.commit();
             return eventi;
         } catch (HibernateException e) {
-            e.printStackTrace();
             if (tran != null) {
                 tran.rollback();
             }
@@ -325,7 +324,6 @@ public class EventiDao {
             sessione.delete(vc);
             tran.commit();
         } catch (HibernateException e) {
-            e.printStackTrace();
             if (tran != null) {
                 tran.rollback();
             }
