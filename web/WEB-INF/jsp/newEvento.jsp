@@ -55,11 +55,23 @@
                                 <label for="autocomplete-input">Provincia</label>
                             </div>
                         </div>
+                                
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <select name="categoria">
+                                    <option value="" disabled selected>Scegli la categoria</option>
+                                    <c:forEach items="${listaCategorie}" var="c">
+                                        <option value="${c.id}">${c.nome}</option>
+                                    </c:forEach>
+                                </select>
+                                <label>Scegli una categoria</label>
+                            </div>
+                        </div>
 
                         <div class="row">
                             <div class="input-field col s12">
                                 <select name="artistiDB" multiple>
-                                    <option value=""  disabled selected>Scegli il tuo artista</option>
+                                    <option value=""  disabled selected>Scegli gli artisti</option>
                                     <c:forEach items="${listaArtisti}" var="e">
                                         <option value="${e.id}">${e.nome} ${e.cognome}</option>
                                     </c:forEach>

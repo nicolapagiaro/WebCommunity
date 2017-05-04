@@ -36,6 +36,8 @@ public class Categoria implements Serializable{
      * Costruttore vuoto
      */
     public Categoria() {}
+    
+    
 
     /**
      * 

@@ -57,6 +57,17 @@ public class Evento implements Serializable {
     public Evento() {
     }
 
+    public Evento(String nome, Date dataE, String via_numero, String provincia) {
+        this.nome = nome;
+        this.dataE = dataE;
+        this.categoria = categoria;
+        this.via_numero = via_numero;
+        this.provincia = provincia;
+    }
+
+    
+    
+    
     /**
      *
      * @return

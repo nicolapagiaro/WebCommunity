@@ -8,6 +8,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import pojo.Artista;
 import pojo.Categoria;
 import pojo.ChiavePrimaria;
 import pojo.Evento;
@@ -20,6 +21,42 @@ import pojo.VotoCommento;
  * @author FSEVERI\pagiaro3283
  */
 public class EventiDao {
+    
+    
+     public static Evento addEvento(Evento e, Integer[] idArt, int idCat, SessionFactory factory) {
+        Session sessione = factory.openSession();
+        Transaction tran = null;
+        try {
+            tran = sessione.beginTransaction();
+            // scarico la lista delle categorie selezionate
+            List<Artista> arts = sessione
+                    .createQuery("FROM Artista WHERE id IN :list")
+                    .setParameterList("list", idArt)
+                    .list();
+            // le aggiungo all'oggetto evento
+            e.setArtisti(arts);
+            
+            Categoria c = (Categoria) sessione.get(Categoria.class, idCat);
+            
+            e.setCategoria(c);
+            
+            
+            // salvo l'oggetto della base di dati
+            sessione.save(e);
+            tran.commit();
+            return e;
+        } catch (HibernateException ciao) {
+            ciao.printStackTrace();
+            if (tran != null) {
+                tran.rollback();
+            }
+        } finally {
+            sessione.close();
+        }
+        return null;
+    }
+    
+    
 
     /**
      * Metodo che restituisce la lista degli eventi
