@@ -43,7 +43,6 @@
                             <h6><b>${utente.nome} ${utente.cognome}</b></h6>
                             <p>${utente.nickname}</p>
                             <p>${utente.email}</p>
-
                         </div>
                     </div>
                 </div>
@@ -55,9 +54,9 @@
                         <div class="divider"></div>
                         <div class="section"></div>
                         <c:forEach items="${listaCategorie}" var="c">
-                            <a href='<c:url value="/homepage/categoria?c=${c.id}"/>'>
+                            <!--<a href='<c:url value="/homepage/categoria?c=${c.id}"/>'> -->
                                 <div class="chip">${c.nome}</div>
-                            </a>   
+                            <!--</a>-->   
                         </c:forEach>
                     </div>
                 </div>
