@@ -58,13 +58,13 @@ public class NewEventoController {
             @RequestParam("data") String data,
             @RequestParam("via") String via,
             @RequestParam("provincia") String provincia,
-            @RequestParam("artistiDB") String artistiDB) {
+            @RequestParam("artistiDB") Integer[] artistiDB) {
         // se non è loggato nessuno
         Utente u = (Utente) request.getSession().getAttribute("utente");
         if(u == null) return "redirect:/";
         
         SessionFactory s = HibernateUtil.getSessionFactory();
-        System.out.println(artistiDB);
+        System.out.println(Arrays.toString(artistiDB));
         //checckato uguale a on
         if(nA.equals("on")){
             System.out.println("checckato");
