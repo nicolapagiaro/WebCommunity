@@ -33,8 +33,8 @@
     <div class="container">
         <div class="row">
             <div class="card">
-                <div class="card-content">
-                    <form method="POST" action="<c:url value="/homepage/newEvento/upload"/>">
+                <div class="card-content"> 
+                    <form method="POST" id="form_newE" action="<c:url value="/homepage/newEvento/upload"/>">
                         <div class="row">
                             <div class="input-field col s6">
                                 <input id="name" type="text" name="name" value="${nomeE}" autocoplete="off">

@@ -70,6 +70,7 @@ public class HomepageController {
         // aggiungo alla pagina la lista degli eventi
         map.addAttribute("listaEventi", events);
         
+        // aggiungo alla pagina la lista delle categorie
         map.addAttribute("listaCategorie", CategorieDao.getCategorieUtente(u, s));
         return "homepage";
     }
@@ -105,8 +106,6 @@ public class HomepageController {
         return "categoria";
     }
 
-    
-    
     
     /**
      * metodo per il caricamento della pagina per visualizzare i commenti ed

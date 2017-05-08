@@ -86,7 +86,7 @@ $(document).ready(function () {
     $('#provincia').autocomplete({
         data: {
             "Agrigento": null, "Alessandria": null, "Ancona": null, "Aosta": null, "Aquila ": null, "Arezzo": null, "Ascoli Piceno": null, "Asti": null, "Avellino": null,
-            "Bari": null, "Belluno": null, "Benevento": null, "Bergamo": null, "Biella": null, "B ologna": null, "Bolzano": null, "Brescia": null, "Brindisi": null,
+            "Bari": null, "Belluno": null, "Benevento": null, "Bergamo": null, "Biella": null, "Bologna": null, "Bolzano": null, "Brescia": null, "Brindisi": null,
             "Cagliari": null, "Caltanissetta": null, "Campobasso": null, "Caserta": null, "Catania": null, "Catanzaro": null, "Chieti": null, "Como": null, "Cosenza": null, "C remona": null, "Crotone": null, "Cuneo": null,
             "Enna": null,
             "Ferrara": null, "Firenze": null, "Foggia": null, "Forlì e Cesena": null, "Frosinone": null,
@@ -150,5 +150,13 @@ $(document).ready(function () {
             $('#numArtisti').addClass('hide');
             $('#caricaE').removeClass('hide');
         }
+    });
+    
+    
+    $('#nuoviArtisti').on('click', function(e){
+        if($('#nuoviArtisti').is(":checked"))
+            $('#form_newE').attr('action', "/WebCommunity/homepage/newEvento/uploadNewArtist");
+        else
+            $('#form_newE').attr('action', "/WebCommunity/homepage/newEvento/upload");
     });
 });

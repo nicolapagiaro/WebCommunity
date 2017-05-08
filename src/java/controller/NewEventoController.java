@@ -62,8 +62,8 @@ public class NewEventoController {
         return "newEvento";
     }
 
-    @RequestMapping(value = "/homepage/newEvento/upload", method = RequestMethod.POST)
-    public String upload(ModelMap map, HttpServletRequest request,
+    @RequestMapping(value = "/homepage/newEvento/uploadNewArtist", method = RequestMethod.POST)
+    public String uploadNewArtist(ModelMap map, HttpServletRequest request,
             @RequestParam("nuoviArtisti") String nA,
             @RequestParam("categoria") int categoria,
             @RequestParam("name") String nome,
@@ -105,6 +105,48 @@ public class NewEventoController {
         // passo alla pagina la lista degli artisti
         //map.addAttribute("listaArtisti", ArtistiDao.getArtisti(s));
         //return "newEvento";
+        System.out.println("New artist");
+        return "null";
+    }
+    
+    @RequestMapping(value = "/homepage/newEvento/upload", method = RequestMethod.POST)
+    public String upload(ModelMap map, HttpServletRequest request,
+            @RequestParam("categoria") int categoria,
+            @RequestParam("name") String nome,
+            @RequestParam("data") String data,
+            @RequestParam("via") String via,
+            @RequestParam("provincia") String provincia,
+            @RequestParam("artistiDB") Integer[] artistiDB) throws ParseException {
+        // se non è loggato nessuno
+        Utente u = (Utente) request.getSession().getAttribute("utente");
+        if (u == null) {
+            return "redirect:/";
+        }
+
+        SessionFactory s = HibernateUtil.getSessionFactory();
+
+        String month = data.split(" ")[1].split(",")[0];
+        Date date = new SimpleDateFormat("MMMM", Locale.ITALIAN).parse(month);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int meseN = cal.get(Calendar.MONTH) + 1;
+        
+        int giorno = Integer.parseInt(data.split(" ")[0]);
+        int anno = Integer.parseInt(data.split(" ")[2]);
+        
+        Date dataD = new Date(giorno,meseN,anno);
+         
+        
+        Evento e = new Evento(nome,dataD,via,provincia);
+        
+        EventiDao.addEvento(e, artistiDB, categoria, s);
+
+        //map.addAttribute("nomeE", nomeE);
+        // passo alla pagina la lista degli artisti
+        //map.addAttribute("listaArtisti", ArtistiDao.getArtisti(s));
+        //return "newEvento";
+        
+        System.out.println("NO new artist");
         return "null";
     }
 
