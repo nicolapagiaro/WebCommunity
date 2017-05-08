@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -57,16 +56,20 @@ public class Evento implements Serializable {
     public Evento() {
     }
 
+    /**
+     * Costruttore parametrico
+     * @param nome nome evento 
+     * @param dataE data evento
+     * @param via_numero via e numero civico evento
+     * @param provincia povincia evento
+     */
     public Evento(String nome, Date dataE, String via_numero, String provincia) {
         this.nome = nome;
         this.dataE = dataE;
-        this.categoria = categoria;
         this.via_numero = via_numero;
         this.provincia = provincia;
     }
 
-    
-    
     
     /**
      *

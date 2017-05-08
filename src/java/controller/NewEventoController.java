@@ -11,7 +11,6 @@ import dao.EventiDao;
 import hibernate.HibernateUtil;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -58,7 +57,6 @@ public class NewEventoController {
         // passo alla pagina la lista degli artisti
         map.addAttribute("listaArtisti", ArtistiDao.getArtisti(s));
         map.addAttribute("listaCategorie", CategorieDao.getCategorie(s));
-
         return "newEvento";
     }
 
@@ -78,37 +76,34 @@ public class NewEventoController {
         }
 
         SessionFactory s = HibernateUtil.getSessionFactory();
-
-        String month = data.split(" ")[1].split(",")[0];
-        Date date = new SimpleDateFormat("MMMM", Locale.ITALIAN).parse(month);
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        int meseN = cal.get(Calendar.MONTH) + 1;
         
-        int giorno = Integer.parseInt(data.split(" ")[0]);
-        int anno = Integer.parseInt(data.split(" ")[2]);
-        
-        Date dataD = new Date(giorno,meseN,anno);
-         
+        Date dataD = parseData(data);
         
         Evento e = new Evento(nome,dataD,via,provincia);
         
         EventiDao.addEvento(e, artistiDB, categoria, s);
-        
-        //checckato uguale a on
-        //bisogna prendere anche il numero 
-        if (nA.equals("on")) {
-            
-        }
 
         //map.addAttribute("nomeE", nomeE);
         // passo alla pagina la lista degli artisti
         //map.addAttribute("listaArtisti", ArtistiDao.getArtisti(s));
         //return "newEvento";
-        System.out.println("New artist");
         return "null";
     }
     
+    /**
+     * Metodo per l'aggiunta dell'evento senza aggiungere nuovi artisti al database
+     * FATTO (Funziona)
+     * @param map
+     * @param request
+     * @param categoria
+     * @param nome
+     * @param data
+     * @param via
+     * @param provincia
+     * @param artistiDB
+     * @return
+     * @throws ParseException 
+     */
     @RequestMapping(value = "/homepage/newEvento/upload", method = RequestMethod.POST)
     public String upload(ModelMap map, HttpServletRequest request,
             @RequestParam("categoria") int categoria,
@@ -124,30 +119,31 @@ public class NewEventoController {
         }
 
         SessionFactory s = HibernateUtil.getSessionFactory();
-
+        Date dataD = parseData(data);
+        Evento e = new Evento(nome,dataD,via,provincia);
+        EventiDao.addEvento(e, artistiDB, categoria, s);
+        return "redirect:/homepage?ordine=default";
+    }
+    
+    /**
+     * Metodo per convertire la stringa con la data in un oggetto Date
+     * @param data stringa con la data
+     * @return l'oggetto Date
+     * @throws ParseException boh
+     */
+    private Date parseData(String data) throws ParseException {
         String month = data.split(" ")[1].split(",")[0];
         Date date = new SimpleDateFormat("MMMM", Locale.ITALIAN).parse(month);
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        int meseN = cal.get(Calendar.MONTH) + 1;
+        int meseN = cal.get(Calendar.MONTH);
         
         int giorno = Integer.parseInt(data.split(" ")[0]);
         int anno = Integer.parseInt(data.split(" ")[2]);
         
-        Date dataD = new Date(giorno,meseN,anno);
-         
-        
-        Evento e = new Evento(nome,dataD,via,provincia);
-        
-        EventiDao.addEvento(e, artistiDB, categoria, s);
-
-        //map.addAttribute("nomeE", nomeE);
-        // passo alla pagina la lista degli artisti
-        //map.addAttribute("listaArtisti", ArtistiDao.getArtisti(s));
-        //return "newEvento";
-        
-        System.out.println("NO new artist");
-        return "null";
+        Calendar c = Calendar.getInstance();
+        c.set(anno, meseN, giorno);
+        return c.getTime();
     }
 
 }

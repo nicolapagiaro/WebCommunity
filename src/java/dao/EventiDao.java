@@ -33,20 +33,19 @@ public class EventiDao {
                     .createQuery("FROM Artista WHERE id IN :list")
                     .setParameterList("list", idArt)
                     .list();
-            // le aggiungo all'oggetto evento
-            e.setArtisti(arts);
-            
             Categoria c = (Categoria) sessione.get(Categoria.class, idCat);
-            
             e.setCategoria(c);
-            
-            
             // salvo l'oggetto della base di dati
             sessione.save(e);
+            // aggiungo ad ogni artista l'evento a cui partecipano
+            //  (altrimenti non va, boh)
+            for(Artista a : arts) {
+                a.getEventi().add(e);
+                sessione.update(a);
+            }
             tran.commit();
             return e;
         } catch (HibernateException ciao) {
-            ciao.printStackTrace();
             if (tran != null) {
                 tran.rollback();
             }
@@ -147,20 +146,16 @@ public class EventiDao {
         Transaction tran = null;
         try {
             tran = sessione.beginTransaction();
-            List<BigDecimal> eventiID = (List<BigDecimal>) sessione
+            List<Integer> eventiID = (List<Integer>) sessione
                     .createSQLQuery("SELECT E.id\n"
                             + "FROM EVENTI E, VOTO_COMMENTO V \n"
                             + "WHERE E.id = V.idEvento\n"
                             + "GROUP BY(E.id)\n"
                             + "ORDER BY (categoria) ASC, (nome) ASC")
                     .list();
-            ArrayList<Integer> l = new ArrayList();
-            for(int i=0; i<eventiID.size(); i++) {
-                l.add(eventiID.get(i).intValue());
-            }
             List<Evento> eventi = (List<Evento>) sessione
                     .createQuery("FROM Evento WHERE id in :list")
-                    .setParameterList("list", l)
+                    .setParameterList("list", eventiID)
                     .setMaxResults(15)
                     .list();
             
