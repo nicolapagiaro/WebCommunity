@@ -171,11 +171,10 @@ $(document).ready(function () {
                 || provincia.length === 0 || cat.length === 0) {
             Materialize.toast('Inserire dei dati validi', 4000);
             e.preventDefault();
-        }
-            
+        }  
     });
     
-    // controllo della validità dei dati inseriti nel form
+    // controllo della validità dei dati inseriti nel form con i nuovi artisti
     $("#nuoviA").on('click', function(e){
         var nome = $('#name').val();
         var data = $('#data').val();
@@ -186,7 +185,17 @@ $(document).ready(function () {
                 || provincia.length === 0 || cat.length === 0) {
             Materialize.toast('Inserire dei dati validi', 4000);
             e.preventDefault();
-        }
-            
+        }  
+    });
+    
+    
+    // cambio del controller per gli eventi senza artisti
+    $("#artistiDB").on('change', function(e){
+        var artistiSelezionati = []; 
+        $('#artistiDB :selected').each(function(i, selected){ 
+          artistiSelezionati[i] = $(selected).text(); 
+        });
+        if(artistiSelezionati.length === 1)
+            alert("buono");
     });
 });

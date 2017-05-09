@@ -70,7 +70,7 @@
 
                         <div class="row">
                             <div class="input-field col s12">
-                                <select name="artistiDB" multiple>
+                                <select id="artistiDB" name="artistiDB" multiple>
                                     <option value=""  disabled selected>Scegli gli artisti</option>
                                     <c:forEach items="${listaArtisti}" var="e">
                                         <option value="${e.id}">${e.nome} ${e.cognome}</option>

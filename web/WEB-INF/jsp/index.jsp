@@ -57,7 +57,7 @@
                                            data-success="">Email</label>
                                     <c:if test="${control}">
                                         <p class="red-text text-darken-1">Credenziali errate<p>
-                                        </c:if>
+                                    </c:if>
                                 </div>
                                 <div class="center col l12">
                                     <button class="btn btn-flat" 
@@ -138,6 +138,10 @@
                             </div>
                         </div>
                     </c:forEach>
+                    <c:if test="${listaEventiTop == null}">
+                        <br>
+                        <h5 class="center-align grey-text">Non &egrave; stato votato alcun evento</h5>
+                    </c:if>
                 </div>
                 <div class="hide" id="section_3">
                     <c:forEach items="${listaCategorie}" var="c">
