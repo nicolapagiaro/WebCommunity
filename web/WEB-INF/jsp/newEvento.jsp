@@ -88,10 +88,10 @@
                             </div>
                             <div class="input-field col s6 hide" id="numArtisti" name="numArtisti">
                                 <p class="range-field">
-                                    <input type="range" id="nA" min="0" max="50" />
+                                    <input type="range"name="nA" id="nA" min="0" max="50" />
                                 </p>
                                 <br>
-                                <button class="btn waves-effect waves-light right" type="submit" name="action" id="inserisciA">Inserisci gli artisti
+                                <button class="btn waves-effect waves-light right" type="submit" name="action" id="nuoviA">Inserisci gli artisti
                                     <i class="material-icons right">send</i>
                                 </button>
 

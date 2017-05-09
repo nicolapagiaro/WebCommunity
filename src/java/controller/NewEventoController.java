@@ -62,13 +62,12 @@ public class NewEventoController {
 
     @RequestMapping(value = "/homepage/newEvento/uploadNewArtist", method = RequestMethod.POST)
     public String uploadNewArtist(ModelMap map, HttpServletRequest request,
-            @RequestParam("nuoviArtisti") String nA,
             @RequestParam("categoria") int categoria,
             @RequestParam("name") String nome,
             @RequestParam("data") String data,
             @RequestParam("via") String via,
             @RequestParam("provincia") String provincia,
-            @RequestParam("numArtisti") int numArt,
+            @RequestParam("nA") int numArt,
             @RequestParam("artistiDB") Integer[] artistiDB) throws ParseException {
         // se non è loggato nessuno
         Utente u = (Utente) request.getSession().getAttribute("utente");
