@@ -86,7 +86,7 @@
                                     <label for="nuoviArtisti" align="left">Vuoi inserire nuovi artisti?</label>
                                 </p>
                             </div>
-                            <div class="input-field col s6 hide" id="numArtisti">
+                            <div class="input-field col s6 hide" id="numArtisti" name="numArtisti">
                                 <p class="range-field">
                                     <input type="range" id="nA" min="0" max="50" />
                                 </p>

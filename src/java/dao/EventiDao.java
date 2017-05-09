@@ -38,7 +38,7 @@ public class EventiDao {
             // salvo l'oggetto della base di dati
             sessione.save(e);
             // aggiungo ad ogni artista l'evento a cui partecipano
-            //  (altrimenti non va, boh)
+            // (altrimenti non va, boh)
             for(Artista a : arts) {
                 a.getEventi().add(e);
                 sessione.update(a);
