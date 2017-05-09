@@ -58,7 +58,7 @@
                                 
                         <div class="row">
                             <div class="input-field col s12">
-                                <select name="categoria">
+                                <select id="categoria" name="categoria">
                                     <option value="" disabled selected>Scegli la categoria</option>
                                     <c:forEach items="${listaCategorie}" var="c">
                                         <option value="${c.id}">${c.nome}</option>
@@ -101,45 +101,6 @@
                             </button>
                         </div>
                     </form>
-
-                    <%--<button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                        <i class="material-icons right">send</i>
-                    </button>
-                    --%>
-
-
-                    <!--
-                                            <div class="row">
-                    
-                                                //da fare for in jstl
-                                                <div class="input-field col s6">
-                                                    <input id="nomeA" type="text" class="validate">
-                                                    <label for="nomeA">Nome</label>
-                                                </div>
-                                                <div class="input-field col s6">
-                                                    <input id="cognome" type="text" class="validate">
-                                                    <label for="cognome">Cognome</label>
-                                                </div>
-                    
-                                                <div class="input-field col s6">
-                                                    <input id="nomeA" type="text" class="validate">
-                                                    <label for="nomeA">Nome</label>
-                                                </div>
-                                                <div class="input-field col s6">
-                                                    <input id="cognome" type="text" class="validate">
-                                                    <label for="cognome">Cognome</label>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col s12">
-                                                    This is an inline input field:
-                                                    <div class="input-field inline">
-                                                        <input id="email" type="email" class="validate">
-                                                        <label for="email" data-error="wrong" data-success="right">Email</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                    -->
                 </div>
             </div>
         </div>

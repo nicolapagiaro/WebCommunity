@@ -152,11 +152,26 @@ $(document).ready(function () {
         }
     });
     
-    
+    // per selezionare il giusto controller nella creazione di un nuovo evento
     $('#nuoviArtisti').on('click', function(e){
         if($('#nuoviArtisti').is(":checked"))
             $('#form_newE').attr('action', "/WebCommunity/homepage/newEvento/uploadNewArtist");
         else
             $('#form_newE').attr('action', "/WebCommunity/homepage/newEvento/upload");
+    });
+    
+    // controllo della validità dei dati inseriti nel form
+    $("#caricaE").on('click', function(e){
+        var nome = $('#name').val();
+        var data = $('#data').val();
+        var via_n = $('#via').val();
+        var provincia = $('#provincia').val();
+        var cat = $('#categoria').find(":selected").val();
+        if(nome.length === 0 || data.length === 0 || via_n.length === 0
+                || provincia.length === 0 || cat.length === 0) {
+            Materialize.toast('Inserire dei dati validi', 4000);
+            e.preventDefault();
+        }
+            
     });
 });
