@@ -11,6 +11,7 @@ import dao.EventiDao;
 import hibernate.HibernateUtil;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -97,7 +98,6 @@ public class NewEventoController {
      * @param data
      * @param via
      * @param provincia
-     * @param artistiDB
      * @return
      * @throws ParseException 
      */
@@ -107,18 +107,29 @@ public class NewEventoController {
             @RequestParam("name") String nome,
             @RequestParam("data") String data,
             @RequestParam("via") String via,
-            @RequestParam("provincia") String provincia,            
-            @RequestParam("artistiDB") Integer[] artistiDB) throws ParseException {
+            @RequestParam("provincia") String provincia) throws ParseException {
         // se non è loggato nessuno
         Utente u = (Utente) request.getSession().getAttribute("utente");
         if (u == null) {
             return "redirect:/";
         }
-
+        
         SessionFactory s = HibernateUtil.getSessionFactory();
         Date dataD = parseData(data);
         Evento e = new Evento(nome,dataD,via,provincia);
-        EventiDao.addEvento(e, artistiDB, categoria, s);
+        
+
+        // prendo gli artisti
+        String[] ar = request.getParameterValues("artistiDB");
+        if(ar != null) {
+            Integer[] artistiDB = new Integer[ar.length];
+            for(int i=0; i<ar.length; i++) {
+                artistiDB[i] = Integer.parseInt(ar[i]);
+            }
+            EventiDao.addEvento(e, artistiDB, categoria, s);
+        }
+        else
+            EventiDao.addEvento(e, categoria, s);
         return "redirect:/homepage?ordine=default";
     }
     

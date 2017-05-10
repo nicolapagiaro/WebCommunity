@@ -11,14 +11,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import pojo.Artista;
-import pojo.Evento;
 
 /**
  *
  * @author FSEVERI\meneghetti3282
  */
 public class ArtistiDao {
-    
     
     /**
      * Metodo che restituisce la lista degli artisti
@@ -40,7 +38,9 @@ public class ArtistiDao {
             }
         } finally {
             sessione.close();
+
         }
         return null;
     }
 }
+

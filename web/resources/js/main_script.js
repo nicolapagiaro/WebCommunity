@@ -187,15 +187,4 @@ $(document).ready(function () {
             e.preventDefault();
         }  
     });
-    
-    
-    // cambio del controller per gli eventi senza artisti
-    $("#artistiDB").on('change', function(e){
-        var artistiSelezionati = []; 
-        $('#artistiDB :selected').each(function(i, selected){ 
-          artistiSelezionati[i] = $(selected).text(); 
-        });
-        if(artistiSelezionati.length === 1)
-            alert("buono");
-    });
 });

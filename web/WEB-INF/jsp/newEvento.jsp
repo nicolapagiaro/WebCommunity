@@ -9,7 +9,7 @@
         <title>Nuovo evento - WebCommunity</title>
         <!--Import Google Icon Font-->
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <!--Import materialize.css-->
+        <!--Import materialize.min.css-->
         <link href="<c:url value="/resources/css/materialize.min.css" />" rel="stylesheet" media="screen,projection">
         <!--Import main_css.css-->
         <link href="<c:url value="/resources/css/main_css.css" />" rel="stylesheet" media="screen,projection">
@@ -52,7 +52,7 @@
                             </div>
                             <div class="input-field col s6">
                                 <input type="text" id="provincia" name="provincia" autocoplete="off" class="autocomplete">
-                                <label for="autocomplete-input">Provincia</label>
+                                <label for="provincia">Provincia</label>
                             </div>
                         </div>
                                 

@@ -1,6 +1,5 @@
 package dao;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Hibernate;
@@ -22,7 +21,14 @@ import pojo.VotoCommento;
  */
 public class EventiDao {
     
-    
+    /**
+     * Metodo per aggiungere un evento alla base di dati con degli artisti
+     * @param e evento
+     * @param idArt id degli artisti
+     * @param idCat id della categoria
+     * @param factory
+     * @return 
+     */
      public static Evento addEvento(Evento e, Integer[] idArt, int idCat, SessionFactory factory) {
         Session sessione = factory.openSession();
         Transaction tran = null;
@@ -43,6 +49,34 @@ public class EventiDao {
                 a.getEventi().add(e);
                 sessione.update(a);
             }
+            tran.commit();
+            return e;
+        } catch (HibernateException ciao) {
+            if (tran != null) {
+                tran.rollback();
+            }
+        } finally {
+            sessione.close();
+        }
+        return null;
+    }
+     
+     /**
+      * Metodo per aggiungere un evento senza alcun artista
+      * @param e evento
+      * @param idCat id categoria
+      * @param factory
+      * @return 
+      */
+     public static Evento addEvento(Evento e, int idCat, SessionFactory factory) {
+        Session sessione = factory.openSession();
+        Transaction tran = null;
+        try {
+            tran = sessione.beginTransaction();
+            Categoria c = (Categoria) sessione.get(Categoria.class, idCat);
+            e.setCategoria(c);
+            // salvo l'oggetto della base di dati
+            sessione.save(e);
             tran.commit();
             return e;
         } catch (HibernateException ciao) {
