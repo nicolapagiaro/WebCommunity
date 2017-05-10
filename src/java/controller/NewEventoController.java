@@ -68,8 +68,7 @@ public class NewEventoController {
             @RequestParam("data") String data,
             @RequestParam("via") String via,
             @RequestParam("provincia") String provincia,
-            @RequestParam("nA") int numArt,
-            @RequestParam("artistiDB") Integer[] artistiDB) throws ParseException {
+            @RequestParam("nA") int numArt) throws ParseException {
         // se non è loggato nessuno
         Utente u = (Utente) request.getSession().getAttribute("utente");
         if (u == null) {
@@ -79,11 +78,22 @@ public class NewEventoController {
         SessionFactory s = HibernateUtil.getSessionFactory();
         Date dataD = parseData(data);
         Evento e = new Evento(nome,dataD,via,provincia);
-        EventiDao.addEvento(e, artistiDB, categoria, s);
-
+        // prendo gli artisti
+        String[] ar = request.getParameterValues("artistiDB");
+        if(ar != null) {
+            Integer[] artistiDB = new Integer[ar.length];
+            for(int i=0; i<ar.length; i++) {
+                artistiDB[i] = Integer.parseInt(ar[i]);
+            }
+            EventiDao.addEvento(e, artistiDB, categoria, s);
+        }
+        else
+            EventiDao.addEvento(e, categoria, s);
         
         map.addAttribute("e", e);
         map.addAttribute("numArt",numArt);
+        
+        
         
         return "newArtisti";
     }
