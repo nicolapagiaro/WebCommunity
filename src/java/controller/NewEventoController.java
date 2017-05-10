@@ -35,8 +35,7 @@ import pojo.Utente;
 @Controller
 public class NewEventoController {
 
-    public NewEventoController() {
-    }
+    public NewEventoController() {}
 
     /**
      * metodo per il caricamento della pagina per creare un nuovo evento
