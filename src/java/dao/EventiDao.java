@@ -61,6 +61,38 @@ public class EventiDao {
         return null;
     }
      
+     
+     /**
+     * Metodo per settare a un evento nuovi artisti e creare nuovi artisti
+     * @param e evento
+     * @param art
+     * @param factory
+     * @return 
+     */
+     public static Evento setEventoNewArt(Evento e, List<Artista> art, SessionFactory factory) {
+        Session sessione = factory.openSession();
+        Transaction tran = null;
+        try {
+            tran = sessione.beginTransaction();
+            for(int i = 0; i< art.size(); i++){
+                art.get(i).getEventi().add(e);
+                sessione.save(art.get(i));
+            }
+            tran.commit();
+            return e;
+        } catch (HibernateException ciao) {
+            if (tran != null) {
+                tran.rollback();
+            }
+        } finally {
+            sessione.close();
+        }
+        return null;
+    }
+     
+     
+     
+     
      /**
       * Metodo per aggiungere un evento senza alcun artista
       * @param e evento

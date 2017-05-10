@@ -18,19 +18,22 @@
     </head>
     <body>
         <div class="row">
-            <form class="col s12">
+            <form class="col s12"  method="POST" action="<c:url value="/homepage/newEvento/uploadFinalArt"/>">
                 <c:forEach var = "i" begin = "0" end = "${numArt}">
                 <div class="row">
                     <div class="input-field col s6">
-                        <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+                        <input placeholder="Placeholder" id="first_name" type="text" class="validate" name="nome">
                         <label for="first_name">Nome</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="last_name" type="text" class="validate">
+                        <input id="last_name" type="text" class="validate" name="cognome">
                         <label for="last_name">Cognome</label>
                     </div>
                 </div>
                 </c:forEach>
+                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                    <i class="material-icons right">send</i>
+                </button>
             </form>
         </div>
         <!-- fast loading of the page -->

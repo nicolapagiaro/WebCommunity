@@ -1,6 +1,7 @@
 package pojo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,6 +20,14 @@ import javax.persistence.Table;
 @Table(name = "ARTISTI")
 public class Artista implements Serializable{
     static final long serialVersionUID = 55L;
+
+    public Artista(String nome, String cognome) {
+        this.nome = nome;
+        this.cognome = cognome;
+        eventi = new ArrayList<>();
+    }
+    
+    
     
     @Id @GeneratedValue
     private int id;

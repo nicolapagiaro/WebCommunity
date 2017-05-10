@@ -11,9 +11,11 @@ import dao.EventiDao;
 import hibernate.HibernateUtil;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import org.hibernate.SessionFactory;
@@ -22,6 +24,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import pojo.Artista;
 import pojo.Evento;
 import pojo.Utente;
 
@@ -61,42 +64,6 @@ public class NewEventoController {
         return "newEvento";
     }
 
-    @RequestMapping(value = "/homepage/newEvento/uploadNewArtist", method = RequestMethod.POST)
-    public String uploadNewArtist(ModelMap map, HttpServletRequest request,
-            @RequestParam("categoria") int categoria,
-            @RequestParam("name") String nome,
-            @RequestParam("data") String data,
-            @RequestParam("via") String via,
-            @RequestParam("provincia") String provincia,
-            @RequestParam("nA") int numArt) throws ParseException {
-        // se non è loggato nessuno
-        Utente u = (Utente) request.getSession().getAttribute("utente");
-        if (u == null) {
-            return "redirect:/";
-        }
-
-        SessionFactory s = HibernateUtil.getSessionFactory();
-        Date dataD = parseData(data);
-        Evento e = new Evento(nome,dataD,via,provincia);
-        // prendo gli artisti
-        String[] ar = request.getParameterValues("artistiDB");
-        if(ar != null) {
-            Integer[] artistiDB = new Integer[ar.length];
-            for(int i=0; i<ar.length; i++) {
-                artistiDB[i] = Integer.parseInt(ar[i]);
-            }
-            EventiDao.addEvento(e, artistiDB, categoria, s);
-        }
-        else
-            EventiDao.addEvento(e, categoria, s);
-        
-        map.addAttribute("e", e);
-        map.addAttribute("numArt",numArt);
-        
-        
-        
-        return "newArtisti";
-    }
     
     /**
      * Metodo per l'aggiunta dell'evento senza aggiungere nuovi artisti al database
@@ -163,5 +130,74 @@ public class NewEventoController {
         c.set(anno, meseN, giorno);
         return c.getTime();
     }
+    
+    
+    @RequestMapping(value = "/homepage/newEvento/uploadNewArtist", method = RequestMethod.POST)
+    public String uploadNewArtist(ModelMap map, HttpServletRequest request,
+            @RequestParam("categoria") int categoria,
+            @RequestParam("name") String nome,
+            @RequestParam("data") String data,
+            @RequestParam("via") String via,
+            @RequestParam("provincia") String provincia,
+            @RequestParam("nA") int numArt) throws ParseException {
+        // se non è loggato nessuno
+        Utente u = (Utente) request.getSession().getAttribute("utente");
+        if (u == null) {
+            return "redirect:/";
+        }
+
+        SessionFactory s = HibernateUtil.getSessionFactory();
+        Date dataD = parseData(data);
+        Evento e = new Evento(nome,dataD,via,provincia);
+        // prendo gli artisti
+        String[] ar = request.getParameterValues("artistiDB");
+        if(ar != null) {
+            Integer[] artistiDB = new Integer[ar.length];
+            for(int i=0; i<ar.length; i++) {
+                artistiDB[i] = Integer.parseInt(ar[i]);
+            }
+            EventiDao.addEvento(e, artistiDB, categoria, s);
+        }
+        else
+            EventiDao.addEvento(e, categoria, s);
+        
+        map.addAttribute("e", e);
+        map.addAttribute("numArt",numArt);
+        
+        
+        request.getSession().setAttribute("evento", e);
+                
+
+        return "newArtisti";
+    }
+    
+    
+    
+    @RequestMapping(value = "/homepage/newEvento/uploadFinalArt", method = RequestMethod.POST)
+    public String uploadNewArtist(ModelMap map, HttpServletRequest request,
+            @RequestParam("nome") String[] nome,
+            @RequestParam("cognome") String[] cognome) throws ParseException {
+        // se non è loggato nessuno
+        Utente u = (Utente) request.getSession().getAttribute("utente");
+        if (u == null) {
+            return "redirect:/";
+        }
+
+        SessionFactory s = HibernateUtil.getSessionFactory();
+        
+        List<Artista> artisti = new ArrayList<>();
+        
+        for(int i=0; i< nome.length; i++){
+            Artista a = new Artista(nome[i],cognome[i]);
+            artisti.add(a);
+        }
+        
+        Evento e = (Evento) request.getSession().getAttribute("evento");
+                
+        EventiDao.setEventoNewArt(e, artisti, s);
+        
+        return "redirect:/homepage?ordine=defaul";
+    }
+    
 
 }
