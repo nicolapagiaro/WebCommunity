@@ -12,7 +12,6 @@ import hibernate.HibernateUtil;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -109,6 +108,22 @@ public class NewEventoController {
         return "redirect:/homepage?ordine=default";
     }
 
+    /**
+     * Mappatura per aggiungere l'evento e aggiungere nuovi artisti
+     * FATTO (Funziona)
+     * @param map
+     * @param request
+     * @param categoria
+     * @param nome
+     * @param data
+     * @param via
+     * @param provincia
+     * @param numArt
+     * @param nomi
+     * @param cognomi
+     * @return
+     * @throws ParseException 
+     */
     @RequestMapping(value = "/homepage/newEvento/uploadNewArtist", method = RequestMethod.POST)
     public String uploadNewArtist(ModelMap map, HttpServletRequest request,
             @RequestParam("categoria") int categoria,
@@ -145,21 +160,6 @@ public class NewEventoController {
             artisti.add(a);
         }
         EventiDao.setEventoNewArt(e, artisti, s);
-
-        return "redirect:/homepage?ordine=defaul";
-    }
-
-    @RequestMapping(value = "/homepage/newEvento/uploadFinalArt", method = RequestMethod.POST)
-    public String uploadNewArtist(ModelMap map, HttpServletRequest request,
-            @RequestParam("nome") String[] nome,
-            @RequestParam("cognome") String[] cognome) throws ParseException {
-        // se non è loggato nessuno
-        Utente u = (Utente) request.getSession().getAttribute("utente");
-        if (u == null) {
-            return "redirect:/";
-        }
-
-        SessionFactory s = HibernateUtil.getSessionFactory();
 
         return "redirect:/homepage?ordine=defaul";
     }

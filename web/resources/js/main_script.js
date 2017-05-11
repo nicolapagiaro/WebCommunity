@@ -190,27 +190,17 @@ $(document).ready(function () {
         }
     });
 
-    // controllo della validità dei dati inseriti nel form con i nuovi artisti
-    $("#nuoviA").on('click', function (e) {
-        var nome = $('#name').val();
-        var data = $('#data').val();
-        var via_n = $('#via').val();
-        var provincia = $('#provincia').val();
-        var cat = $('#categoria').find(":selected").val();
-        if (nome.length === 0 || data.length === 0 || via_n.length === 0
-                || provincia.length === 0 || cat.length === 0) {
-            Materialize.toast('Inserire dei dati validi', 4000);
-            e.preventDefault();
-        }
-    });
-
-    // metodo per attivare 
+    // metodo per attivare le caselle per aggiungere gli artisti
     $('#nA').on('change', function (e) {
         var count = $('#nA').val();
+        $('#label_newArt').text("Inserisci " + count + " nuovi artisti");
         var s = "";
         for (var i = 0; i < count; i++) {
             s += "<div class='row'>" +
-                    "<div class='input-field col s6'>" +
+                    "<div class='input-field col s1'><p class='center' style='padding-top:18px;'>" 
+                    + (i+1) 
+                    + ".</p></div>" +
+                    "<div class='input-field col s5'>" +
                     "<input id='name' type='text' name='name' autocoplete='off'>" +
                     "<label for='name'>Nome</label>" +
                     "</div>" +
@@ -221,8 +211,10 @@ $(document).ready(function () {
                     "</div>";
         }
         $('#artisti_container').html(s);
+        // animo la pagina
         $('html,body').animate({
             scrollTop: $("#artisti_container").offset().top},
         'slow');
     });
+    
 });

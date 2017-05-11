@@ -81,19 +81,17 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="input-field col s6">
+                                <div class="input-field col s3">
                                     <p>                                   
                                         <input type="checkbox" class="filled-in" id="nuoviArtisti" name="nuoviArtisti" align="right"/>
-                                        <label for="nuoviArtisti" align="left">Vuoi inserire nuovi artisti?</label>
+                                        <label id="label_newArt" for="nuoviArtisti" align="left">Inserire nuovi artisti: </label>
                                     </p>
                                 </div>
-                                <div class="input-field col s6 hide" id="numArtisti" name="numArtisti">
-                                    <p class="range-field">
-                                        <input type="range" name="nA" id="nA" min="1" max="10" value="1"/>
-                                    </p>
+                                <div class="input-field col s2 hide" id="numArtisti" name="numArtisti">
+                                    <p class="range-field"><input type="range" name="nA" id="nA" min="1" max="10" value="1"/></p>
                                     <br>
                                 </div>
-                                <button class="btn waves-effect waves-light right" type="submit" name="action" id="caricaE">Carica l'evento
+                                <button class="btn waves-effect waves-light right" type="submit" name="action" id="caricaE">Carica l"evento
                                     <i class="material-icons right">send</i>
                                 </button>
                             </div>
@@ -105,7 +103,8 @@
                         <span class="card-title">Inserisci i tuoi artisti</span>
                         <div id="artisti_container">
                             <div class="row"> 
-                                <div class="input-field col s6"> 
+                                <div class="input-field col s1"><p class="center" style="padding-top:18px;">1.</p></div>
+                                <div class="input-field col s5"> 
                                     <input id="name" type="text" name="nome" autocoplete="off"> 
                                     <label for="name">Nome</label> 
                                 </div>
@@ -116,7 +115,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <button class="btn waves-effect waves-light right" type="submit" name="action" id="caricaEA">Carica l'evento
+                            <button class="btn waves-effect waves-light right" type="submit" name="action" id="caricaEA">Carica l"evento
                                 <i class="material-icons right">send</i>
                             </button>
                         </div>
