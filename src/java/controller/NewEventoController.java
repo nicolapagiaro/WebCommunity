@@ -35,7 +35,8 @@ import pojo.Utente;
 @Controller
 public class NewEventoController {
 
-    public NewEventoController() {}
+    public NewEventoController() {
+    }
 
     /**
      * metodo per il caricamento della pagina per creare un nuovo evento
@@ -63,10 +64,10 @@ public class NewEventoController {
         return "newEvento";
     }
 
-    
     /**
-     * Metodo per l'aggiunta dell'evento senza aggiungere nuovi artisti al database
-     * FATTO (Funziona)
+     * Metodo per l'aggiunta dell'evento senza aggiungere nuovi artisti al
+     * database FATTO (Funziona)
+     *
      * @param map
      * @param request
      * @param categoria
@@ -75,7 +76,7 @@ public class NewEventoController {
      * @param via
      * @param provincia
      * @return
-     * @throws ParseException 
+     * @throws ParseException
      */
     @RequestMapping(value = "/homepage/newEvento/upload", method = RequestMethod.POST)
     public String upload(ModelMap map, HttpServletRequest request,
@@ -89,48 +90,25 @@ public class NewEventoController {
         if (u == null) {
             return "redirect:/";
         }
-        
+
         SessionFactory s = HibernateUtil.getSessionFactory();
         Date dataD = parseData(data);
-        Evento e = new Evento(nome,dataD,via,provincia);
-        
+        Evento e = new Evento(nome, dataD, via, provincia);
 
         // prendo gli artisti
         String[] ar = request.getParameterValues("artistiDB");
-        if(ar != null) {
+        if (ar != null) {
             Integer[] artistiDB = new Integer[ar.length];
-            for(int i=0; i<ar.length; i++) {
+            for (int i = 0; i < ar.length; i++) {
                 artistiDB[i] = Integer.parseInt(ar[i]);
             }
             EventiDao.addEvento(e, artistiDB, categoria, s);
-        }
-        else
+        } else {
             EventiDao.addEvento(e, categoria, s);
+        }
         return "redirect:/homepage?ordine=default";
     }
-    
-    /**
-     * Metodo per convertire la stringa con la data in un oggetto Date
-     * @param data stringa con la data
-     * @return l'oggetto Date
-     * @throws ParseException boh
-     */
-    private Date parseData(String data) throws ParseException {
-        String month = data.split(" ")[1].split(",")[0];
-        Date date = new SimpleDateFormat("MMMM", Locale.ITALIAN).parse(month);
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        int meseN = cal.get(Calendar.MONTH);
-        
-        int giorno = Integer.parseInt(data.split(" ")[0]);
-        int anno = Integer.parseInt(data.split(" ")[2]);
-        
-        Calendar c = Calendar.getInstance();
-        c.set(anno, meseN, giorno);
-        return c.getTime();
-    }
-    
-    
+
     @RequestMapping(value = "/homepage/newEvento/uploadNewArtist", method = RequestMethod.POST)
     public String uploadNewArtist(ModelMap map, HttpServletRequest request,
             @RequestParam("categoria") int categoria,
@@ -138,7 +116,9 @@ public class NewEventoController {
             @RequestParam("data") String data,
             @RequestParam("via") String via,
             @RequestParam("provincia") String provincia,
-            @RequestParam("nA") int numArt) throws ParseException {
+            @RequestParam("nA") int numArt,
+            @RequestParam("nome") String[] nomi,
+            @RequestParam("cognome") String[] cognomi) throws ParseException {
         // se non è loggato nessuno
         Utente u = (Utente) request.getSession().getAttribute("utente");
         if (u == null) {
@@ -147,31 +127,28 @@ public class NewEventoController {
 
         SessionFactory s = HibernateUtil.getSessionFactory();
         Date dataD = parseData(data);
-        Evento e = new Evento(nome,dataD,via,provincia);
+        Evento e = new Evento(nome, dataD, via, provincia);
         // prendo gli artisti
         String[] ar = request.getParameterValues("artistiDB");
-        if(ar != null) {
+        if (ar != null) {
             Integer[] artistiDB = new Integer[ar.length];
-            for(int i=0; i<ar.length; i++) {
+            for (int i = 0; i < ar.length; i++) {
                 artistiDB[i] = Integer.parseInt(ar[i]);
             }
             EventiDao.addEvento(e, artistiDB, categoria, s);
-        }
-        else
+        } else {
             EventiDao.addEvento(e, categoria, s);
-        
-        map.addAttribute("e", e);
-        map.addAttribute("numArt",numArt);
-        
-        
-        request.getSession().setAttribute("evento", e);
-                
+        }
+        List<Artista> artisti = new ArrayList<>();
+        for (int i = 0; i < nomi.length; i++) {
+            Artista a = new Artista(nomi[i], cognomi[i]);
+            artisti.add(a);
+        }
+        EventiDao.setEventoNewArt(e, artisti, s);
 
-        return "newArtisti";
+        return "redirect:/homepage?ordine=defaul";
     }
-    
-    
-    
+
     @RequestMapping(value = "/homepage/newEvento/uploadFinalArt", method = RequestMethod.POST)
     public String uploadNewArtist(ModelMap map, HttpServletRequest request,
             @RequestParam("nome") String[] nome,
@@ -183,20 +160,30 @@ public class NewEventoController {
         }
 
         SessionFactory s = HibernateUtil.getSessionFactory();
-        
-        List<Artista> artisti = new ArrayList<>();
-        
-        for(int i=0; i< nome.length; i++){
-            Artista a = new Artista(nome[i],cognome[i]);
-            artisti.add(a);
-        }
-        
-        Evento e = (Evento) request.getSession().getAttribute("evento");
-                
-        EventiDao.setEventoNewArt(e, artisti, s);
-        
+
         return "redirect:/homepage?ordine=defaul";
     }
     
+    /**
+     * Metodo per convertire la stringa con la data in un oggetto Date
+     *
+     * @param data stringa con la data
+     * @return l'oggetto Date
+     * @throws ParseException boh
+     */
+    private Date parseData(String data) throws ParseException {
+        String month = data.split(" ")[1].split(",")[0];
+        Date date = new SimpleDateFormat("MMMM", Locale.ITALIAN).parse(month);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int meseN = cal.get(Calendar.MONTH);
+
+        int giorno = Integer.parseInt(data.split(" ")[0]);
+        int anno = Integer.parseInt(data.split(" ")[2]);
+
+        Calendar c = Calendar.getInstance();
+        c.set(anno, meseN, giorno);
+        return c.getTime();
+    }
 
 }

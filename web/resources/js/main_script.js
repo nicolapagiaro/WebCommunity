@@ -1,7 +1,7 @@
 $(document).ready(function () {
     // per aggiornare le text fields
     Materialize.updateTextFields();
-    
+
     //per i multiple select degli artisti
     $('select').material_select();
 
@@ -22,16 +22,16 @@ $(document).ready(function () {
     $('#confirm_delete_si').on('click', function () {
         // Send the data using post
         var getting = $.get("/WebCommunity/homepage/evento/eliminaRecensione");
-        getting.done(function() {
+        getting.done(function () {
             window.location.reload();
         });
     });
-    
-    
+
+
     // controllo la correttezza  del voto immesso del commento
-    $("#btn_commenta").on('click', function(e) {
+    $("#btn_commenta").on('click', function (e) {
         var v = $("#voto").text();
-        if(v === "Voto") {
+        if (v === "Voto") {
             e.preventDefault();
             Materialize.toast("Votare l'evento", 4000);
         }
@@ -58,7 +58,7 @@ $(document).ready(function () {
             e.preventDefault();
         }
     });
-    
+
     var section_active = "_1";
     // per l'index e le tre sezioni
     $('.trigger').on('click', function (e) {
@@ -98,7 +98,7 @@ $(document).ready(function () {
             "Oristano": null,
             "Padova": null, "Palermo": null, "Parma": null, "Pavia": null, "Perugia": null, "Pesa ro e Urbino": null, "Pescara": null, "Piacenza": null, "Pisa": null, "Pistoia": null, "Por denone": null, "Potenza": null, "Prato": null,
             "Ragusa": null, "Ravenna": null, "Reggio Calabria": null, "Reggio Emilia": null, "Rieti": null, "Rimini": null, "Roma": null, "Rovigo": null,
-            "Salerno": null, "Sassari": null, "Savona": null, "Siena": null, "Siracusa": null, "S ondrio": null,
+            "Salerno": null, "Sassari": null, "Savona": null, "Siena": null, "Siracusa": null, "Sondrio": null,
             "Taranto": null, "Teramo": null, "Terni": null, "Torino": null, "Trapani": null, "Trento": null, "Treviso": null, "Trieste": null,
             "Udine": null,
             "Varese": null, "Venezia": null, "Verbano-Cusio-Ossola": null, "Vercelli": null, "Verona": null, "Vibo Valentia": null, "Vicenza": null, "Viterbo": null
@@ -114,20 +114,20 @@ $(document).ready(function () {
     $("#range").on('change', function () {
         var v = $(this).val();
         var commento;
-        switch(v) {
-            case '0': 
+        switch (v) {
+            case '0':
                 commento = "Schifoso";
                 break;
-            case '1': 
+            case '1':
                 commento = "Penoso";
                 break;
-            case '2': 
+            case '2':
                 commento = "Uhm";
                 break;
             case '3':
                 commento = "Carino dai";
                 break;
-            case '4': 
+            case '4':
                 commento = "Molto bello";
                 break;
             case '5':
@@ -142,69 +142,87 @@ $(document).ready(function () {
 
     // per mostrare/nascondere i campi di nuovi artisti
     $("#nuoviArtisti").on('click', function (n) {
-        if (this.checked){
+        if (this.checked) {
             $('#numArtisti').removeClass('hide');
             $('#caricaE').addClass('hide');
+            $("#artisti_div").removeClass("hide");
         }
-        else{
+        else {
             $('#numArtisti').addClass('hide');
             $('#caricaE').removeClass('hide');
+            $("#artisti_div").addClass("hide");
         }
     });
-    
+
     // per selezionare il giusto controller nella creazione di un nuovo evento
-    $('#nuoviArtisti').on('click', function(e){
-        if($('#nuoviArtisti').is(":checked"))
+    $('#nuoviArtisti').on('click', function (e) {
+        if ($('#nuoviArtisti').is(":checked"))
             $('#form_newE').attr('action', "/WebCommunity/homepage/newEvento/uploadNewArtist");
         else
             $('#form_newE').attr('action', "/WebCommunity/homepage/newEvento/upload");
     });
-    
+
     // controllo della validità dei dati inseriti nel form
-    $("#caricaE").on('click', function(e){
+    $("#caricaE").on('click', function (e) {
         var nome = $('#name').val();
         var data = $('#data').val();
         var via_n = $('#via').val();
         var provincia = $('#provincia').val();
         var cat = $('#categoria').find(":selected").val();
-        if(nome.length === 0 || data.length === 0 || via_n.length === 0
+        if (nome.length === 0 || data.length === 0 || via_n.length === 0
                 || provincia.length === 0 || cat.length === 0) {
             Materialize.toast('Inserire dei dati validi', 4000);
             e.preventDefault();
-        }  
+        }
     });
-    
+
     // controllo della validità dei dati inseriti nel form con i nuovi artisti
-    $("#nuoviA").on('click', function(e){
+    $("#caricaEA").on('click', function (e) {
         var nome = $('#name').val();
         var data = $('#data').val();
         var via_n = $('#via').val();
         var provincia = $('#provincia').val();
         var cat = $('#categoria').find(":selected").val();
-        if(nome.length === 0 || data.length === 0 || via_n.length === 0
+        if (nome.length === 0 || data.length === 0 || via_n.length === 0
                 || provincia.length === 0 || cat.length === 0) {
             Materialize.toast('Inserire dei dati validi', 4000);
             e.preventDefault();
-        }  
+        }
     });
-    
+
     // controllo della validità dei dati inseriti nel form con i nuovi artisti
-    $("#nuoviA").on('click', function(e){
+    $("#nuoviA").on('click', function (e) {
         var nome = $('#name').val();
         var data = $('#data').val();
         var via_n = $('#via').val();
         var provincia = $('#provincia').val();
         var cat = $('#categoria').find(":selected").val();
-        if(nome.length === 0 || data.length === 0 || via_n.length === 0
+        if (nome.length === 0 || data.length === 0 || via_n.length === 0
                 || provincia.length === 0 || cat.length === 0) {
             Materialize.toast('Inserire dei dati validi', 4000);
             e.preventDefault();
-        }  
+        }
     });
-    
+
     // metodo per attivare 
-    $('#nA').on('change', function(e){
-        alert("porco dio");
-        $("#artisti_div").removeClass("hide");
+    $('#nA').on('change', function (e) {
+        var count = $('#nA').val();
+        var s = "";
+        for (var i = 0; i < count; i++) {
+            s += "<div class='row'>" +
+                    "<div class='input-field col s6'>" +
+                    "<input id='name' type='text' name='name' autocoplete='off'>" +
+                    "<label for='name'>Nome</label>" +
+                    "</div>" +
+                    " <div class='input-field col s6'>" +
+                    "<input  id='via' name='via' type='text' autocoplete='off'>" +
+                    "<label for='via'>Cognome</label>" +
+                    " </div>" +
+                    "</div>";
+        }
+        $('#artisti_container').html(s);
+        $('html,body').animate({
+            scrollTop: $("#artisti_container").offset().top},
+        'slow');
     });
 });

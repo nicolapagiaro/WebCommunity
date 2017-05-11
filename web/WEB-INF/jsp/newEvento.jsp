@@ -89,12 +89,9 @@
                                 </div>
                                 <div class="input-field col s6 hide" id="numArtisti" name="numArtisti">
                                     <p class="range-field">
-                                        <input type="range" name="nA" id="nA" min="0" max="10" value="2"/>
+                                        <input type="range" name="nA" id="nA" min="1" max="10" value="1"/>
                                     </p>
                                     <br>
-                                    <button class="btn waves-effect waves-light right" type="submit" name="action" id="nuoviA">Inserisci gli artisti
-                                        <i class="material-icons right">send</i>
-                                    </button>
                                 </div>
                                 <button class="btn waves-effect waves-light right" type="submit" name="action" id="caricaE">Carica l'evento
                                     <i class="material-icons right">send</i>
@@ -107,15 +104,15 @@
                     <div class="card-content"> 
                         <span class="card-title">Inserisci i tuoi artisti</span>
                         <div id="artisti_container">
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <input id="name" type="text" name="name" autocoplete="off">
-                                    <label for="name">Nome</label>
+                            <div class="row"> 
+                                <div class="input-field col s6"> 
+                                    <input id="name" type="text" name="nome" autocoplete="off"> 
+                                    <label for="name">Nome</label> 
                                 </div>
-                                <div class="input-field col s6">
-                                    <input  id="via" name="via" type="text" autocoplete="off">
-                                    <label for="via">Congome</label>
-                                </div>
+                                <div class="input-field col s6"> 
+                                    <input  id="via" name="cognome" type="text" autocoplete="off"> 
+                                    <label for="via">Cognome</label> 
+                                </div> 
                             </div>
                         </div>
                         <div class="row">
