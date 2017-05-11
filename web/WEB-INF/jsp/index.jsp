@@ -48,11 +48,11 @@
                             <div class="row white">
                                 <br>
                                 <div class="input-field col s12">
-                                    <input name="nick" id="nickname" type="text">
+                                    <input maxlength="30" name="nick" id="nickname" type="text">
                                     <label for="nickname">Nickname</label>
                                 </div>
                                 <div class="input-field col s12">
-                                    <input name="email" id="email" type="email" class="validate">
+                                    <input maxlength="30" name="email" id="email" type="email" class="validate">
                                     <label for="email" data-error="Immettere una mail valida" 
                                            data-success="">Email</label>
                                     <c:if test="${control}">
@@ -176,10 +176,11 @@
                 <div class="col l4 offset-l2 s12">
                     <h5>Autori</h5>
                     <ul>
-                        <li class="grey-text text-darken-4">Link 1</li>
-                        <li class="grey-text text-darken-4">Link 2</li>
-                        <li class="grey-text text-darken-4">Link 3</li>
-                        <li class="grey-text text-darken-4">Link 4</li>
+                        <li class="grey-text text-darken-4">Pagiaro Nicola</li>
+                        <li class="grey-text text-darken-4">Meneghetti Thomas</li>
+                        <li class="grey-text text-darken-4">Fincato Jacopo</li>
+                        <li class="grey-text text-darken-4">Pinton Matteo</li>
+                        <li class="grey-text text-darken-4">Canova Gianluca</li>
                     </ul>
                 </div>
             </div>

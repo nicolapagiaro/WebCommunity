@@ -143,11 +143,13 @@ $(document).ready(function () {
     // per mostrare/nascondere i campi di nuovi artisti
     $("#nuoviArtisti").on('click', function (n) {
         if (this.checked) {
+            $('#label_newArt').text("Inserisci 1 nuovo artista");
             $('#numArtisti').removeClass('hide');
             $('#caricaE').addClass('hide');
             $("#artisti_div").removeClass("hide");
         }
         else {
+            $('#label_newArt').text("Inserisci nuovi artisti");
             $('#numArtisti').addClass('hide');
             $('#caricaE').removeClass('hide');
             $("#artisti_div").addClass("hide");
@@ -183,7 +185,17 @@ $(document).ready(function () {
         var via_n = $('#via').val();
         var provincia = $('#provincia').val();
         var cat = $('#categoria').find(":selected").val();
-        if (nome.length === 0 || data.length === 0 || via_n.length === 0
+        
+        var nomiA = $("input[name='nome']")
+              .map(function(){return $(this).val();}).get();
+        var cognomiA = $("input[name='cognome']")
+              .map(function(){return $(this).val();}).get();
+        var check = false;
+        for (var i = 0; i < nomiA.length; i++) {
+            if(nomiA[i].length === 0 || cognomiA[i].length === 0)
+                check = true;
+        }
+        if (check || nome.length === 0 || data.length === 0 || via_n.length === 0
                 || provincia.length === 0 || cat.length === 0) {
             Materialize.toast('Inserire dei dati validi', 4000);
             e.preventDefault();
@@ -193,7 +205,12 @@ $(document).ready(function () {
     // metodo per attivare le caselle per aggiungere gli artisti
     $('#nA').on('change', function (e) {
         var count = $('#nA').val();
-        $('#label_newArt').text("Inserisci " + count + " nuovi artisti");
+        
+        // cambio della scritta nella pagina
+        if(count == 1) $('#label_newArt').text("Inserisci " + count + " nuovo artista");
+        else $('#label_newArt').text("Inserisci " + count + " nuovi artisti");
+        
+        // ciclo per mostrare gli input per quanti artisti si voglia inserire
         var s = "";
         for (var i = 0; i < count; i++) {
             s += "<div class='row'>" +
@@ -201,16 +218,17 @@ $(document).ready(function () {
                     + (i+1) 
                     + ".</p></div>" +
                     "<div class='input-field col s5'>" +
-                    "<input id='name' type='text' name='name' autocoplete='off'>" +
-                    "<label for='name'>Nome</label>" +
+                    "<input maxlength='30' id='nome" + i + "' type='text' name='nome' autocoplete='off'>" +
+                    "<label for='nome" + i + "'>Nome</label>" +
                     "</div>" +
                     " <div class='input-field col s6'>" +
-                    "<input  id='via' name='via' type='text' autocoplete='off'>" +
-                    "<label for='via'>Cognome</label>" +
+                    "<input maxlength='30' id='cognome" + i + "' name='cognome' type='text' autocoplete='off'>" +
+                    "<label for='cognome" + i + "'>Cognome</label>" +
                     " </div>" +
                     "</div>";
         }
         $('#artisti_container').html(s);
+        
         // animo la pagina
         $('html,body').animate({
             scrollTop: $("#artisti_container").offset().top},

@@ -65,4 +65,26 @@ public class CategorieDao {
         Hibernate.initialize(c.getEventi());
         return c;
     }
+    
+    public static List<Categoria> getCategorieNoCheck(Utente u,SessionFactory factory) {
+        Session sessione = factory.openSession();
+        Transaction tran = null;
+        try {
+            tran = sessione.beginTransaction();
+            List<Categoria> categorie = (List<Categoria>) sessione.createQuery("FROM Categoria").list();
+            
+            List<Categoria> cat = (List<Categoria>) 
+                ((Utente) sessione.get(Utente.class, u.getId())).getCategorie();
+            categorie.removeAll(cat);
+            tran.commit();
+            return categorie;
+        } catch (HibernateException e) {
+            if (tran != null) {
+                tran.rollback();
+            }
+        } finally{
+            sessione.close();
+        }
+        return null;
+    }
 }

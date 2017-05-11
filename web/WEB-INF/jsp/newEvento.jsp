@@ -91,7 +91,7 @@
                                     <p class="range-field"><input type="range" name="nA" id="nA" min="1" max="10" value="1"/></p>
                                     <br>
                                 </div>
-                                <button class="btn waves-effect waves-light right" type="submit" name="action" id="caricaE">Carica l"evento
+                                <button class="btn waves-effect waves-light right" type="submit" name="action" id="caricaE">Carica l'evento
                                     <i class="material-icons right">send</i>
                                 </button>
                             </div>
@@ -105,12 +105,12 @@
                             <div class="row"> 
                                 <div class="input-field col s1"><p class="center" style="padding-top:18px;">1.</p></div>
                                 <div class="input-field col s5"> 
-                                    <input id="name" type="text" name="nome" autocoplete="off"> 
-                                    <label for="name">Nome</label> 
+                                    <input id="nome" type="text" name="nome" autocoplete="off"> 
+                                    <label for="nome">Nome</label> 
                                 </div>
                                 <div class="input-field col s6"> 
-                                    <input  id="via" name="cognome" type="text" autocoplete="off"> 
-                                    <label for="via">Cognome</label> 
+                                    <input  id="cognome" name="cognome" type="text" autocoplete="off"> 
+                                    <label for="cognome">Cognome</label> 
                                 </div> 
                             </div>
                         </div>

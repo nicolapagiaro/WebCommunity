@@ -44,21 +44,21 @@
                 <form method="POST" action="<c:url value="/doRegister"/>" class="col s12">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input name="nick" id="nick" type="text"/>
+                            <input name="nick" id="nick" type="text" maxlength="30"/>
                             <label for="nick">Nickname</label>
                         </div>
                         <div class="input-field col s12">
-                            <input name="nome" id="nome" type="text"/>
+                            <input name="nome" id="nome" type="text" maxlength="30"/>
                             <label for="nome">Nome</label>
                         </div>
                         <div class="input-field col s12">
-                            <input name="cognome" id="cognome" type="text"/>
+                            <input name="cognome" id="cognome" type="text" maxlength="30"/>
                             <label for="cognome">Cognome</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input name="email" id="email" type="email" class="validate"/>
+                            <input name="email" id="email" type="email" class="validate" maxlength="30"/>
                             <label for="email" data-error="Immettere una mail valida" data-success="">Email</label>
                         </div>
                     </div>

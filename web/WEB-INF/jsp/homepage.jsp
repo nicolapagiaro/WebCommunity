@@ -37,7 +37,7 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="center-align">
-                            <a href="#!" class="tooltipped" data-position="right" data-delay="100" data-tooltip="Modifica il tuo profilo">
+                            <a href="<c:url value="/homepage/setProfilo"/>" class="tooltipped" data-position="right" data-delay="100" data-tooltip="Modifica il tuo profilo">
                                 <i class="material-icons icon-homepage">mode_edit</i>
                             </a>
                             <img src="<c:url value="/resources/images/userimage.png"/>" 
@@ -58,9 +58,12 @@
                         <div class="section"></div>
                         <c:forEach items="${listaCategorie}" var="c">
                             <!--<a href='<c:url value="/homepage/categoria?c=${c.id}"/>'> -->
-                                <div class="chip">${c.nome}</div>
+                            <div class="chip">${c.nome}</div>
                             <!--</a>-->   
                         </c:forEach>
+                        <c:if test="${listaCategorie.size() == 0}">
+                            <p class="center-align grey-text">Nessuna</p>
+                        </c:if>
                     </div>
                 </div>
                 <!-- nuovo evento -->
@@ -69,7 +72,7 @@
                         <div class="row">
                             <form method="POST" action="<c:url value="/homepage/newEvento"/>">
                                 <div class="input-field col s12">
-                                    <input name="nomeE" id="nomeE" type="text" class="validate">
+                                    <input name="nomeE" id="nomeE" type="text" maxlength="30">
                                     <label for="nomeE">Nome nuovo evento</label>
                                 </div>
                                 <div class="right-align col l12">
@@ -107,7 +110,9 @@
 
                             </div>
                         </div>
+                        <c:set var="count" value="0" scope="page" />
                         <c:forEach items="${listaEventi}" var="e">
+                            <c:set var="count" value="${count + 1}" scope="page"/>
                             <div class="row">
                                 <div class="col l9">
                                     <p class="grey-text text-darken-2">${e.categoria.nome}</p>
@@ -128,11 +133,14 @@
                                         Commenta
                                     </a>
                                 </div>
-                                <div class="col l12">
-                                    <div class="section"></div>
-                                    <div class="divider"></div>
-                                    <div class="section no-padding"></div>
-                                </div>
+                                <c:if test="${listaEventi.size() != count}">
+                                    <div class="col l12">
+                                        <div class="section"></div>
+                                        <div class="divider"></div>
+                                        <div class="section no-padding"></div>
+                                    </div>
+                                </c:if>
+
                             </div>
                         </c:forEach>
                     </div>

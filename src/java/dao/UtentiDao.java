@@ -115,4 +115,45 @@ public class UtentiDao {
         }
         return null;
     }
+    
+    /**
+     * Metodo per aggiornare i dati dell'utente
+     * @param u oggeto utente
+     * @param cat array con le categorie preferite
+     * @param sessionFactory sessio factory
+     * @return 
+     */
+    public static Utente updateUtente(Utente u, Integer[] cat, SessionFactory sessionFactory) {
+         Session sessione = sessionFactory.openSession();
+        Transaction tran = null;
+        try {
+            tran = sessione.beginTransaction();
+            
+            u.setCategorie(null);
+            // salvo l'oggetto della base di dati
+            sessione.update(u);
+            
+            if(cat != null) {
+                // scarico la lista delle categorie selezionate
+                List<Categoria> cats = sessione
+                        .createQuery("FROM Categoria WHERE id IN :list")
+                        .setParameterList("list", cat)
+                        .list();
+                // le aggiungo all'oggetto utente
+                u.setCategorie(cats);
+                
+                // salvo l'oggetto della base di dati
+                sessione.update(u);
+            }
+            tran.commit();
+            return u;
+        } catch (HibernateException e) {
+            if (tran != null) {
+                tran.rollback();
+            }
+        } finally {
+            sessione.close();
+        }
+        return null;
+    }
 }
