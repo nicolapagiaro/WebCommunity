@@ -37,6 +37,9 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="center-align">
+                            <a href="#!" class="tooltipped" data-position="right" data-delay="100" data-tooltip="Modifica il tuo profilo">
+                                <i class="material-icons icon-homepage">mode_edit</i>
+                            </a>
                             <img src="<c:url value="/resources/images/userimage.png"/>" 
                                  width="100px" alt="user_image" class="circle responsive-img">
                             <br>

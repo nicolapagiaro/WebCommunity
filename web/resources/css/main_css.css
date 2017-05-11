@@ -110,3 +110,9 @@ nav .brand-logo {
 .circle-min {
     border: 1px solid #00796b;
 }
+
+.icon-homepage {
+    position: absolute;
+    top: 8px;
+    right:8px;
+}
