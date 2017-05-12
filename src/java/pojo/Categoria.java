@@ -36,8 +36,14 @@ public class Categoria implements Serializable{
      * Costruttore vuoto
      */
     public Categoria() {}
-    
-    
+
+    /**
+     * Costruttore parametrico
+     * @param nome nome della categoria
+     */
+    public Categoria(String nome) {
+        this.nome = nome;
+    }
 
     /**
      * 

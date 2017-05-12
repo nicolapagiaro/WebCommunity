@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -25,7 +26,10 @@ public class UtentiDao {
         Transaction tran = null;
         try {
             tran = sessione.beginTransaction();
-            List<Utente> users = (List<Utente>) sessione.createQuery("FROM Utente").list();
+            List<Utente> users = (List<Utente>) sessione.createQuery("FROM Utente ORDER BY (nome) ASC, (cognome) ASC").list();
+            for(Utente u : users) {
+                Hibernate.initialize(u.getCategorie());
+            }
             tran.commit();
             return users;
         } catch (HibernateException e) {
@@ -155,5 +159,28 @@ public class UtentiDao {
             sessione.close();
         }
         return null;
+    }
+    
+    /**
+     * Metodo che elimina un utente
+     * @param id id utente
+     * @param factory session factory
+     */
+    public static void deleteUtente(int id, SessionFactory factory) {
+        Session sessione = factory.openSession();
+        Transaction tran = null;
+        try {
+            tran = sessione.beginTransaction();
+            // salvo l'oggetto della base di dati
+            Utente u = (Utente) sessione.get(Utente.class, id);
+            sessione.delete(u);
+            tran.commit();
+        } catch (HibernateException e) {
+            if (tran != null) {
+                tran.rollback();
+            }
+        } finally {
+            sessione.close();
+        }
     }
 }

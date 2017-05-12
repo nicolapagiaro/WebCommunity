@@ -57,7 +57,7 @@
                                            data-success="">Email</label>
                                     <c:if test="${control}">
                                         <p class="red-text text-darken-1">Credenziali errate<p>
-                                    </c:if>
+                                        </c:if>
                                 </div>
                                 <div class="center col l12">
                                     <button class="btn btn-flat" 
@@ -163,6 +163,41 @@
         <div class="parallax"><img src="<c:url value="/resources/images/bg_bottom.jpg"/>"></div>
     </div>
 
+    <!-- Modal Login Admin Structure -->
+    <div id="modal_admin" class="modal">
+        <div class="modal-content">
+            <!-- form per accedere -->
+            <form method="POST" action="<c:url value="/admin"/>">
+                <div class="row">
+                    <div class="col s4 offset-s4 center-align">
+                        <h5>Pannello di controllo</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4 offset-s4">
+                        <input name="nome" id="nome" type="text" maxlength="30"/>
+                        <label for="nome">Nome admin</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4 offset-s4">
+                        <input name="password" id="passw" type="password" maxlength="30"/>
+                        <label for="passw">Password</label>
+                    </div>
+                </div>
+                <div class="center-align">
+                    <button class="btn waves-effect waves-light" type="submit" name="action" id="admin_login">
+                        Entra
+                    </button> 
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Chiudi</a>
+        </div>
+    </div>
+    <!-- Modal Login Admin Structure -->
+
     <!-- footer -->
     <footer class="page-footer white">
         <div class="container">
@@ -171,6 +206,9 @@
                     <h5 >WebCommunity</h5>
                     <p class="grey-text text-darken-4">
                         Sviluppo di un progetto di gruppo
+                    </p class="grey-text text-darken-4">
+                    <p>
+                        <a href="#modal_admin">Pannello di controllo</a>
                     </p>
                 </div>
                 <div class="col l4 offset-l2 s12">

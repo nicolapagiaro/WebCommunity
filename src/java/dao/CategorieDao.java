@@ -87,4 +87,47 @@ public class CategorieDao {
         }
         return null;
     }
+    
+    /**
+     * Metodo per aggiungere una nuova categoria
+     * @param factory
+     * @param c oggetto categoria
+     */
+    public static void addCategoria(SessionFactory factory, Categoria c) {
+        Session sessione = factory.openSession();
+        Transaction tran = null;
+        try {
+            tran = sessione.beginTransaction();
+            sessione.save(c);
+            tran.commit();
+        } catch (HibernateException e) {
+            if (tran != null) {
+                tran.rollback();
+            }
+        } finally{
+            sessione.close();
+        }
+    }
+    
+    /**
+     * Metodo per aggiungere una nuova categoria
+     * @param factory
+     * @param id id categoria
+     */
+    public static void deleteCtegoria(SessionFactory factory, int id) {
+        Session sessione = factory.openSession();
+        Transaction tran = null;
+        try {
+            tran = sessione.beginTransaction();
+            Categoria c = (Categoria) sessione.get(Categoria.class, id);
+            sessione.delete(c);
+            tran.commit();
+        } catch (HibernateException e) {
+            if (tran != null) {
+                tran.rollback();
+            }
+        } finally{
+            sessione.close();
+        }
+    }
 }

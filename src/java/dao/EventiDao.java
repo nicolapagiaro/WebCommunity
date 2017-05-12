@@ -135,6 +135,10 @@ public class EventiDao {
         try {
             tran = sessione.beginTransaction();
             List<Evento> eventi = (List<Evento>) sessione.createQuery("FROM Evento").list();
+            for(Evento e : eventi) {
+                Hibernate.initialize(e.getArtisti());
+                Hibernate.initialize(e.getCategoria());
+            }
             tran.commit();
             return eventi;
         } catch (HibernateException e) {
@@ -420,6 +424,29 @@ public class EventiDao {
             VotoCommento vc = (VotoCommento) sessione
                     .get(VotoCommento.class, new ChiavePrimaria(u.getId(), idEvento));
             sessione.delete(vc);
+            tran.commit();
+        } catch (HibernateException e) {
+            if (tran != null) {
+                tran.rollback();
+            }
+        } finally {
+            sessione.close();
+        }
+    }
+    
+    /**
+     * Metodo che elimina un evento
+     *
+     * @param factory
+     * @param id id evento
+     */
+    public static void deleteEvento(SessionFactory factory, int id) {
+        Session sessione = factory.openSession();
+        Transaction tran = null;
+        try {
+            tran = sessione.beginTransaction();
+            Evento e = (Evento) sessione.get(Evento.class, id);
+            sessione.delete(e);
             tran.commit();
         } catch (HibernateException e) {
             if (tran != null) {
