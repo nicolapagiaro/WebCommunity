@@ -48,8 +48,8 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s6">
-                                <input value="${u.getNickname()}" maxlength="30" id="nickname" name="nickname" type="text">
-                                <label class="active" for="nickname">Nickname</label>
+                                <input value="${u.getNickname()}" maxlength="30" id="nick" name="nickname" type="text">
+                                <label class="active" for="nick">Nickname</label>
                             </div>
                             <div class="input-field col s6">
                                 <input value="${u.getEmail()}" maxlength="30" id="email" name="email" type="email" class="validate">
@@ -87,7 +87,7 @@
                                 <a class="btn-flat waves-effect waves-light" href="<c:url value="/homepage?ordine=default"/>">
                                     Annulla
                                 </a>
-                                <button class="btn waves-effect waves-light" type="submit" name="action" id="register">
+                                <button class="btn waves-effect waves-light" type="submit" name="action" id="updateProfile">
                                     Salva
                                 </button> 
                             </div>
