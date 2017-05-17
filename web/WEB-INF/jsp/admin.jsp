@@ -200,7 +200,7 @@
                         <form action="<c:url value="/admin/addCategoria"/>" method="POST">
                             <div class="row">
                                 <div class="input-field col s4">
-                                    <input id="nomeC" name="nomeC" type="text" maxlength="30">
+                                    <input id="nome_categoria" name="nomeC" type="text" maxlength="30">
                                     <label for="nomeC">Nome</label>
                                 </div>
                                 <div class="col s8">
@@ -219,7 +219,52 @@
 
     <!-- dashboard -->
     <div id="dash" class="container">
-        Test 4
+        <br>
+        <div class="card">
+            <div class="card-content">
+                <h5>Invio di mail agli utenti</h5>
+                <br>
+                <form action="<c:url value="/admin/sendMail"/>" method="POST">
+                    <div class="row">                    
+                        <div class="input-field col s6">
+                            <select name="to">
+                                <option name="to" value="" disabled selected>Scegli</option>
+                                <c:forEach items="${users}" var="us" >
+                                    <option value="${us.email}">${us.nome} ${us.cognome} - ${us.email}</option>
+                                </c:forEach>
+                            </select>
+                            <label>Destinatario</label>
+                        </div>
+                        <div class="col s6">
+                            <p>Messaggi preimpostati:</p>
+                            <p>
+                                <input name="msg" type="radio" id="msg_default" />
+                                <label class="radio_text" id="label_msg_default" for="msg_default">Nessuno</label>
+                            </p>
+                            <p>
+                                <input name="msg" type="radio" id="msg1" />
+                                <label class="radio_text" id="label_msg1" for="msg1">
+                                    Nuovo evento disponibile delle tue categorie preferite, affrettati a partecipare ed a valutarlo!
+                                </label>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <textarea name="mail" id="textarea1_mail" class="materialize-textarea" maxlength="500"></textarea>
+                            <label for="textarea_mail">Scrivi la mail...</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6 right-align">
+                            <button class="btn waves-effect waves-light" type="submit" name="action" id="invia_mail">
+                                Invia
+                            </button> 
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
 

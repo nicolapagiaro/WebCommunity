@@ -4,6 +4,15 @@ import dao.CategorieDao;
 import dao.EventiDao;
 import dao.UtentiDao;
 import hibernate.HibernateUtil;
+import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.Transport;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
 import javax.servlet.http.HttpServletRequest;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Controller;
@@ -20,6 +29,7 @@ import pojo.Categoria;
  */
 @Controller
 public class AdminController {
+
     private int sectionActive = 0;
 
     public AdminController() {
@@ -52,7 +62,7 @@ public class AdminController {
 
             // passo alla pagina la lista delle categorie
             map.addAttribute("cats", CategorieDao.getCategorie(s));
-            
+
             // per ricare la pagina con la sezione
             map.addAttribute("section", 0);
 
@@ -83,7 +93,7 @@ public class AdminController {
 
                 // passo alla pagina la lista delle categorie
                 map.addAttribute("cats", CategorieDao.getCategorie(s));
-                
+
                 // per ricare la pagina con la sezione attiva prima
                 map.addAttribute("section", sectionActive);
 
@@ -112,13 +122,12 @@ public class AdminController {
         Categoria c = new Categoria(nome);
 
         CategorieDao.addCategoria(s, c);
-        
+
         sectionActive = 2;
-        
+
         return "redirect:/admin";
     }
-    
-    
+
     /**
      * Metodo per eliminare un evento
      *
@@ -134,12 +143,12 @@ public class AdminController {
         SessionFactory s = HibernateUtil.getSessionFactory();
 
         EventiDao.deleteEvento(s, id);
-        
+
         sectionActive = 1;
-        
+
         return "redirect:/admin";
     }
-    
+
     /**
      * Metodo per eliminare un utente
      *
@@ -153,14 +162,14 @@ public class AdminController {
             @RequestParam("id") int id) {
 
         SessionFactory s = HibernateUtil.getSessionFactory();
-        
+
         UtentiDao.deleteUtente(id, s);
-        
+
         sectionActive = 0;
-        
+
         return "redirect:/admin";
     }
-    
+
     /**
      * Metodo per eliminare una categoria
      *
@@ -178,10 +187,80 @@ public class AdminController {
         CategorieDao.deleteCtegoria(s, id);
 
         sectionActive = 2;
-        
+
         return "redirect:/admin";
     }
-    
+
+    /**
+     * Metodo per mandare la mail ad un utente
+     *
+     * @param map
+     * @param request
+     * @param to mail del destinatario
+     * @param mail testo della mail
+     * @return
+     */
+    @RequestMapping(value = "/admin/sendMail", method = RequestMethod.POST)
+    public String sendMail(ModelMap map, HttpServletRequest request,
+            @RequestParam("to") String to,
+            @RequestParam("mail") String mail) {
+
+        String result;
+
+        // Sender's email ID needs to be mentioned
+        String from = "pagiaro@gmail.com";
+
+        // Get system properties object
+        Properties properties = System.getProperties();
+
+        // Setup mail server
+        properties.setProperty("mail.transport.protocol", "smtp");
+        properties.setProperty("mail.host", "smtp.gmail.com");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.port", "587");
+        properties.put("mail.debug", "true");
+        properties.put("mail.smtp.socketFactory.port", "587");
+        properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        properties.put("mail.smtp.socketFactory.fallback", "false");
+
+        // Get the default Session object.
+        Session mailSession = Session.getInstance(properties, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(
+                        from, "kobebriant");
+            }
+        });
+
+        try {
+            // Create a default MimeMessage object.
+            MimeMessage message = new MimeMessage(mailSession);
+
+            
+            // Set From: header field of the header.
+            message.setFrom(new InternetAddress(from));
+
+            // Set To: header field of the header.
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+            // Set Subject: header field
+            message.setSubject("Messaggio dalla web community");
+
+            // Now set the actual message
+            message.setText(mail);
+
+            // Send message
+            Transport.send(message);
+            result = "Sent message successfully....";
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
+            result = "Error: unable to send message....";
+        }
+
+        System.out.println(result);
+        sectionActive = 3;
+        return "redirect:/admin";
+    }
 
     /**
      * Metodo per il uscire dalla pagina di amministrazione

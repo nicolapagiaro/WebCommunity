@@ -147,8 +147,7 @@ $(document).ready(function () {
             $('#numArtisti').removeClass('hide');
             $('#caricaE').addClass('hide');
             $("#artisti_div").removeClass("hide");
-        }
-        else {
+        } else {
             $('#label_newArt').text("Inserisci nuovi artisti");
             $('#numArtisti').addClass('hide');
             $('#caricaE').removeClass('hide');
@@ -185,14 +184,18 @@ $(document).ready(function () {
         var via_n = $('#via').val();
         var provincia = $('#provincia').val();
         var cat = $('#categoria').find(":selected").val();
-        
+
         var nomiA = $("input[name='nome']")
-              .map(function(){return $(this).val();}).get();
+                .map(function () {
+                    return $(this).val();
+                }).get();
         var cognomiA = $("input[name='cognome']")
-              .map(function(){return $(this).val();}).get();
+                .map(function () {
+                    return $(this).val();
+                }).get();
         var check = false;
         for (var i = 0; i < nomiA.length; i++) {
-            if(nomiA[i].length === 0 || cognomiA[i].length === 0)
+            if (nomiA[i].length === 0 || cognomiA[i].length === 0)
                 check = true;
         }
         if (check || nome.length === 0 || data.length === 0 || via_n.length === 0
@@ -205,17 +208,19 @@ $(document).ready(function () {
     // metodo per attivare le caselle per aggiungere gli artisti
     $('#nA').on('change', function (e) {
         var count = $('#nA').val();
-        
+
         // cambio della scritta nella pagina
-        if(count == 1) $('#label_newArt').text("Inserisci " + count + " nuovo artista");
-        else $('#label_newArt').text("Inserisci " + count + " nuovi artisti");
-        
+        if (count == 1)
+            $('#label_newArt').text("Inserisci " + count + " nuovo artista");
+        else
+            $('#label_newArt').text("Inserisci " + count + " nuovi artisti");
+
         // ciclo per mostrare gli input per quanti artisti si voglia inserire
         var s = "";
         for (var i = 0; i < count; i++) {
             s += "<div class='row'>" +
-                    "<div class='input-field col s1'><p class='center' style='padding-top:18px;'>" 
-                    + (i+1) 
+                    "<div class='input-field col s1'><p class='center' style='padding-top:18px;'>"
+                    + (i + 1)
                     + ".</p></div>" +
                     "<div class='input-field col s5'>" +
                     "<input maxlength='30' id='nome" + i + "' type='text' name='nome' autocoplete='off'>" +
@@ -228,15 +233,15 @@ $(document).ready(function () {
                     "</div>";
         }
         $('#artisti_container').html(s);
-        
+
         // animo la pagina
         $('html,body').animate({
             scrollTop: $("#artisti_container").offset().top},
-        'slow');
+                'slow');
     });
-    
+
     // controllo per il form nella pagina di aggiornamento dei dati dell'utente
-    $('#updateProfile').on('click', function(e) {
+    $('#updateProfile').on('click', function (e) {
         var nick = $('#nick').val();
         var nome = $('#nome').val();
         var cognome = $('#cognome').val();
@@ -246,5 +251,26 @@ $(document).ready(function () {
             e.preventDefault();
         }
     });
-    
+
+
+    // controllo per l'inserimento della nuova categoria
+    // nel pannello admin
+    $('#btn_aggiungi_categoria').on('click', function (e) {
+        var c = $('#nome_categoria').val();
+        if (c.length === 0)
+            e.preventDefault();
+    });
+
+    // per i messaggi preimpostati
+    $('input[name=msg]').on('click', function (e) {
+        var idVal = $(this).attr("id");
+        if (idVal === "msg_default")
+            $('#textarea1_mail').val("");
+        else
+            $('#textarea1_mail').val($("label[for='" + idVal + "']").text().trim());
+
+
+        // per aggiornare le text fields
+        Materialize.updateTextFields();
+    });
 });
