@@ -228,7 +228,7 @@ public class AdminController {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(
-                        from, "kobebriant");
+                        from, "");
             }
         });
 
