@@ -167,6 +167,10 @@ public class EventiDao {
                     .createQuery("FROM Evento WHERE dataE > current_date() ORDER BY (dataE) ASC")
                     .setMaxResults(15)
                     .list();
+            for(Evento e : eventi) {
+                Hibernate.initialize(e.getArtisti());
+                Hibernate.initialize(e.getCategoria());
+            }
             tran.commit();
             return eventi;
         } catch (HibernateException e) {

@@ -106,11 +106,19 @@
                 <div class="" id="section_1">
                     <c:forEach items="${listaEventi}" var="e">
                         <div class="col l6">
+
                             <div class="card">
                                 <div class="card-content">
                                     <span class="card-title">${e.nome}</span>
-                                    <p class="">Il: ${e.dataE}</p>
-                                    <p class="">Indirizzo: ${e.via_numero} - ${e.provincia}</p>
+                                    <p><i class="material-icons">today</i> ${e.dataE}</p>
+                                    <p><i class="material-icons">location_on</i> ${e.via_numero} - ${e.provincia}</p>
+                                    <span><i class="material-icons">people</i></span>
+                                    <c:forEach items="${e.artisti}" var="a">
+                                        <div class="chip">${a.nome} ${a.cognome}</div>
+                                    </c:forEach>
+                                    <c:if test="${e.artisti.size() == 0}">
+                                        Nessun artista presente
+                                    </c:if>
                                 </div>
                                 <div class="card-action center-align teal lighten-1 white-text">
                                     ${e.categoria.nome}

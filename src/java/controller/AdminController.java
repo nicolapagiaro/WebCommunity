@@ -205,8 +205,6 @@ public class AdminController {
             @RequestParam("to") String to,
             @RequestParam("mail") String mail) {
 
-        String result;
-
         // Sender's email ID needs to be mentioned
         String from = "pagiaro@gmail.com";
 
@@ -235,7 +233,6 @@ public class AdminController {
         try {
             // Create a default MimeMessage object.
             MimeMessage message = new MimeMessage(mailSession);
-
             
             // Set From: header field of the header.
             message.setFrom(new InternetAddress(from));
@@ -251,13 +248,10 @@ public class AdminController {
 
             // Send message
             Transport.send(message);
-            result = "Sent message successfully....";
         } catch (MessagingException mex) {
             mex.printStackTrace();
-            result = "Error: unable to send message....";
         }
-
-        System.out.println(result);
+        
         sectionActive = 3;
         return "redirect:/admin";
     }
