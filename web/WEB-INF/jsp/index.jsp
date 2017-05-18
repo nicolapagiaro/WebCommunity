@@ -106,7 +106,6 @@
                 <div class="" id="section_1">
                     <c:forEach items="${listaEventi}" var="e">
                         <div class="col l6">
-
                             <div class="card">
                                 <div class="card-content">
                                     <span class="card-title">${e.nome}</span>
@@ -137,8 +136,15 @@
                             <div class="card">
                                 <div class="card-content">
                                     <span class="card-title">${eT.nome}</span>
-                                    <p class="">Il: ${eT.dataE}</p>
-                                    <p class="">Indirizzo: ${eT.via_numero} - ${eT.provincia}</p>
+                                    <p><i class="material-icons">today</i> ${eT.dataE}</p>
+                                    <p><i class="material-icons">location_on</i> ${eT.via_numero} - ${eT.provincia}</p>
+                                    <span><i class="material-icons">people</i></span>
+                                    <c:forEach items="${eT.artisti}" var="a">
+                                        <div class="chip">${a.nome} ${a.cognome}</div>
+                                    </c:forEach>
+                                    <c:if test="${eT.artisti.size() == 0}">
+                                        Nessun artista presente
+                                    </c:if>
                                 </div>
                                 <div class="card-action center-align brown lighten-1 white-text">
                                     Voto medio: ${eT.getVotoMedio()}

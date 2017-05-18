@@ -236,6 +236,8 @@ public class EventiDao {
             // inizializzo i voti e commenti di ogni evento per mostrarli nel jsp
             for(Evento e : eventi) {
                 Hibernate.initialize(e.getVotiCommenti());
+                Hibernate.initialize(e.getArtisti());
+                Hibernate.initialize(e.getCategoria());
             }
             tran.commit();
             return eventi;
