@@ -1,5 +1,6 @@
 package controller;
 
+import dao.ArtistiDao;
 import dao.CategorieDao;
 import dao.EventiDao;
 import dao.UtentiDao;
@@ -20,6 +21,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import pojo.Artista;
 import pojo.Categoria;
 
 /**
@@ -57,6 +59,9 @@ public class AdminController {
             // passo alla pagina la lista degli utenti
             map.addAttribute("users", UtentiDao.getUtenti(s));
 
+            // passo alla pagina la lista delle categorie
+            map.addAttribute("artisti", ArtistiDao.getArtisti(s));
+                
             // passo alla pagina la lista degli eventi
             map.addAttribute("events", EventiDao.getEventi(s));
 
@@ -90,6 +95,9 @@ public class AdminController {
 
                 // passo alla pagina la lista degli eventi
                 map.addAttribute("events", EventiDao.getEventi(s));
+                
+                // passo alla pagina la lista delle categorie
+                map.addAttribute("artisti", ArtistiDao.getArtisti(s));
 
                 // passo alla pagina la lista delle categorie
                 map.addAttribute("cats", CategorieDao.getCategorie(s));
@@ -123,7 +131,7 @@ public class AdminController {
 
         CategorieDao.addCategoria(s, c);
 
-        sectionActive = 2;
+        sectionActive = 3;
 
         return "redirect:/admin";
     }
@@ -144,11 +152,55 @@ public class AdminController {
 
         EventiDao.deleteEvento(s, id);
 
+        sectionActive = 2;
+
+        return "redirect:/admin";
+    }
+
+    /**
+     * Metodo per aggiungere un nuovo artista
+     *
+     * @param map
+     * @param request
+     * @param nome
+     * @param cognome
+     * @return
+     */
+    @RequestMapping(value = "/admin/addArtista", method = RequestMethod.POST)
+    public String addArtista(ModelMap map, HttpServletRequest request,
+            @RequestParam("nomeA") String nome,
+            @RequestParam("cognomeA") String cognome) {
+
+        SessionFactory s = HibernateUtil.getSessionFactory();
+
+        ArtistiDao.addArtista(s, new Artista(nome, cognome));
+        
         sectionActive = 1;
 
         return "redirect:/admin";
     }
 
+    /**
+     * Metodo per eliminare un artista
+     *
+     * @param map
+     * @param request
+     * @param id id artista
+     * @return
+     */
+    @RequestMapping(value = "/admin/deleteArtista", method = RequestMethod.GET)
+    public String deleteArtista(ModelMap map, HttpServletRequest request,
+            @RequestParam("id") int id) {
+
+        SessionFactory s = HibernateUtil.getSessionFactory();
+
+        ArtistiDao.deleteArtista(s, id);
+        
+        sectionActive = 1;
+
+        return "redirect:/admin";
+    }
+    
     /**
      * Metodo per eliminare un utente
      *
@@ -186,7 +238,7 @@ public class AdminController {
 
         CategorieDao.deleteCtegoria(s, id);
 
-        sectionActive = 2;
+        sectionActive = 3;
 
         return "redirect:/admin";
     }
@@ -252,7 +304,7 @@ public class AdminController {
             mex.printStackTrace();
         }
         
-        sectionActive = 3;
+        sectionActive = 4;
         return "redirect:/admin";
     }
 
