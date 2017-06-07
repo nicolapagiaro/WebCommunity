@@ -125,9 +125,8 @@ public class EventiDao {
 
     /**
      * Metodo che restituisce la lista degli eventi
-     *
-     * @param factory
-     * @return
+     * @param factory sessionfactory
+     * @return lista di oggetti Evento
      */
     public static List<Evento> getEventi(SessionFactory factory) {
         Session sessione = factory.openSession();
